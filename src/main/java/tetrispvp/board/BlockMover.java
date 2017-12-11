@@ -8,5 +8,5 @@ public interface BlockMover {
     void rotateClockwise();
     void rotateCounterClockwise();
     boolean isBlockCollidingBelow();
-    void addBlockCollidedBelowListener(BlockCollidedBelowListener);
+    void addBlockCollidedBelowListener(BlockCollidedBelowListener newListener);
 }
