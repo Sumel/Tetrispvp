@@ -2,7 +2,7 @@ package tetrispvp.board;
 
 public interface MutableBoard extends Board {
     void flipBoard();
-    void addLine(int lineNumber, BoardField field);
+    void addLine(int lineNumber, GridField field);
     void clearLine(int lineNumber);
-    void setFieldAtPosition(BoardField field, int x, int y);
+    void setFieldAtPosition(GridField field, int x, int y);
 }

@@ -5,9 +5,9 @@ import tetrispvp.board.Mocks.PowerUp;
 import java.awt.*;
 import java.util.Optional;
 
-public interface BoardField {
+public interface GridField {
     /**
-     * Returns information about occupation state of this BoardField.
+     * Returns information about occupation state of this GridField.
      *
      * @return Returns true if there is currently a field at this position (regardless if it's locked in place, or if it's the current block). Returns false otherwise.
      */
