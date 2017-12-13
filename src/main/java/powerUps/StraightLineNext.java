@@ -1,6 +1,6 @@
 package powerUps;
 
-public interface StraightLineNext implements PowerUp{
+public interface StraightLineNext extends PowerUp{
 
 	int maxAllowedSimultaneousActivations = 2;
 	

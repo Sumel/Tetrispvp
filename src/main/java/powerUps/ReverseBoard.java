@@ -1,6 +1,6 @@
 package powerUps;
 
-public interface ReverseBoard implements PowerUp {
+public interface ReverseBoard extends PowerUp {
 	
 	void informToReverseBoard();
 	

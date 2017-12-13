@@ -1,6 +1,6 @@
 package powerUps;
 
-public interface ClearBottomLine implements PowerUp {
+public interface ClearBottomLine extends PowerUp {
 	
 	int maxAllowedSimultaneousActivations = 2;
 	

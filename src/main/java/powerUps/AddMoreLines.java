@@ -1,6 +1,6 @@
 package powerUps;
 
-public interface AddMoreLines implements PowerUp{
+public interface AddMoreLines extends PowerUp{
 	
 	int maxAllowedSimultaneousActivations = 1;
 	int numberOfAddingLines = 1;
