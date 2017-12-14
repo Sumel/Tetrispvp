@@ -3,15 +3,15 @@ package tetrispvp.board.Mocks;
 import tetrispvp.board.GridField;
 
 import java.awt.*;
-import java.util.Arrays;
+import java.util.*;
 import java.util.List;
-import java.util.Optional;
 
 public class BlockImplementation implements Block {
 
     private static final int boundingBoxSize = 4;
     private static final int possibleRotations = 4;
     private GridField[][][] fields;
+    private int currentRotation = 0;
 
     public BlockImplementation(char blockType) {
         fillWithEmpty();
@@ -46,22 +46,26 @@ public class BlockImplementation implements Block {
 
     @Override
     public GridField getFieldAtPosition(int x, int y) {
-        return null;
+        return fields[currentRotation][x][y];
     }
 
     @Override
     public List<List<GridField>> getBoardFields() {
-        return null;
+        List<List<GridField>> out = new ArrayList<>();
+        for (GridField[] col : fields[currentRotation]) {
+            out.add(Collections.unmodifiableList(Arrays.asList(col)));
+        }
+        return Collections.unmodifiableList(out);
     }
 
     @Override
     public void rotateClockwise() {
-
+        currentRotation = (currentRotation + 1) % possibleRotations;
     }
 
     @Override
     public void rotateCounterClockwise() {
-
+        currentRotation = (currentRotation - 1) % possibleRotations;
     }
 
     private void fillWithEmpty() {
