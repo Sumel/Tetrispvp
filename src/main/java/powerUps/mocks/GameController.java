@@ -1,6 +1,6 @@
 package powerUps.mocks;
 
-public interface GameController {
+public class GameController {
 	
 	void setNextBlockAsStraightLine();
 	

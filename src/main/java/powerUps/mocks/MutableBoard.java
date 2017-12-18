@@ -1,6 +1,6 @@
 package powerUps.mocks;
 
-public interface Board {
+public class MutableBoard {
 	
 	void reverse();
 	void clearLine(int linePosition);

@@ -2,7 +2,7 @@ package powerUps.mocks;
 
 import powerUps.PowerUp;
 
-public interface BoardField {
+public class GridField {
 
 	boolean hasPowerUp();
 	PowerUp getPowerUp();
