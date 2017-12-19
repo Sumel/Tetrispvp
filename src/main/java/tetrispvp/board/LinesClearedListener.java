@@ -3,12 +3,12 @@ package tetrispvp.board;
 import java.util.List;
 
 
-public interface LineClearedListener {
+public interface LinesClearedListener {
 
     interface Line {
         int getLineNumber();
         List<GridField> getFieldsInLine();
     }
 
-    void lineCleared(List<Line> clearedLines);
+    void linesCleared(List<Line> lines);
 }
