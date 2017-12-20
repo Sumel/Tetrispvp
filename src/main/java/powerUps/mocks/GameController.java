@@ -2,6 +2,10 @@ package powerUps.mocks;
 
 public class GameController {
 	
-	void setNextBlockAsStraightLine();
+	Block nextBlock;
+	
+	void setNextBlockAsStraightLine(){
+		nextBlock.setType(BlockType.STRAIGHT_LINE);
+	}
 	
 }
