@@ -1,9 +1,6 @@
 package tetrispvp.board;
 
-import tetrispvp.board.Mocks.PowerUp;
-
 import java.awt.*;
-import java.util.Optional;
 
 public interface GridField {
     /**
@@ -28,11 +25,11 @@ public interface GridField {
     Color getColor();
 
     /**
-     * Used to get potential power up strategy for this field.
+     * Used to get potential power up strategy ID for this field. Calling the strategy implementation is handled by PowerUpManager.
      *
-     * @return Returns this field's PowerUp if set.
+     * @return Returns this field's PowerUp ID.
      */
-    Optional<PowerUp> getPowerUp();
+    default int getPowerUpID() { return -1; }
 
     /**
      * Used to determine whether this field has a power up attached.
@@ -40,6 +37,6 @@ public interface GridField {
      * @return Returns true if this field has a power up attached. Returns false otherwise.
      */
     default boolean hasPowerUp() {
-        return getPowerUp().isPresent();
+        return getPowerUpID() != -1;
     }
 }

@@ -9,9 +9,9 @@ public class BlockField implements GridField {
 
     private final boolean isOccupied;
     private final Color color;
-    private final Optional<PowerUp> powerUp;
+    private final int powerUp;
 
-    public BlockField(boolean isOccupied, Color color, Optional<PowerUp> powerUp){
+    public BlockField(boolean isOccupied, Color color, int powerUp){
         this.isOccupied = isOccupied;
         this.color = color;
         this.powerUp = powerUp;
@@ -33,7 +33,7 @@ public class BlockField implements GridField {
     }
 
     @Override
-    public Optional<PowerUp> getPowerUp() {
+    public int getPowerUpID() {
         return powerUp;
     }
 }
