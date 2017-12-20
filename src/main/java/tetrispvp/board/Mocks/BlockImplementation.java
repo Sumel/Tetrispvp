@@ -1,5 +1,6 @@
 package tetrispvp.board.Mocks;
 
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import tetrispvp.board.GridField;
 
 import java.awt.*;
@@ -15,30 +16,12 @@ public class BlockImplementation implements Block {
 
     public BlockImplementation(char blockType) {
         fillWithEmpty();
-        switch(blockType) {
+        switch (blockType) {
             case 'I':
                 createTetrominoI();
                 break;
-            case 'O':
-                createTetrominoO();
-                break;
-            case 'S':
-                createTetrominoS();
-                break;
-            case 'Z':
-                createTetrominoZ();
-                break;
-            case 'J':
-                createTetrominoJ();
-                break;
-            case 'L':
-                createTetrominoL();
-                break;
-            case 'T':
-                createTetrominoT();
-                break;
             default:
-                throw new IllegalArgumentException();
+                throw new NotImplementedException();
 
         }
     }
@@ -69,10 +52,10 @@ public class BlockImplementation implements Block {
     }
 
     private void fillWithEmpty() {
-        BlockField emptyField = new BlockField(false, Color.black, Optional.empty());
+        BlockField emptyField = new BlockField(false, Color.black, -1);
         fields = new BlockField[possibleRotations][boundingBoxSize][boundingBoxSize];
-        for(GridField[][] mtx : fields) {
-            for(GridField[] row : mtx) {
+        for (GridField[][] mtx : fields) {
+            for (GridField[] row : mtx) {
                 Arrays.fill(row, emptyField);
             }
         }
@@ -80,7 +63,7 @@ public class BlockImplementation implements Block {
 
     private void createTetrominoI() {
         Color color = Color.cyan;
-        BlockField block = new BlockField(true, color, Optional.empty());
+        BlockField block = new BlockField(true, color, -1);
         int[][][] indexes =
                 {
                         {
@@ -109,42 +92,12 @@ public class BlockImplementation implements Block {
                                 {1, 3}
                         }
                 };
-        for(int i = 0;i<possibleRotations;++i){
-            for(int j = 0;j<boundingBoxSize;++j){
+        for (int i = 0; i < possibleRotations; ++i) {
+            for (int j = 0; j < boundingBoxSize; ++j) {
                 int x = indexes[i][j][0];
                 int y = indexes[i][j][1];
                 fields[i][x][y] = block;
             }
         }
-    }
-
-    private void createTetrominoO() {
-        Color color = Color.yellow;
-        BlockField block = new BlockField(true, color, java.util.Optional.empty());
-    }
-
-    private void createTetrominoS() {
-        Color color = Color.green;
-        BlockField block = new BlockField(true, color, java.util.Optional.empty());
-    }
-
-    private void createTetrominoZ() {
-        Color color = Color.red;
-        BlockField block = new BlockField(true, color, java.util.Optional.empty());
-    }
-
-    private void createTetrominoJ() {
-        Color color = Color.blue;
-        BlockField block = new BlockField(true, color, java.util.Optional.empty());
-    }
-
-    private void createTetrominoL() {
-        Color color = Color.orange;
-        BlockField block = new BlockField(true, color, java.util.Optional.empty());
-    }
-
-    private void createTetrominoT() {
-        Color color = Color.pink;
-        BlockField block = new BlockField(true, color, java.util.Optional.empty());
     }
 }
