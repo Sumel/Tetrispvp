@@ -1,3 +1,5 @@
 package powerUps.mocks;
 
-public interface MessageSender{}
+public interface MessageSender{
+    void send(String messageName, Object with);
+}
