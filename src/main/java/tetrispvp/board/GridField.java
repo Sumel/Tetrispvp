@@ -29,7 +29,9 @@ public interface GridField {
      *
      * @return Returns this field's PowerUp ID.
      */
-    default int getPowerUpID() { return -1; }
+    default int getPowerUpID() {
+        return -1;
+    }
 
     /**
      * Used to determine whether this field has a power up attached.

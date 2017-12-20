@@ -17,7 +17,7 @@ public class NetworkModuleMock implements MessageReceiver, MessageSender {
 
     @Override
     public void expect(String messageName, MessageHandler handler) {
-        if(!handlers.containsKey(messageName)) {
+        if (!handlers.containsKey(messageName)) {
             handlers.put(messageName, new LinkedList<>());
         }
         handlers.get(messageName).add(handler);

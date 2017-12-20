@@ -11,7 +11,7 @@ public class BlockField implements GridField {
     private final Color color;
     private final int powerUp;
 
-    public BlockField(boolean isOccupied, Color color, int powerUp){
+    public BlockField(boolean isOccupied, Color color, int powerUp) {
         this.isOccupied = isOccupied;
         this.color = color;
         this.powerUp = powerUp;

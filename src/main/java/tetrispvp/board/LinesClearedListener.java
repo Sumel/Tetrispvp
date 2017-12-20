@@ -7,6 +7,7 @@ public interface LinesClearedListener {
 
     interface Line {
         int getLineNumber();
+
         List<GridField> getFieldsInLine();
     }
 
