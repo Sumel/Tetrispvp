@@ -34,4 +34,8 @@ public class Board {
     public void moveDown(){
 
     }
+
+    public void register(){
+
+    }
 }
