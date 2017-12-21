@@ -1,9 +1,7 @@
 package aiModule;
 
-import java.util.List;
-import java.util.concurrent.TimeUnit;
 
-public class AIController{
+public class AIController implements  IAIController{
     private double difficultLevel;
     private Board mainBoard;
 
@@ -14,7 +12,7 @@ public class AIController{
         this.mainBoard = mainBoard;
     }
 
-    public synchronized void notifyNextTetromino(Tetromino tetromino) {
+    public void notifyNextTetromino(Tetromino tetromino) {
         MoveMaker moveMaker = new MoveMaker(this.mainBoard, this.difficultLevel);
         this.moveThread = new Thread(moveMaker);
         this.moveThread.start();

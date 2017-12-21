@@ -3,7 +3,7 @@ package aiModule;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class MoveMaker implements Runnable {
+public class MoveMaker implements Runnable, IMoveMaker {
     private final double difficultLevel;
     private Board mainBoard;
     private boolean endMove=false;
