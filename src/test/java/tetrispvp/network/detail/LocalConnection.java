@@ -1,20 +1,18 @@
-package tetrispvp.network;
-
-import tetrispvp.network.detail.Connection;
+package tetrispvp.network.detail;
 
 import java.util.ArrayDeque;
 import java.util.Queue;
 
-public class MockConnection implements Connection {
+public class LocalConnection implements Connection {
     private final Queue<String> nearEndMQ;
     private final Queue<String> farEndMQ;
 
-    private MockConnection(Queue<String> nearEndMQ, Queue<String> farEndMQ) {
+    private LocalConnection(Queue<String> nearEndMQ, Queue<String> farEndMQ) {
         this.nearEndMQ = nearEndMQ;
         this.farEndMQ = farEndMQ;
     }
 
-    public MockConnection() {
+    public LocalConnection() {
         this.nearEndMQ = new ArrayDeque<>();
         this.farEndMQ = new ArrayDeque<>();
     }
@@ -38,7 +36,12 @@ public class MockConnection implements Connection {
         }
     }
 
-    public MockConnection getFarEnd() {
-        return new MockConnection(farEndMQ, nearEndMQ);
+    @Override
+    public String thisAddress() {
+        throw new IllegalStateException("Not implemented.");
+    }
+
+    public LocalConnection getFarEnd() {
+        return new LocalConnection(farEndMQ, nearEndMQ);
     }
 }

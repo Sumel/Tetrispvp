@@ -14,4 +14,9 @@ public interface Connection {
      * Receives a binary message synchronously.
      */
     String receiveMessage() throws java.lang.InterruptedException;
+
+    /**
+     * Returns the address of this connection for the other peer to connect to.
+     */
+    String thisAddress();
 }
