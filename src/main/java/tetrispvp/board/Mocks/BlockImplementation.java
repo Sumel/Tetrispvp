@@ -48,7 +48,7 @@ public class BlockImplementation implements Block {
 
     @Override
     public void rotateCounterClockwise() {
-        currentRotation = (currentRotation - 1) % possibleRotations;
+        currentRotation = (currentRotation - 1 + possibleRotations) % possibleRotations;
     }
 
     private void fillWithEmpty() {
