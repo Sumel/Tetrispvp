@@ -25,21 +25,21 @@ public class BoardField implements GridField {
 
     @Override
     public boolean isOccupied() {
-        return false;
+        return isOccupied;
     }
 
     @Override
     public boolean isLocked() {
-        return false;
+        return isLocked;
     }
 
     @Override
     public Color getColor() {
-        return null;
+        return color;
     }
 
     @Override
     public int getPowerUpID() {
-        return 0;
+        return powerUpID;
     }
 }
