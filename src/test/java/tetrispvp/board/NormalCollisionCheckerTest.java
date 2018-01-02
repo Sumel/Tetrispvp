@@ -84,6 +84,8 @@ public class NormalCollisionCheckerTest {
         block.rotateCounterClockwise();
         NormalCollisionChecker checker = new NormalCollisionChecker(board);
         assertEquals(checker.collides(currentPosition, block), true);
+        currentPosition = new Point(-1, 1);
+        assertEquals(checker.collides(currentPosition, block), true);
     }
 
 }
