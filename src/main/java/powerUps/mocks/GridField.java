@@ -13,13 +13,13 @@ public class GridField {
 		this.state = state;
 	}
 
-	boolean hasPowerUp(){
+	public boolean hasPowerUp(){
 		if(powerUpId == -1)
 			return false;
 		return true;
 	}
 	
-	long getPowerUp(){
+	public long getPowerUp(){
 		return powerUpId;
 	}
 

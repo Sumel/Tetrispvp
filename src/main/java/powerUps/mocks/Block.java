@@ -2,7 +2,11 @@ package powerUps.mocks;
 
 public class Block {
 	
-	BlockType type;
+	private BlockType type;
+
+	public Block(BlockType type) {
+		this.type = type;
+	}
 
 	public BlockType getType() {
 		return type;

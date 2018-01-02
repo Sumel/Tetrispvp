@@ -4,7 +4,7 @@ public class GameController {
 	
 	Block nextBlock;
 	
-	void setNextBlockAsStraightLine(){
+	public void setNextBlockAsStraightLine(){
 		nextBlock.setType(BlockType.STRAIGHT_LINE);
 	}
 	
