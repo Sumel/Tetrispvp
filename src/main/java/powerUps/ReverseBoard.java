@@ -1,8 +1,14 @@
 package powerUps;
 
-public interface ReverseBoard extends PowerUp {
+public class ReverseBoard implements PowerUp {
 	
-	void informToReverseBoard();
-	
-	
+	private void informToReverseBoard(){
+
+	}
+
+
+	@Override
+	public void activate(int powerUpPresence) {
+
+	}
 }

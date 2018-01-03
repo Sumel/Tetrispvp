@@ -1,10 +1,16 @@
 package powerUps;
 
-public interface AddMoreLines extends PowerUp{
+public class AddMoreLines implements PowerUp{
 	
 	int maxAllowedSimultaneousActivations = 1;
 	int numberOfAddingLines = 1;
 	
-	void informAboutMoreLines();
+	private void informAboutMoreLines(){
 
+	}
+
+	@Override
+	public void activate(int powerUpPresence) {
+
+	}
 }

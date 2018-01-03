@@ -1,9 +1,15 @@
 package powerUps;
 
-public interface ClearBottomLine extends PowerUp {
+public class ClearBottomLine implements PowerUp {
 	
 	int maxAllowedSimultaneousActivations = 2;
 	
-	void clearLine();
+	private void clearLine(){
 
+	}
+
+	@Override
+	public void activate(int powerUpPresence) {
+
+	}
 }

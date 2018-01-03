@@ -2,6 +2,6 @@ package powerUps;
 
 public interface PowerUp {
 	
-	void activate(); 
+	void activate(int powerUpPresence);
 	
 }
