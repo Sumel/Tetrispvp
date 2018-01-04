@@ -18,32 +18,32 @@ public class TetrisBoard implements BlockMover, MutableBoard {
 
     @Override
     public boolean moveDown() {
-
+        return false;
     }
 
     @Override
     public boolean moveLeft() {
-
+        return false;
     }
 
     @Override
     public boolean moveRight() {
-
+        return false;
     }
 
     @Override
     public boolean moveToBottom() {
-
+        return false;
     }
 
     @Override
     public boolean rotateClockwise() {
-
+        return false;
     }
 
     @Override
     public boolean rotateCounterClockwise() {
-
+        return false;
     }
 
     @Override
