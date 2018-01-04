@@ -9,6 +9,10 @@ public class BoardField implements GridField {
     private Color color;
     private int powerUpID;
 
+    public static BoardField GetEmptyBoardField() {
+        return new BoardField();
+    }
+
     public BoardField(boolean isOccupied, boolean isLocked, Color color,int powerUpID) {
         this.isOccupied = isOccupied;
         this.isLocked = isLocked;
