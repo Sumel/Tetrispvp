@@ -17,32 +17,32 @@ public class TetrisBoard implements BlockMover, MutableBoard {
     }
 
     @Override
-    public void moveDown() {
+    public boolean moveDown() {
 
     }
 
     @Override
-    public void moveLeft() {
+    public boolean moveLeft() {
 
     }
 
     @Override
-    public void moveRight() {
+    public boolean moveRight() {
 
     }
 
     @Override
-    public void moveToBottom() {
+    public boolean moveToBottom() {
 
     }
 
     @Override
-    public void rotateClockwise() {
+    public boolean rotateClockwise() {
 
     }
 
     @Override
-    public void rotateCounterClockwise() {
+    public boolean rotateCounterClockwise() {
 
     }
 

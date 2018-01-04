@@ -13,19 +13,19 @@ class DTETBlockMover implements BlockMover {
     private MutableBoard board;
     private CollisionChecker collisionChecker;
     private final static Point[] wallkicksClockwise = {
-            new Point(1,0),
-            new Point(-1,0),
-            new Point(0,1),
-            new Point(1,1),
-            new Point(-1,1)
+            new Point(1, 0),
+            new Point(-1, 0),
+            new Point(0, 1),
+            new Point(1, 1),
+            new Point(-1, 1)
     };
 
     private final static Point[] wallkicksCounterClockwise = {
-            new Point(-1,0),
-            new Point(1,0),
-            new Point(0,1),
-            new Point(-1,1),
-            new Point(1,1)
+            new Point(-1, 0),
+            new Point(1, 0),
+            new Point(0, 1),
+            new Point(-1, 1),
+            new Point(1, 1)
     };
 
     public DTETBlockMover(MutableBoard board) {
@@ -41,23 +41,23 @@ class DTETBlockMover implements BlockMover {
     }
 
     @Override
-    public void moveDown() {
-        move(0, 1);
+    public boolean moveDown() {
+        return move(0, 1);
     }
 
     @Override
-    public void moveLeft() {
-        move(-1, 0);
+    public boolean moveLeft() {
+        return move(-1, 0);
     }
 
     @Override
-    public void moveRight() {
-        move(1, 0);
+    public boolean moveRight() {
+        return move(1, 0);
     }
 
     @Override
-    public void moveToBottom() {
-        move(0, 30);
+    public boolean moveToBottom() {
+        return move(0, 30);
     }
 
     // returns false if block didn't move at all
@@ -69,25 +69,23 @@ class DTETBlockMover implements BlockMover {
         boolean result = false;
         Point workingPosition = new Point(blockPosition);
 
-        for(int i = 0;i<Math.abs(x);++i) {
+        for (int i = 0; i < Math.abs(x); ++i) {
             Point testingPosition = new Point(workingPosition);
             testingPosition.x += Math.signum(x);
-            if (collisionChecker.collides(testingPosition, currentBlock)){
+            if (collisionChecker.collides(testingPosition, currentBlock)) {
                 break;
-            }
-            else {
+            } else {
                 workingPosition = testingPosition;
                 result = true;
             }
         }
 
-        for(int i = 0;i<Math.abs(y);++i) {
+        for (int i = 0; i < Math.abs(y); ++i) {
             Point testingPosition = new Point(workingPosition);
             testingPosition.y += Math.signum(y);
-            if (collisionChecker.collides(testingPosition, currentBlock)){
+            if (collisionChecker.collides(testingPosition, currentBlock)) {
                 break;
-            }
-            else {
+            } else {
                 workingPosition = testingPosition;
                 result = true;
             }
@@ -99,7 +97,7 @@ class DTETBlockMover implements BlockMover {
     }
 
     private int getValidWallkick(Point[] wallkicks) {
-        for(int i = 0;i<wallkicks.length;++i){
+        for (int i = 0; i < wallkicks.length; ++i) {
             Point point = wallkicks[i];
             Point newPosition = new Point(blockPosition.x + point.x, blockPosition.y + point.y);
             if (!collisionChecker.collides(newPosition, currentBlock)) {
@@ -110,38 +108,40 @@ class DTETBlockMover implements BlockMover {
     }
 
     @Override
-    public void rotateClockwise() {
+    public boolean rotateClockwise() {
         currentBlock.rotateClockwise();
         if (!collisionChecker.collides(blockPosition, currentBlock)) {
-            return;
+            return true;
         }
 
         int kickIndex = getValidWallkick(wallkicksClockwise);
-        if (kickIndex == -1){
+        if (kickIndex == -1) {
             //reverse rotation, because there's no space to rotate
             currentBlock.rotateCounterClockwise();
-        }
-        else {
+            return false;
+        } else {
             Point point = wallkicksClockwise[kickIndex];
             blockPosition = new Point(blockPosition.x + point.x, blockPosition.y + point.y);
+            return true;
         }
     }
 
     @Override
-    public void rotateCounterClockwise() {
+    public boolean rotateCounterClockwise() {
         currentBlock.rotateCounterClockwise();
         if (!collisionChecker.collides(blockPosition, currentBlock)) {
-            return;
+            return true;
         }
 
         int kickIndex = getValidWallkick(wallkicksCounterClockwise);
-        if (kickIndex == -1){
+        if (kickIndex == -1) {
             //reverse rotation, because there's no space to rotate
             currentBlock.rotateClockwise();
-        }
-        else {
+            return false;
+        } else {
             Point point = wallkicksClockwise[kickIndex];
             blockPosition = new Point(blockPosition.x + point.x, blockPosition.y + point.y);
+            return true;
         }
     }
 
@@ -153,6 +153,10 @@ class DTETBlockMover implements BlockMover {
     //TODO
     @Override
     public void addBlockCollidedBelowListener(BlockCollidedBelowListener newListener) {
+
+    }
+
+    private void onCollision() {
 
     }
 }

@@ -3,17 +3,17 @@ package tetrispvp.board;
 public interface BlockMover {
     void spawnNewBlock(tetrispvp.board.Mocks.Block newBlock);
 
-    void moveDown();
+    boolean moveDown();
 
-    void moveLeft();
+    boolean moveLeft();
 
-    void moveRight();
+    boolean moveRight();
 
-    void moveToBottom();
+    boolean moveToBottom();
 
-    void rotateClockwise();
+    boolean rotateClockwise();
 
-    void rotateCounterClockwise();
+    boolean rotateCounterClockwise();
 
     boolean isBlockCollidingBelow();
 
