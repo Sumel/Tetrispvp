@@ -3,8 +3,10 @@ package tetrispvp.board;
 
 import tetrispvp.board.Mocks.Block;
 
-import java.awt.*;
-
+import java.awt.Point;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Predicate;
 
 class DTETBlockMover implements BlockMover {
 
@@ -98,13 +100,47 @@ class DTETBlockMover implements BlockMover {
     }
 
     private void changePosition(Point newPosition) {
-        //TODO
-
+        List<GridFieldWithPosition> fields = new ArrayList<GridFieldWithPosition>();
+        addEmptyFieldsToList(currentBlock, blockPosition, fields);
+        addBlockFieldsToList(currentBlock, newPosition, fields);
         blockPosition = newPosition;
+        board.setFields(fields);
     }
 
-    private void removeFieldsFromBoard() {
+    private void removeFieldFromList(List<GridFieldWithPosition> fields, Point point) {
+        Predicate<GridFieldWithPosition> removePredicate = g->g.getRowNumber() == point.y && g.getColumnNumber() == point.x;
+        fields.removeIf(removePredicate);
+    }
 
+    private void addEmptyFieldsToList(Block block, Point position, List<GridFieldWithPosition> fields) {
+        List<List<GridField>> blockFields = block.getBoardFields();
+        GridField emptyField = BoardField.GetEmptyBoardField();
+        for (int i = 0; i < blockFields.size(); ++i) {
+            for (int j = 0; j < blockFields.get(i).size(); j++) {
+                GridField currentBlockField = blockFields.get(i).get(j);
+                if (currentBlockField.isOccupied()) {
+                    int row = i + position.y;
+                    int column = j + position.x;
+                    removeFieldFromList(fields,new Point(column, row));
+                    fields.add(new GridFieldWithPosition(row, column, emptyField));
+                }
+            }
+        }
+    }
+
+    private void addBlockFieldsToList(Block block, Point position, List<GridFieldWithPosition> fields) {
+        List<List<GridField>> blockFields = block.getBoardFields();
+        for (int i = 0; i < blockFields.size(); ++i) {
+            for (int j = 0; j < blockFields.get(i).size(); j++) {
+                GridField currentBlockField = blockFields.get(i).get(j);
+                if (currentBlockField.isOccupied()) {
+                    int row = i + position.y;
+                    int column = j + position.x;
+                    removeFieldFromList(fields,new Point(column, row));
+                    fields.add(new GridFieldWithPosition(row, column, currentBlockField));
+                }
+            }
+        }
     }
 
     private int getValidWallkick(Point[] wallkicks) {
