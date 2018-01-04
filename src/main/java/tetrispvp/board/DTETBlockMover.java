@@ -91,9 +91,20 @@ class DTETBlockMover implements BlockMover {
             }
         }
         if (result) {
-            blockPosition = workingPosition;
+            changePosition(workingPosition);
+
         }
         return result;
+    }
+
+    private void changePosition(Point newPosition) {
+        //TODO
+
+        blockPosition = newPosition;
+    }
+
+    private void removeFieldsFromBoard() {
+
     }
 
     private int getValidWallkick(Point[] wallkicks) {

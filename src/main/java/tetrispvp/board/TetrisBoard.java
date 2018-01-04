@@ -77,6 +77,11 @@ public class TetrisBoard implements BlockMover, MutableBoard {
     }
 
     @Override
+    public void setFields(List<GridFieldWithPosition> fields) {
+
+    }
+
+    @Override
     public GridField getFieldAtPosition(int x, int y) {
         return null;
     }
