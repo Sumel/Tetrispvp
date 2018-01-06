@@ -42,29 +42,10 @@ public class NormalCollisionCheckerTest {
         assertEquals(checker.positionWithinBounds(0, -5), true);
     }
 
-    private List<List<GridField>> getEmptyBoard() {
-        int width = 10;
-        int height = 20;
-
-        GridField emptyField = new BoardField();
-
-        List<List<GridField>> board = new ArrayList<List<GridField>>();
-
-        for (int row = 0; row < height; ++row) {
-            List<GridField> newRow = new ArrayList<GridField>();
-            for (int col = 0; col < width; ++col) {
-                newRow.add(col, emptyField);
-            }
-            board.add(row, newRow);
-        }
-
-        return board;
-    }
-
     @Test
     public void collidesEmptyBoard() throws Exception {
         Board board = setUpMockBoardSize();
-        List<List<GridField>> boardState = getEmptyBoard();
+        List<List<GridField>> boardState = TestingUtils.getEmptyBoard();
         when(board.getBoardState()).thenReturn(boardState);
         NormalCollisionChecker checker = new NormalCollisionChecker(board);
         Block block = new BlockImplementation('I');
@@ -73,7 +54,7 @@ public class NormalCollisionCheckerTest {
 
     @Test
     public void collidesTopLeftCorner() throws Exception {
-        List<List<GridField>> boardState = getEmptyBoard();
+        List<List<GridField>> boardState = TestingUtils.getEmptyBoard();
         BoardField boardField = new BoardField(true, true, Color.red, -1);
         boardState.get(0).set(0, boardField);
 
