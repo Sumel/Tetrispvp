@@ -49,10 +49,10 @@ public class BoardField implements GridField {
 
     @Override
     public boolean equals(Object object) {
-        if (object == null || !(object instanceof BoardField)) {
+        if (object == null || !(object instanceof GridField)) {
             return false;
         }
-        BoardField otherBoardField = (BoardField) object;
+        GridField otherBoardField = (GridField) object;
         return isOccupied() == otherBoardField.isOccupied() &&
                 isLocked() == otherBoardField.isLocked() &&
                 getColor().equals(otherBoardField.getColor()) &&
