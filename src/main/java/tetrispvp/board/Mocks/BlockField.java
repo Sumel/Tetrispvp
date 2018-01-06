@@ -36,4 +36,16 @@ public class BlockField implements GridField {
     public int getPowerUpID() {
         return powerUp;
     }
+
+    @Override
+    public boolean equals(Object object) {
+        if (object == null || !(object instanceof GridField)) {
+            return false;
+        }
+        GridField otherBoardField = (GridField) object;
+        return isOccupied() == otherBoardField.isOccupied() &&
+                isLocked() == otherBoardField.isLocked() &&
+                getColor().equals(otherBoardField.getColor()) &&
+                getPowerUpID() == otherBoardField.getPowerUpID();
+    }
 }
