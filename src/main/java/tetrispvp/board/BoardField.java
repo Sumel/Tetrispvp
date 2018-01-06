@@ -13,14 +13,14 @@ public class BoardField implements GridField {
         return new BoardField();
     }
 
-    public BoardField(boolean isOccupied, boolean isLocked, Color color,int powerUpID) {
+    public BoardField(boolean isOccupied, boolean isLocked, Color color, int powerUpID) {
         this.isOccupied = isOccupied;
         this.isLocked = isLocked;
         this.color = color;
         this.powerUpID = powerUpID;
     }
 
-    public BoardField(){
+    public BoardField() {
         isOccupied = false;
         isLocked = false;
         color = null;
@@ -45,5 +45,17 @@ public class BoardField implements GridField {
     @Override
     public int getPowerUpID() {
         return powerUpID;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (object == null || !(object instanceof BoardField)) {
+            return false;
+        }
+        BoardField otherBoardField = (BoardField) object;
+        return isOccupied() == otherBoardField.isOccupied() &&
+                isLocked() == otherBoardField.isLocked() &&
+                getColor().equals(otherBoardField.getColor()) &&
+                getPowerUpID() == otherBoardField.getPowerUpID();
     }
 }
