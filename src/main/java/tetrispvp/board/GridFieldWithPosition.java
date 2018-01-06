@@ -22,4 +22,16 @@ public class GridFieldWithPosition {
         this.columnNumber = columnNumber;
         this.gridField = gridField;
     }
+
+    @Override
+    public boolean equals(Object object) {
+        if (object == null || !(object instanceof GridFieldWithPosition)) {
+            return false;
+        }
+        GridFieldWithPosition otherField = (GridFieldWithPosition) object;
+        return rowNumber == otherField.getRowNumber() &&
+                columnNumber == otherField.getColumnNumber() &&
+                gridField.equals(otherField.getGridField());
+
+    }
 }
