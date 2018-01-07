@@ -6,6 +6,7 @@ import tetrispvp.board.Mocks.Block;
 import javax.annotation.Resource;
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -15,6 +16,7 @@ class DTETBlockMover implements BlockMover {
     private Block currentBlock;
     private MutableBoard board;
     private CollisionChecker collisionChecker;
+    private List<BlockCollidedBelowListener> listeners = new LinkedList<BlockCollidedBelowListener>();
     private final static Point[] wallkicksClockwise = {
             new Point(1, 0),
             new Point(-1, 0),
@@ -98,11 +100,11 @@ class DTETBlockMover implements BlockMover {
                 result = true;
             }
         }
-
+        List<Point> collidingPoints = null;
         for (int i = 0; i < Math.abs(y); ++i) {
             Point testingPosition = new Point(workingPosition);
             testingPosition.y += Math.signum(y);
-            if (collisionChecker.collides(testingPosition, currentBlock)) {
+            if (collisionChecker.collides(testingPosition, currentBlock, collidingPoints)) {
                 break;
             } else {
                 workingPosition = testingPosition;
@@ -111,7 +113,9 @@ class DTETBlockMover implements BlockMover {
         }
         if (result) {
             changePosition(workingPosition);
-
+            if (collidingPoints != null) {
+                onCollision(collidingPoints);
+            }
         }
         return result;
     }
@@ -240,16 +244,19 @@ class DTETBlockMover implements BlockMover {
 
     @Override
     public boolean isBlockCollidingBelow() {
-        return false;
+        Point pointBelow = (Point) blockPosition.clone();
+        pointBelow.y++;
+        return collisionChecker.collides(pointBelow, currentBlock);
     }
 
-    //TODO
     @Override
     public void addBlockCollidedBelowListener(BlockCollidedBelowListener newListener) {
-
+        listeners.add(newListener);
     }
 
-    private void onCollision() {
-
+    private void onCollision(List<Point> points) {
+        for (BlockCollidedBelowListener listener : listeners) {
+            listener.BlockCollidedBelow(points);
+        }
     }
 }
