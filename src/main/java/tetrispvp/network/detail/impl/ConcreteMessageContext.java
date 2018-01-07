@@ -14,14 +14,4 @@ public class ConcreteMessageContext implements MessageContext {
     public MessageReceiver receiver() {
         throw new IllegalStateException("Not implemented.");
     }
-
-    @Override
-    public String groupName() {
-        throw new IllegalStateException("Not implemented.");
-    }
-
-    @Override
-    public MessageContext subgroup(String subgroupName) {
-        throw new IllegalStateException("Not implemented.");
-    }
 }

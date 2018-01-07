@@ -7,14 +7,7 @@ public class Message {
         throw new IllegalStateException("Not implemented.");
     }
 
-    Message(List<String> modules, String name, Object with) {
-        throw new IllegalStateException("Not implemented.");
-    }
-
-    /**
-     * @return List of nested modules this message is for.
-     */
-    List<String> getModules() {
+    Message(String name, Object with) {
         throw new IllegalStateException("Not implemented.");
     }
 

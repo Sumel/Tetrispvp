@@ -6,7 +6,7 @@ import tetrispvp.network.MessageReceiver;
 
 import java.util.regex.Pattern;
 
-public class NestedMessageReceiver implements MessageReceiver {
+public class ConcreteMessageReceiver implements MessageReceiver {
     @Override
     public void expect(String messageName, MessageHandler handler) {
         throw new IllegalStateException("Not implemented.");
