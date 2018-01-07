@@ -3,6 +3,7 @@ package tetrispvp.board;
 
 import tetrispvp.board.Mocks.Block;
 
+import javax.annotation.Resource;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,8 +39,24 @@ class DTETBlockMover implements BlockMover {
 
     @Override
     public void spawnNewBlock(Block newBlock) {
-        //TODO: position should depend on block type.
+        if (currentBlock != null) {
+            solidifyBlock();
+        }
         blockPosition.setLocation(board.getWidth() / 2, -2);
+        currentBlock = newBlock;
+        showNewBlock();
+    }
+
+    private void solidifyBlock() {
+        List<GridFieldWithPosition> fields = new ArrayList<GridFieldWithPosition>();
+        addSolidFieldsToList(currentBlock, blockPosition, fields);
+        board.setFields(fields);
+    }
+
+    private void showNewBlock() {
+        List<GridFieldWithPosition> fields = new ArrayList<GridFieldWithPosition>();
+        addBlockFieldsToList(currentBlock, blockPosition, fields);
+        board.setFields(fields);
     }
 
     @Override
@@ -108,7 +125,7 @@ class DTETBlockMover implements BlockMover {
     }
 
     private void removeFieldFromList(List<GridFieldWithPosition> fields, Point point) {
-        Predicate<GridFieldWithPosition> removePredicate = g->g.getRowNumber() == point.y && g.getColumnNumber() == point.x;
+        Predicate<GridFieldWithPosition> removePredicate = g -> g.getRowNumber() == point.y && g.getColumnNumber() == point.x;
         fields.removeIf(removePredicate);
     }
 
@@ -121,7 +138,7 @@ class DTETBlockMover implements BlockMover {
                 if (currentBlockField.isOccupied()) {
                     int row = i + position.y;
                     int column = j + position.x;
-                    removeFieldFromList(fields,new Point(column, row));
+                    removeFieldFromList(fields, new Point(column, row));
                     fields.add(new GridFieldWithPosition(row, column, emptyField));
                 }
             }
@@ -136,8 +153,24 @@ class DTETBlockMover implements BlockMover {
                 if (currentBlockField.isOccupied()) {
                     int row = i + position.y;
                     int column = j + position.x;
-                    removeFieldFromList(fields,new Point(column, row));
+                    removeFieldFromList(fields, new Point(column, row));
                     fields.add(new GridFieldWithPosition(row, column, currentBlockField));
+                }
+            }
+        }
+    }
+
+    private void addSolidFieldsToList(Block block, Point position, List<GridFieldWithPosition> fields) {
+        List<List<GridField>> blockFields = block.getBoardFields();
+        for (int i = 0; i < blockFields.size(); ++i) {
+            for (int j = 0; j < blockFields.get(i).size(); j++) {
+                GridField currentBlockField = blockFields.get(i).get(j);
+                GridField currentBoardField = new BoardField(true, true, currentBlockField.getColor(), currentBlockField.getPowerUpID());
+                if (currentBoardField.isOccupied()) {
+                    int row = i + position.y;
+                    int column = j + position.x;
+                    removeFieldFromList(fields, new Point(column, row));
+                    fields.add(new GridFieldWithPosition(row, column, currentBoardField));
                 }
             }
         }
@@ -156,40 +189,53 @@ class DTETBlockMover implements BlockMover {
 
     @Override
     public boolean rotateClockwise() {
-        currentBlock.rotateClockwise();
-        if (!collisionChecker.collides(blockPosition, currentBlock)) {
-            return true;
-        }
-
-        int kickIndex = getValidWallkick(wallkicksClockwise);
-        if (kickIndex == -1) {
-            //reverse rotation, because there's no space to rotate
-            currentBlock.rotateCounterClockwise();
-            return false;
-        } else {
-            Point point = wallkicksClockwise[kickIndex];
-            blockPosition = new Point(blockPosition.x + point.x, blockPosition.y + point.y);
-            return true;
-        }
+        return rotateCurrentBlockAndApply(true);
     }
 
     @Override
     public boolean rotateCounterClockwise() {
-        currentBlock.rotateCounterClockwise();
+        return rotateCurrentBlockAndApply(false);
+    }
+
+    private boolean rotateCurrentBlockAndApply(boolean rotateClockwise) {
+        rotateBlock(currentBlock, rotateClockwise);
         if (!collisionChecker.collides(blockPosition, currentBlock)) {
+            applyRotationToBoard(rotateClockwise, currentBlock, blockPosition, blockPosition);
             return true;
         }
-
-        int kickIndex = getValidWallkick(wallkicksCounterClockwise);
+        Point[] wallkicks = (rotateClockwise) ? wallkicksClockwise : wallkicksCounterClockwise;
+        int kickIndex = getValidWallkick(wallkicks);
         if (kickIndex == -1) {
             //reverse rotation, because there's no space to rotate
-            currentBlock.rotateClockwise();
+            rotateBlock(currentBlock, !rotateClockwise);
             return false;
         } else {
-            Point point = wallkicksClockwise[kickIndex];
-            blockPosition = new Point(blockPosition.x + point.x, blockPosition.y + point.y);
+            Point point = wallkicks[kickIndex];
+            Point newBlockPosition = new Point(blockPosition.x + point.x, blockPosition.y + point.y);
+            applyRotationToBoard(rotateClockwise, currentBlock, blockPosition, newBlockPosition);
+            blockPosition = newBlockPosition;
+
             return true;
         }
+    }
+
+    private void rotateBlock(Block block, boolean rotateClockwise) {
+        if (rotateClockwise) {
+            block.rotateClockwise();
+        } else {
+            block.rotateCounterClockwise();
+        }
+    }
+
+    private void applyRotationToBoard(boolean blockIsRotatedClockwise, Block rotatedBlock, Point previousPosition, Point newPosition) {
+        List<GridFieldWithPosition> fields = new ArrayList<GridFieldWithPosition>();
+        //reverse rotation before removing old blocks
+        rotateBlock(rotatedBlock, !blockIsRotatedClockwise);
+        addEmptyFieldsToList(currentBlock, previousPosition, fields);
+        rotateBlock(rotatedBlock, blockIsRotatedClockwise);
+        addBlockFieldsToList(currentBlock, newPosition, fields);
+        blockPosition = newPosition;
+        board.setFields(fields);
     }
 
     @Override
