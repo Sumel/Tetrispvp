@@ -62,9 +62,9 @@ public class ConsoleTetrisPlayer {
             String rowRepresentation = "";
             for (int col = 0; col < board.getWidth(); ++col) {
                 if (fields.get(row).get(col).isOccupied()) {
-                    rowRepresentation = rowRepresentation.concat("x");
+                    rowRepresentation = rowRepresentation.concat("|x");
                 } else {
-                    rowRepresentation = rowRepresentation.concat("o");
+                    rowRepresentation = rowRepresentation.concat("|o");
                 }
             }
             System.out.println(rowRepresentation);
