@@ -16,7 +16,7 @@ public class MutableBoard {
 		}
 	}
 	
-	void clearLine(int linePosition){
+	public void clearLine(int linePosition){
 		List<GridField> clearedLine = board.get(linePosition);
 		for(int i = linePosition; i < board.size() - 1; i++){
 			board.set(i, board.get(i+1));
@@ -33,4 +33,8 @@ public class MutableBoard {
 	void addLinesClearedListener(LineClearedListener newListener){
 		lineClearedListeners.add(newListener);
 	}
+	
+	public int getHeight() {
+        return 20;
+    }
 }

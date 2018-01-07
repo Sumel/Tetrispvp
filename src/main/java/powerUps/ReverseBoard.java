@@ -9,6 +9,7 @@ public class ReverseBoard implements PowerUp {
 
 	@Override
 	public void activate(int powerUpPresence) {
-
+		if (powerUpPresence % 2 != 0)
+			informToReverseBoard();
 	}
 }

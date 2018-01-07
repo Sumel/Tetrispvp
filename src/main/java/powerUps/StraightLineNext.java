@@ -14,12 +14,15 @@ public class StraightLineNext implements PowerUp{
 		return straightLineNext;
 	}
 	
-	private void changeNextBlockToStraightLine(){
-
+	private void changeNextBlockToStraightLine(int howMany){
+		PowerUpManager.getPowerUpManager().getGameController().
+			setNextBlockAsStraightLine(howMany);
 	}
 
 	@Override
 	public void activate(int powerUpPresence) {
-
+		if(powerUpPresence > maxAllowedSimultaneousActivations)
+			powerUpPresence = maxAllowedSimultaneousActivations;
+		changeNextBlockToStraightLine(powerUpPresence);
 	}
 }

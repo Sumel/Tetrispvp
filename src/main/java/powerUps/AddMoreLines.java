@@ -11,6 +11,7 @@ public class AddMoreLines implements PowerUp{
 
 	@Override
 	public void activate(int powerUpPresence) {
-
+		if(powerUpPresence > maxAllowedSimultaneousActivations)
+			powerUpPresence = maxAllowedSimultaneousActivations;
 	}
 }

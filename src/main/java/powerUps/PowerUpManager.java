@@ -3,13 +3,16 @@ package powerUps;
 import java.util.List;
 import java.util.Random;
 
-import powerUps.mocks.GridField;
+import powerUps.mocks.*;
 
 public class PowerUpManager {
     private static PowerUpManager powerUpManager = null;
     private Random random = new Random();
+    private MutableBoard board;
+    private GameController gameController;
 
-    private PowerUpManager() {
+	private PowerUpManager() {
+		
     }
 
     public static PowerUpManager getPowerUpManager(){
@@ -18,6 +21,22 @@ public class PowerUpManager {
         }
         return powerUpManager;
     }
+    
+    public GameController getGameController() {
+		return gameController;
+	}
+
+	public void setGameController(GameController gameController) {
+		this.gameController = gameController;
+	}
+
+	public MutableBoard getBoard() {
+		return board;
+	}
+
+	public void setBoard(MutableBoard board) {
+		this.board = board;
+	}
 
     public int randomPowerUp(){
         int powerUp = random.nextInt(PowerUpTypes.values().length);
@@ -38,6 +57,7 @@ public class PowerUpManager {
                 case ADD_MORE_LINES:
                     break;
                 case CLEAR_BOTTOM_LINE:
+                	ClearBottomLine.getClearBottomLine().activate(powerUpsPresence[i]);
                     break;
                 case REVERSE_BOARD:
                     break;
