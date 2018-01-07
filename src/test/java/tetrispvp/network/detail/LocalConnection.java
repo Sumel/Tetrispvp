@@ -4,10 +4,10 @@ import java.util.ArrayDeque;
 import java.util.Queue;
 
 public class LocalConnection implements Connection {
-    private final Queue<String> nearEndMQ;
-    private final Queue<String> farEndMQ;
+    private final Queue<Object> nearEndMQ;
+    private final Queue<Object> farEndMQ;
 
-    private LocalConnection(Queue<String> nearEndMQ, Queue<String> farEndMQ) {
+    private LocalConnection(Queue<Object> nearEndMQ, Queue<Object> farEndMQ) {
         this.nearEndMQ = nearEndMQ;
         this.farEndMQ = farEndMQ;
     }
@@ -18,7 +18,7 @@ public class LocalConnection implements Connection {
     }
 
     @Override
-    public void sendMessage(String message) {
+    public void sendMessage(Object message) {
         synchronized (farEndMQ) {
             farEndMQ.offer(message);
             if (farEndMQ.size() == 1)
@@ -27,10 +27,15 @@ public class LocalConnection implements Connection {
     }
 
     @Override
-    public String receiveMessage() throws java.lang.InterruptedException {
+    public Object receiveMessage() {
         synchronized (nearEndMQ) {
-            while (nearEndMQ.isEmpty())
-                wait();
+            while (nearEndMQ.isEmpty()) {
+                try {
+                    wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
 
             return nearEndMQ.poll();
         }
@@ -38,6 +43,11 @@ public class LocalConnection implements Connection {
 
     @Override
     public String thisAddress() {
+        throw new IllegalStateException("Not implemented.");
+    }
+
+    @Override
+    public void close() {
         throw new IllegalStateException("Not implemented.");
     }
 

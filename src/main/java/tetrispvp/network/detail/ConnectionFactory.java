@@ -1,11 +1,14 @@
 package tetrispvp.network.detail;
 
+import tetrispvp.network.detail.socket.SocketConnectionProvider;
+
 public class ConnectionFactory {
+
     /**
      * Obtains a connection from current provider.
      */
     static public Connection connect(LocalEndpoint from, String toAddress) {
-        throw new IllegalStateException("Not implemented.");
+        return provider.connect(from, toAddress);
     }
 
     /**
@@ -13,21 +16,29 @@ public class ConnectionFactory {
      * Doesn't connect to peer.
      */
     static public Connection listen(LocalEndpoint from) {
-        throw new IllegalStateException("Not implemented.");
+        return provider.listen(from);
     }
 
     /**
      * Overrides the connection provider.
      */
     static public void overrideProvider(ConnectionProvider connectionProvider) {
-        throw new IllegalStateException("Not implemented.");
+        if (connectionProvider == null)
+            throw new NullPointerException("Connection provider shouldn't be" +
+                    " null.");
+        provider = connectionProvider;
     }
 
     /**
      * Resets the connection provider to the default one.
      */
     static public void resetProvider() {
-        throw new IllegalStateException("Not implemented.");
+        provider = new SocketConnectionProvider();
     }
 
+    static private ConnectionProvider provider = new SocketConnectionProvider();
+
+    public static ConnectionProvider getProvider() {
+        return provider;
+    }
 }
