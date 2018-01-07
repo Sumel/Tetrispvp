@@ -101,8 +101,8 @@ public class TetrisBoard implements BlockMover, MutableBoard {
             savedFields.add(boardFields.get(lineNumber).get(i));
         }
         //shift rows by one
-        for (int i = lineNumber; i > 0; ++i) {
-            boardFields.set(i, boardFields.get(i + 1));
+        for (int i = lineNumber; i > 0; --i) {
+            boardFields.set(i, boardFields.get(i - 1));
         }
         boardFields.set(0, createEmptyRow());
         LinesClearedListener.Line ret = new BoardLine(lineNumber, savedFields);
