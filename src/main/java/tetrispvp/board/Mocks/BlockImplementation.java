@@ -82,7 +82,7 @@ public class BlockImplementation implements Block {
                                 {0, 2},
                                 {1, 2},
                                 {2, 2},
-                                {2, 3}
+                                {3, 2}
 
                         },
                         {
