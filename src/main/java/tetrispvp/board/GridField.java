@@ -18,6 +18,15 @@ public interface GridField {
     boolean isLocked();
 
     /**
+     * Returns information about whether this field can be cleared (grey lines cannot be cleared).
+     *
+     * @return Returns true if this field can be cleared. Returns false otherwise.
+     */
+    default boolean canBeCleared() {
+        return true;
+    }
+
+    /**
      * Gets the color of this field. Should only be used if the field is occupied.
      *
      * @return Returns the color of this field.
