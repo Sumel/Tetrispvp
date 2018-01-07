@@ -169,8 +169,8 @@ class DTETBlockMover implements BlockMover {
         for (int i = 0; i < blockFields.size(); ++i) {
             for (int j = 0; j < blockFields.get(i).size(); j++) {
                 GridField currentBlockField = blockFields.get(i).get(j);
-                GridField currentBoardField = new BoardField(true, true, currentBlockField.getColor(), currentBlockField.getPowerUpID());
-                if (currentBoardField.isOccupied()) {
+                if (currentBlockField.isOccupied()) {
+                    GridField currentBoardField = new BoardField(true, true, currentBlockField.getColor(), currentBlockField.getPowerUpID());
                     int row = i + position.y;
                     int column = j + position.x;
                     removeFieldFromList(fields, new Point(column, row));
