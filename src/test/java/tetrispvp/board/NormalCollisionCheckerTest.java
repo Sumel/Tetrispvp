@@ -13,38 +13,30 @@ import static org.junit.Assert.*;
 
 public class NormalCollisionCheckerTest {
 
-
-    private Board setUpMockBoardSize() {
-        Board board = mock(Board.class);
-        when(board.getWidth()).thenReturn(10);
-        when(board.getHeight()).thenReturn(20);
-        return board;
-    }
-
     @Test
     public void columnsOutsideBounds() throws Exception {
-        Board board = setUpMockBoardSize();
+        Board board = TestingUtils.setUpMockBoardSize();
         NormalCollisionChecker checker = new NormalCollisionChecker(board);
         assertEquals(checker.positionWithinBounds(13, 2), false);
     }
 
     @Test
     public void positionWithinBounds() throws Exception {
-        Board board = setUpMockBoardSize();
+        Board board = TestingUtils.setUpMockBoardSize();
         NormalCollisionChecker checker = new NormalCollisionChecker(board);
         assertEquals(checker.positionWithinBounds(2, 2), true);
     }
 
     @Test
     public void positionWithinBoundsAboveBoard() throws Exception {
-        Board board = setUpMockBoardSize();
+        Board board = TestingUtils.setUpMockBoardSize();
         NormalCollisionChecker checker = new NormalCollisionChecker(board);
         assertEquals(checker.positionWithinBounds(0, -5), true);
     }
 
     @Test
     public void collidesEmptyBoard() throws Exception {
-        Board board = setUpMockBoardSize();
+        Board board = TestingUtils.setUpMockBoardSize();
         List<List<GridField>> boardState = TestingUtils.getEmptyBoard();
         when(board.getBoardState()).thenReturn(boardState);
         NormalCollisionChecker checker = new NormalCollisionChecker(board);
@@ -58,7 +50,7 @@ public class NormalCollisionCheckerTest {
         BoardField boardField = new BoardField(true, true, Color.red, -1);
         boardState.get(0).set(0, boardField);
 
-        Board board = setUpMockBoardSize();
+        Board board = TestingUtils.setUpMockBoardSize();
         when(board.getBoardState()).thenReturn(boardState);
         Point currentPosition = new Point(-1,0);
         Block block = new BlockImplementation('I');
