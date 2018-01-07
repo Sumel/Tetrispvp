@@ -123,7 +123,14 @@ public class TetrisBoard implements BlockMover, MutableBoard {
         onBoardChanged();
     }
 
+    private boolean positionInDisplayBoundaries(int col, int row) {
+        return col >= 0 && col < getWidth() && row >= 0 && row < getHeight();
+    }
+
     private void setFieldAtPosition(GridField field, int col, int row, boolean fireEvent, boolean checkLinesCleared) {
+        if (!positionInDisplayBoundaries(col, row)) {
+            return;
+        }
         GridField currentField = boardFields.get(row).get(col);
         if (currentField.equals(field)) {
             return;
@@ -171,12 +178,13 @@ public class TetrisBoard implements BlockMover, MutableBoard {
 
     @Override
     public GridField getFieldAtPosition(int x, int y) {
-        return null;
+        return boardFields.get(y).get(x);
     }
 
     @Override
     public List<List<GridField>> getBoardState() {
-        return null;
+        //TODO: make immutable
+        return boardFields;
     }
 
     @Override
