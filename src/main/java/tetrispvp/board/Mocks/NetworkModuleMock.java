@@ -9,6 +9,13 @@ public class NetworkModuleMock implements MessageReceiver, MessageSender {
     private Map<String, List<MessageHandler>> handlers = new HashMap<>();
     private NetworkModuleMock otherNetwork;
 
+    public NetworkModuleMock(NetworkModuleMock otherNetwork) {
+        this.otherNetwork = otherNetwork;
+    }
+
+    public NetworkModuleMock() {
+        this.otherNetwork = new NetworkModuleMock(this);
+    }
 
     @Override
     public void send(String messageName, Object with) {
@@ -24,8 +31,10 @@ public class NetworkModuleMock implements MessageReceiver, MessageSender {
     }
 
     public void messageFromOtherNetwork(String messageName, Object with) {
-        for (MessageHandler mHandler : handlers.get(messageName)) {
-            mHandler.arrived(messageName, with, null);
+        if (handlers.containsKey(messageName)) {
+            for (MessageHandler mHandler : handlers.get(messageName)) {
+                mHandler.arrived(messageName, with, null);
+            }
         }
     }
 
