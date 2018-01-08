@@ -7,22 +7,24 @@ import tetrispvp.board.Mocks.Block;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import com.google.inject.*;
 
 public class TetrisBoard implements BlockMover, MutableBoard {
-
-    //TODO: inject this
-    private BlockMover blockMover = new DTETBlockMover(this);
+    
+    private BlockMover blockMover;
     private final static int boardWidth = 10;
     private final static int boardHeight = 20;
     private List<List<GridField>> boardFields;
     private List<BoardStateChangedListener> stateChangedListeners = new LinkedList<BoardStateChangedListener>();
     private List<LinesClearedListener> lineClearedListeners = new LinkedList<LinesClearedListener>();
 
-    public TetrisBoard() {
+    @Inject
+    public TetrisBoard(BlockMover blockMover) {
         boardFields = new ArrayList<List<GridField>>();
         for (int i = 0; i < boardHeight; ++i) {
             boardFields.add(createEmptyRow());
         }
+        this.blockMover = blockMover;
     }
 
     private List<GridField> createEmptyRow() {

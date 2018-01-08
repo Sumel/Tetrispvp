@@ -1,10 +1,9 @@
 package tetrispvp.board.Mocks;
 
 
-import tetrispvp.board.BlockCollidedBelowListener;
-import tetrispvp.board.BoardStateChangedListener;
-import tetrispvp.board.GridField;
-import tetrispvp.board.TetrisBoard;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import tetrispvp.board.*;
 
 import java.awt.*;
 import java.util.List;
@@ -18,7 +17,8 @@ public class ConsoleTetrisPlayer {
     }
 
     private TetrisBoard setUpBoard() {
-        TetrisBoard ret = new TetrisBoard();
+        Injector injector = Guice.createInjector(new TetrisBoardModule());
+        TetrisBoard ret = injector.getInstance(TetrisBoard.class);
         ret.addBoardStateChangedListener(new BoardStateChangedListener() {
             @Override
             public void stateChanged() {

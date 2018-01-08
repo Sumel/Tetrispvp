@@ -1,6 +1,7 @@
 package tetrispvp.board;
 
 
+import com.google.inject.Inject;
 import tetrispvp.board.Mocks.Block;
 
 import javax.annotation.Resource;
@@ -32,7 +33,7 @@ class DTETBlockMover implements BlockMover {
             new Point(-1, 1),
             new Point(1, 1)
     };
-
+    @Inject
     public DTETBlockMover(MutableBoard board) {
         this.board = board;
         blockPosition = new Point();
