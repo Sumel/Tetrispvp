@@ -114,9 +114,18 @@ public class TetrisBoard implements BlockMover, MutableBoard {
     }
 
     @Override
-    public void addLine(int lineNumber, GridField field) {
+    public void addLine(int lineNumber, GridField field, boolean moveUp) {
+        if (moveUp) {
+            shiftRowsUp(lineNumber - 1);
+        }
         for (int i = 0; i < getWidth(); ++i) {
             boardFields.get(lineNumber).set(i, field);
+        }
+    }
+
+    private void shiftRowsUp(int start) {
+        for (int i = start; i >= 0; --i) {
+            boardFields.set(i, boardFields.get(i + 1));
         }
     }
 

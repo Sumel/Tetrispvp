@@ -5,7 +5,7 @@ import java.util.List;
 public interface MutableBoard extends Board {
     void flipBoard();
 
-    void addLine(int lineNumber, GridField field);
+    void addLine(int lineNumber, GridField field, boolean moveUp);
 
     void clearLine(int lineNumber);
 
