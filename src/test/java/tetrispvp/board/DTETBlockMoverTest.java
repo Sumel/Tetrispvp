@@ -235,9 +235,4 @@ public class DTETBlockMoverTest {
         }
         assertTrue(expectedResult.length == capturedArguments.size());
     }
-
-    @Test
-    public void isBlockCollidingBelow() throws Exception {
-    }
-
 }
