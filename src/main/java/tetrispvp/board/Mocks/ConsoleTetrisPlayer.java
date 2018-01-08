@@ -49,6 +49,8 @@ public class ConsoleTetrisPlayer {
             board.rotateCounterClockwise();
         } else if (input.equals("s") || input.toLowerCase().equals("spawn")) {
             board.spawnNewBlock(new BlockImplementation('I'));
+        } else if (input.equals("f") || input.toLowerCase().equals("flip")) {
+            board.flipBoard();
         } else {
             return false;
         }
