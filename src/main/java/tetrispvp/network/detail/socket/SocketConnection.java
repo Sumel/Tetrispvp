@@ -60,12 +60,7 @@ public class SocketConnection implements Connection {
     public void startListening() {
 
         final SocketConnection connection = this;
-        this.listening = new Thread() {
-            public void run() {
-                connection.listeningLoop();
-            }
-        };
-
+        this.listening = new Thread(connection::listeningLoop);
         this.listening.start();
     }
 
@@ -95,18 +90,21 @@ public class SocketConnection implements Connection {
 
     @Override
     public void close() {
-        if (listening != null) {
-            stopListening = true;
+        if (listening == null)
+            return;
 
-            for (int i = 0; i < 4; i++) {
-                try {
-                    listening.join();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+        stopListening = true;
+
+        for (int i = 0; i < 5; i++) {
+            try {
+                listening.join(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
-            listening = null;
         }
+
+        if (listening.isAlive())
+            throw new IllegalStateException("Couldn't join listening thread.");
     }
 
     private void initPeer() throws IOException {

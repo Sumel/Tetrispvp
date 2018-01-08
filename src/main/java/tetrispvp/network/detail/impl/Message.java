@@ -1,18 +1,19 @@
 package tetrispvp.network.detail.impl;
 
-import java.util.List;
-
 public class Message {
-    Message(String str) {
-        throw new IllegalStateException("Not implemented.");
-    }
+    private final String name;
+    private final Object with;
 
     Message(String name, Object with) {
-        throw new IllegalStateException("Not implemented.");
+        this.name = name;
+        this.with = with;
     }
 
-    @Override
-    public String toString() {
-        throw new IllegalStateException("Not implemented.");
+    public String name() {
+        return name;
+    }
+
+    public Object with() {
+        return with;
     }
 }

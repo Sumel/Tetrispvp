@@ -1,6 +1,7 @@
 package tetrispvp.network.detail.impl;
 
 import tetrispvp.network.ConnectionContext;
+import tetrispvp.network.detail.Connection;
 import tetrispvp.network.detail.LocalEndpoint;
 
 public class ConcreteConnectionContext implements ConnectionContext, LocalEndpoint {
@@ -22,6 +23,10 @@ public class ConcreteConnectionContext implements ConnectionContext, LocalEndpoi
 
     @Override
     public String getUID() {
+        throw new IllegalStateException("Not implemented.");
+    }
+
+    public Connection getConnection() {
         throw new IllegalStateException("Not implemented.");
     }
 }
