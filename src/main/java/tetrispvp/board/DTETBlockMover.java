@@ -34,10 +34,10 @@ class DTETBlockMover implements BlockMover {
             new Point(1, 1)
     };
     @Inject
-    public DTETBlockMover(MutableBoard board) {
+    public DTETBlockMover(MutableBoard board, CollisionChecker collisionChecker) {
         this.board = board;
         blockPosition = new Point();
-        collisionChecker = new NormalCollisionChecker(board);
+        this.collisionChecker = collisionChecker;
     }
 
     @Override

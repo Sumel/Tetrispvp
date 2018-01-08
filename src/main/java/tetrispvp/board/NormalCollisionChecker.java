@@ -1,6 +1,7 @@
 package tetrispvp.board;
 
 
+import com.google.inject.Inject;
 import tetrispvp.board.Mocks.Block;
 
 import java.awt.Point;
@@ -10,7 +11,7 @@ import java.util.List;
 public class NormalCollisionChecker implements CollisionChecker {
 
     private Board board;
-
+    @Inject
     public NormalCollisionChecker(Board board) {
         this.board = board;
     }
