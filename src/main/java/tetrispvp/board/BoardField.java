@@ -8,9 +8,18 @@ public class BoardField implements GridField {
     private boolean isLocked;
     private Color color;
     private int powerUpID;
+    private boolean canBeCleared;
 
     public static BoardField GetEmptyBoardField() {
         return new BoardField();
+    }
+
+    public BoardField(boolean isOccupied, boolean isLocked, Color color, int powerUpID, boolean canBeCleared) {
+        this.isOccupied = isOccupied;
+        this.isLocked = isLocked;
+        this.color = color;
+        this.powerUpID = powerUpID;
+        this.canBeCleared = canBeCleared;
     }
 
     public BoardField(boolean isOccupied, boolean isLocked, Color color, int powerUpID) {
@@ -18,6 +27,7 @@ public class BoardField implements GridField {
         this.isLocked = isLocked;
         this.color = color;
         this.powerUpID = powerUpID;
+        this.canBeCleared = true;
     }
 
     public BoardField() {
@@ -57,5 +67,10 @@ public class BoardField implements GridField {
                 isLocked() == otherBoardField.isLocked() &&
                 (getColor() == null && otherBoardField.getColor() == null || getColor().equals(otherBoardField.getColor())) &&
                 getPowerUpID() == otherBoardField.getPowerUpID();
+    }
+
+    @Override
+    public boolean canBeCleared() {
+        return canBeCleared;
     }
 }
