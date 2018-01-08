@@ -19,6 +19,8 @@ public class ConsoleTetrisPlayer {
     private TetrisBoard setUpBoard() {
         Injector injector = Guice.createInjector(new TetrisBoardModule());
         TetrisBoard ret = injector.getInstance(TetrisBoard.class);
+        //ensure creation of GreyLinesManager
+        injector.getInstance(GreyLinesManager.class);
         ret.addBoardStateChangedListener(new BoardStateChangedListener() {
             @Override
             public void stateChanged() {
