@@ -7,10 +7,11 @@ import tetrispvp.board.Mocks.Block;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+
 import com.google.inject.*;
 
 public class TetrisBoard implements BlockMover, MutableBoard {
-    
+
     private BlockMover blockMover;
     private final static int boardWidth = 10;
     private final static int boardHeight = 20;
@@ -83,12 +84,40 @@ public class TetrisBoard implements BlockMover, MutableBoard {
 
     @Override
     public void flipBoard() {
-        //TODO
+        int top = highestRowWithLockedFields();
+        for (int offset = 0; offset < (getHeight() - top) / 2; ++offset) {
+            swapRows(top + offset, getHeight() - offset - 1);
+        }
+        onBoardChanged();
+    }
+
+    private void swapRows(int row1, int row2) {
+        List<GridField> tmpRow = boardFields.get(row1);
+        boardFields.set(row1, boardFields.get(row2));
+        boardFields.set(row2, tmpRow);
+    }
+
+    private int highestRowWithLockedFields() {
+        for (int row = 0; row < getHeight(); ++row) {
+            boolean rowEmpty = true;
+            for (int col = 0; col < getWidth(); ++col) {
+                if (boardFields.get(row).get(col).isLocked()) {
+                    rowEmpty = false;
+                    break;
+                }
+            }
+            if (!rowEmpty) {
+                return row;
+            }
+        }
+        return getHeight();
     }
 
     @Override
     public void addLine(int lineNumber, GridField field) {
-
+        for (int i = 0; i < getWidth(); ++i) {
+            boardFields.get(lineNumber).set(i, field);
+        }
     }
 
     @Override
@@ -174,7 +203,10 @@ public class TetrisBoard implements BlockMover, MutableBoard {
         for (Integer i : rowsToClear) {
             lines.add(clearLine(i, false));
         }
-        onLinesCleared(lines);
+        if (lines.size() > 0) {
+            onLinesCleared(lines);
+        }
+
 
     }
 
