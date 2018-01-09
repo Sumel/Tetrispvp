@@ -19,6 +19,7 @@ public class ConcreteMessageReceiver implements MessageReceiver {
     private HandlerStore store;
     private final Lock lock = new ReentrantLock();
     private boolean stopReceiving;
+    private static final long sleepOnErrorMillis = 100;
 
     public ConcreteMessageReceiver(MessageContext parentContext,
                                    ConcreteConnectionContext connectionContext) {
@@ -127,9 +128,10 @@ public class ConcreteMessageReceiver implements MessageReceiver {
             } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
                 try {
-                    Thread.sleep(100);
+                    Thread.sleep(sleepOnErrorMillis);
                 } catch (InterruptedException e1) {
                 }
+                connection.close();
             }
         }
     }

@@ -51,6 +51,11 @@ public class LocalConnection implements Connection {
         throw new IllegalStateException("Not implemented.");
     }
 
+    @Override
+    public boolean isOpen() {
+        throw new IllegalStateException("Not implemented.");
+    }
+
     public LocalConnection getFarEnd() {
         return new LocalConnection(farEndMQ, nearEndMQ);
     }

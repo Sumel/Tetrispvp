@@ -6,13 +6,27 @@ import tetrispvp.network.NetworkModule;
 
 public class ConcreteNetworkModule implements NetworkModule {
 
+    ConcreteConnectionContext connectionContext = new
+            ConcreteConnectionContext();
+    ConcreteMessageContext messageContext = new ConcreteMessageContext(connectionContext);
+
+    public ConcreteNetworkModule() {
+        messageContext.activate();
+    }
+
     @Override
     public ConnectionContext connectionContext() {
-        throw new IllegalStateException("Not implemented.");
+        return connectionContext;
     }
 
     @Override
     public MessageContext messageContext() {
-        throw new IllegalStateException("Not implemented.");
+        return messageContext;
+    }
+
+    @Override
+    public void cleanUp() {
+        connectionContext.disconnect();
+        messageContext.deactivate();
     }
 }

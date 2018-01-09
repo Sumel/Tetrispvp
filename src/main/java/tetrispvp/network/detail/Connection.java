@@ -23,4 +23,6 @@ public interface Connection {
     String thisAddress();
 
     void close();
+
+    boolean isOpen();
 }

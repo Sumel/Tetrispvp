@@ -14,4 +14,6 @@ public interface NetworkModule {
      * @return Context for passing messages.
      */
     MessageContext messageContext();
+
+    void cleanUp();
 }

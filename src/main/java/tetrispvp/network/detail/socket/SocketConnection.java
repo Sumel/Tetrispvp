@@ -89,7 +89,7 @@ public class SocketConnection implements Connection {
     }
 
     @Override
-    public void close() {
+    synchronized public void close() {
         if (listening == null)
             return;
 
@@ -105,6 +105,12 @@ public class SocketConnection implements Connection {
 
         if (listening.isAlive())
             throw new IllegalStateException("Couldn't join listening thread.");
+        listening = null;
+    }
+
+    @Override
+    public boolean isOpen() {
+        return listening != null;
     }
 
     private void initPeer() throws IOException {
