@@ -1,4 +1,8 @@
-package tetrispvp.network.detail;
+package tetrispvp.network.helper;
+
+import tetrispvp.network.detail.Connection;
+import tetrispvp.network.detail.ConnectionProvider;
+import tetrispvp.network.detail.LocalEndpoint;
 
 public class LocalConnectionProvider implements ConnectionProvider {
     @Override

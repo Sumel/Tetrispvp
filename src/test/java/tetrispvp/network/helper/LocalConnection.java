@@ -1,4 +1,6 @@
-package tetrispvp.network.detail;
+package tetrispvp.network.helper;
+
+import tetrispvp.network.detail.Connection;
 
 import java.util.ArrayDeque;
 import java.util.Queue;

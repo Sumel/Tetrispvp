@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 
 import static junit.framework.TestCase.assertEquals;
 
-public class HandlerStoreTest {
+public class HandlerStoreIT {
 
     class Handler implements MessageHandler {
 

@@ -1,6 +1,5 @@
 package tetrispvp.network.detail.socket;
 
-import com.sun.security.ntlm.Server;
 import tetrispvp.network.detail.Connection;
 import tetrispvp.network.detail.ConnectionProvider;
 import tetrispvp.network.detail.LocalEndpoint;
@@ -8,7 +7,6 @@ import tetrispvp.network.detail.LocalEndpoint;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.text.ParseException;
 
 public class SocketConnectionProvider implements ConnectionProvider {
 

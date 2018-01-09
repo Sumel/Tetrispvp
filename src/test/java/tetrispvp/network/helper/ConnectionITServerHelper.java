@@ -1,27 +1,20 @@
-package tetrispvp.network.detail;
+package tetrispvp.network.helper;
 
-import org.junit.Test;
-import tetrispvp.network.detail.socket.SocketConnectionProvider;
+import tetrispvp.network.detail.Connection;
+import tetrispvp.network.detail.ConnectionFactory;
+import tetrispvp.network.detail.LocalEndpoint;
 
 import java.io.IOException;
-import java.util.Scanner;
-import java.util.UUID;
 
-public class TestAppFar {
+public class ConnectionITServerHelper {
+    private LocalEndpoint here = new LocalEndpoint() {
+        @Override
+        public String getUID() {
+            return "ba518818-abad-4983-b3d2-45d7154c693d";
+        }
+    };
 
-    @Test
-    public void main() {
-        LocalEndpoint here = new LocalEndpoint() {
-            @Override
-            public String getUID() {
-                return "ba518818-abad-4983-b3d2-45d7154c693d";
-            }
-        };
-
-        SocketConnectionProvider provider = (SocketConnectionProvider)
-                ConnectionFactory.getProvider();
-        provider.overrideListenPort(52869);
-
+    public void run() {
         Connection c = ConnectionFactory.listen(here);
 
         System.out.println("Listening on " + c.thisAddress());
