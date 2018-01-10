@@ -4,11 +4,8 @@ public class ClearBottomLine implements PowerUp {
 	
 	private int maxAllowedSimultaneousActivations = 2;
 	private static ClearBottomLine clearBottomLine = null;
-	
 
-	private ClearBottomLine() {
-		
-	}
+	private ClearBottomLine() { }
 	
 	public static ClearBottomLine getClearBottomLine(){
 		if(clearBottomLine == null)
