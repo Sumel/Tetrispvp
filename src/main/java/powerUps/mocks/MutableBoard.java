@@ -34,17 +34,22 @@ public class MutableBoard {
 		for(LineClearedListener l : lineClearedListeners)
 			l.lineCleared(clearedLine);
 	}
-
-	private void moveBoardUp(){
-
-    }
 	
 	public void addLine(int lineNumber, GridField field, boolean moveUp){
-		if(moveUp){
-		    moveBoardUp();
+        for(int i = 0; i < getHeight()-2; i++){
+            board.set(i, board.get(i+1));
         }
-		//for(GridField g : board.get(linePosition))
-		//	g.setState(FieldState.BLOCKED);
+
+        List<GridField> line;
+        for(int i = getHeight()-lineNumber; i < getHeight(); i++) {
+            line = new ArrayList<>();
+            for (int j = 0; j < getWidth(); j++) {
+                GridField gf = new GridField();
+                gf.setState(FieldState.BLOCKED);
+                line.add(gf);
+            }
+            board.set(i, line);
+        }
 	}
 	
 	void addLinesClearedListener(LineClearedListener newListener){
