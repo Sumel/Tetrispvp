@@ -4,12 +4,14 @@ package tetrispvp.board;
 import javafx.scene.chart.LineChart;
 import tetrispvp.board.Mocks.Block;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
 import com.google.inject.*;
+import tetrispvp.board.Mocks.BlockField;
 
 public class TetrisBoard implements BlockMover, MutableBoard, GameStateTracker {
 
@@ -44,6 +46,16 @@ public class TetrisBoard implements BlockMover, MutableBoard, GameStateTracker {
     @Override
     public void spawnNewBlock(Block newBlock) {
         blockMover.spawnNewBlock(newBlock);
+    }
+
+    @Override
+    public void changePosition(Point point) {
+        blockMover.changePosition(point);
+    }
+
+    @Override
+    public Point getPosition() {
+        return blockMover.getPosition();
     }
 
     @Override
@@ -127,16 +139,29 @@ public class TetrisBoard implements BlockMover, MutableBoard, GameStateTracker {
         if (moveUp) {
             shiftRowsUp(lineNumber - 1);
         }
+        boardFields.set(lineNumber, createEmptyRow());
         for (int i = 0; i < getWidth(); ++i) {
             boardFields.get(lineNumber).set(i, field);
         }
+        onBoardChanged();
+    }
+
+    private void moveBlockUp(){
+        Point point = blockMover.getPosition();
+        point.y--;
+        changePosition(point);
     }
 
     private void shiftRowsUp(int start) {
-        for (int i = start; i >= 0; --i) {
+
+        for (int i = 0; i <= start; ++i) {
+
             boardFields.set(i, boardFields.get(i + 1));
         }
+        moveBlockUp();
     }
+
+
 
     @Override
     public void clearLine(int lineNumber) {
@@ -236,7 +261,7 @@ public class TetrisBoard implements BlockMover, MutableBoard, GameStateTracker {
     @Override
     public List<List<GridField>> getBoardState() {
         List<List<GridField>> tmp = new ArrayList<List<GridField>>();
-        for (List<GridField> list : boardFields){
+        for (List<GridField> list : boardFields) {
             tmp.add(Collections.unmodifiableList(list));
         }
         return Collections.unmodifiableList(tmp);

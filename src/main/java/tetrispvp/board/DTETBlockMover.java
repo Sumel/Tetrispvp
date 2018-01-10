@@ -122,12 +122,17 @@ class DTETBlockMover implements BlockMover {
         return result;
     }
 
-    private void changePosition(Point newPosition) {
+    public void changePosition(Point newPosition) {
         List<GridFieldWithPosition> fields = new ArrayList<GridFieldWithPosition>();
         addEmptyFieldsToList(currentBlock, blockPosition, fields);
         addBlockFieldsToList(currentBlock, newPosition, fields);
         blockPosition = newPosition;
         board.setFields(fields);
+    }
+
+    @Override
+    public Point getPosition() {
+        return (Point)blockPosition.clone();
     }
 
     private void removeFieldFromList(List<GridFieldWithPosition> fields, Point point) {

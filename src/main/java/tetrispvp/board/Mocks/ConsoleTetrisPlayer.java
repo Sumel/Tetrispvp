@@ -17,10 +17,7 @@ public class ConsoleTetrisPlayer {
     }
 
     private TetrisBoard setUpBoard() {
-        Injector injector = Guice.createInjector(new TetrisBoardModule());
-        TetrisBoard ret = injector.getInstance(TetrisBoard.class);
-        //ensure creation of GreyLinesManager
-        injector.getInstance(GreyLinesManager.class);
+        TetrisBoard ret = TetrisBoardProvider.getTetrisBoard();
         ret.addBoardStateChangedListener(new BoardStateChangedListener() {
             @Override
             public void stateChanged() {
@@ -59,6 +56,10 @@ public class ConsoleTetrisPlayer {
             board.spawnNewBlock(new BlockImplementation('I'));
         } else if (input.equals("f") || input.toLowerCase().equals("flip")) {
             board.flipBoard();
+        }
+        else if (input.equals("add")){
+            BoardField field = new BoardField(true, true, Color.gray, -1, false);
+            board.addLine(board.getHeight()-1, field,true);
         } else {
             return false;
         }
@@ -73,7 +74,12 @@ public class ConsoleTetrisPlayer {
             for (int col = 0; col < board.getWidth(); ++col) {
                 if (fields.get(row).get(col).isOccupied()) {
                     if (fields.get(row).get(col).isLocked()) {
-                        rowRepresentation = rowRepresentation.concat("|x");
+                        if (fields.get(row).get(col).canBeCleared()){
+                            rowRepresentation = rowRepresentation.concat("|x");
+                        } else{
+                            rowRepresentation = rowRepresentation.concat("|g");
+                        }
+
                     }
                     else{
                         rowRepresentation = rowRepresentation.concat("|o");
