@@ -4,8 +4,11 @@ import tetrispvp.network.MessageContext;
 import tetrispvp.network.MessageHandler;
 import tetrispvp.network.MessageReceiver;
 import tetrispvp.network.detail.Connection;
+import tetrispvp.network.detail.socket.SocketConnection;
 
+import java.io.EOFException;
 import java.io.IOException;
+import java.net.SocketException;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.regex.Pattern;
@@ -92,7 +95,7 @@ public class ConcreteMessageReceiver implements MessageReceiver {
 
         for (int i = 0; i < 5; i++) {
             try {
-                receiving.join(100);
+                receiving.join(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -125,11 +128,18 @@ public class ConcreteMessageReceiver implements MessageReceiver {
                     }
                 }
 
+            } catch (SocketException | EOFException e) {
+                e.printStackTrace();
+                try {
+                    Thread.sleep(sleepOnErrorMillis);
+                } catch (InterruptedException ignored) {
+                }
+                connection.close();
             } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
                 try {
                     Thread.sleep(sleepOnErrorMillis);
-                } catch (InterruptedException e1) {
+                } catch (InterruptedException ignored) {
                 }
                 connection.close();
             }

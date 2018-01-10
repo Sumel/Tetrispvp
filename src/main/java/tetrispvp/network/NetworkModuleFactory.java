@@ -6,7 +6,7 @@ import tetrispvp.network.detail.impl.ConcreteNetworkModule;
  * Provides a new network module.
  */
 public class NetworkModuleFactory {
-    static NetworkModule getNetworkModule() {
+    public static NetworkModule getNetworkModule() {
         return new ConcreteNetworkModule();
     }
 }

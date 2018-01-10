@@ -106,6 +106,15 @@ public class SocketConnection implements Connection {
         if (listening.isAlive())
             throw new IllegalStateException("Couldn't join listening thread.");
         listening = null;
+
+        try {
+            System.out.println("Closing socket.");
+            listen.close();
+            if (peer != null)
+                peer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -125,13 +134,16 @@ public class SocketConnection implements Connection {
         }
     }
 
-    private void waitForPeer() {
-        while (peer == null) {
+    private void waitForPeer() throws IOException {
+        while (peer == null || out == null || in == null) {
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+
+            if (!isOpen())
+                throw new IOException("Closed while waiting for peer.");
         }
     }
 

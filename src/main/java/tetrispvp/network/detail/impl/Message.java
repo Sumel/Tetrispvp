@@ -1,6 +1,8 @@
 package tetrispvp.network.detail.impl;
 
-public class Message {
+import java.io.Serializable;
+
+public class Message implements Serializable {
     private final String name;
     private final Object with;
 

@@ -72,7 +72,7 @@ public class ConcreteMessageSender implements MessageSender {
         messageQueueLock.lock();
 
         try {
-            messageQueueNotEmpty.notifyAll();
+            messageQueueNotEmpty.signalAll();
         } finally {
             messageQueueLock.unlock();
         }
