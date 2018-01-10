@@ -5,6 +5,7 @@ import javafx.scene.chart.LineChart;
 import tetrispvp.board.Mocks.Block;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -234,8 +235,11 @@ public class TetrisBoard implements BlockMover, MutableBoard, GameStateTracker {
 
     @Override
     public List<List<GridField>> getBoardState() {
-        //TODO: make immutable
-        return boardFields;
+        List<List<GridField>> tmp = new ArrayList<List<GridField>>();
+        for (List<GridField> list : boardFields){
+            tmp.add(Collections.unmodifiableList(list));
+        }
+        return Collections.unmodifiableList(tmp);
     }
 
     @Override

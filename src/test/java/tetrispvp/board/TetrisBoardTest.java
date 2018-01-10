@@ -5,6 +5,7 @@ import org.mockito.internal.util.reflection.Whitebox;
 import tetrispvp.board.Mocks.Block;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -134,6 +135,18 @@ public class TetrisBoardTest {
                 }
             }
         }
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void immutabilityTest() throws Exception {
+        BlockMover mover = mock(BlockMover.class);
+        GameStateTracker gameStateTracker = mock(GameStateTracker.class);
+        TetrisBoard board = new TetrisBoard(mover, gameStateTracker);
+
+
+        List<List<GridField>> fields = board.getBoardState();
+        fields.get(0).set(2,BoardField.GetEmptyBoardField());
+        fields.set(3, new ArrayList<GridField>());
     }
 
 }
