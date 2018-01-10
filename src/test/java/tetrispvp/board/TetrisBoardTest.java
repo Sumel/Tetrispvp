@@ -18,7 +18,8 @@ public class TetrisBoardTest {
     public void spawnNewBlock() throws Exception {
         BlockMover mover = mock(BlockMover.class);
         Block block = mock(Block.class);
-        TetrisBoard board = new TetrisBoard(mover);
+        GameStateTracker gameStateTracker = mock(GameStateTracker.class);
+        TetrisBoard board = new TetrisBoard(mover, gameStateTracker);
 
         board.spawnNewBlock(block);
 
@@ -28,7 +29,8 @@ public class TetrisBoardTest {
     @Test
     public void moveDown() throws Exception {
         BlockMover mover = mock(BlockMover.class);
-        TetrisBoard board = new TetrisBoard(mover);
+        GameStateTracker gameStateTracker = mock(GameStateTracker.class);
+        TetrisBoard board = new TetrisBoard(mover, gameStateTracker);
 
         board.moveDown();
 
@@ -38,7 +40,8 @@ public class TetrisBoardTest {
     @Test
     public void moveLeft() throws Exception {
         BlockMover mover = mock(BlockMover.class);
-        TetrisBoard board = new TetrisBoard(mover);
+        GameStateTracker gameStateTracker = mock(GameStateTracker.class);
+        TetrisBoard board = new TetrisBoard(mover, gameStateTracker);
 
         board.moveLeft();
 
@@ -48,7 +51,8 @@ public class TetrisBoardTest {
     @Test
     public void moveRight() throws Exception {
         BlockMover mover = mock(BlockMover.class);
-        TetrisBoard board = new TetrisBoard(mover);
+        GameStateTracker gameStateTracker = mock(GameStateTracker.class);
+        TetrisBoard board = new TetrisBoard(mover, gameStateTracker);
 
         board.moveRight();
 
@@ -58,7 +62,8 @@ public class TetrisBoardTest {
     @Test
     public void moveToBottom() throws Exception {
         BlockMover mover = mock(BlockMover.class);
-        TetrisBoard board = new TetrisBoard(mover);
+        GameStateTracker gameStateTracker = mock(GameStateTracker.class);
+        TetrisBoard board = new TetrisBoard(mover, gameStateTracker);
 
         board.moveToBottom();
 
@@ -68,7 +73,8 @@ public class TetrisBoardTest {
     @Test
     public void rotateClockwise() throws Exception {
         BlockMover mover = mock(BlockMover.class);
-        TetrisBoard board = new TetrisBoard(mover);
+        GameStateTracker gameStateTracker = mock(GameStateTracker.class);
+        TetrisBoard board = new TetrisBoard(mover, gameStateTracker);
 
         board.rotateClockwise();
 
@@ -78,7 +84,8 @@ public class TetrisBoardTest {
     @Test
     public void rotateCounterClockwise() throws Exception {
         BlockMover mover = mock(BlockMover.class);
-        TetrisBoard board = new TetrisBoard(mover);
+        GameStateTracker gameStateTracker = mock(GameStateTracker.class);
+        TetrisBoard board = new TetrisBoard(mover, gameStateTracker);
 
         board.rotateCounterClockwise();
 
@@ -89,7 +96,8 @@ public class TetrisBoardTest {
     public void isBlockCollidingBelow() throws Exception {
         BlockMover mover = mock(BlockMover.class);
         when(mover.isBlockCollidingBelow()).thenReturn(true);
-        TetrisBoard board = new TetrisBoard(mover);
+        GameStateTracker gameStateTracker = mock(GameStateTracker.class);
+        TetrisBoard board = new TetrisBoard(mover, gameStateTracker);
 
         assertTrue(board.isBlockCollidingBelow());
 
@@ -109,7 +117,8 @@ public class TetrisBoardTest {
     @Test
     public void flipTest() throws Exception {
         BlockMover mover = mock(BlockMover.class);
-        TetrisBoard board = new TetrisBoard(mover);
+        GameStateTracker gameStateTracker = mock(GameStateTracker.class);
+        TetrisBoard board = new TetrisBoard(mover, gameStateTracker);
         Whitebox.setInternalState(board, "boardFields", setUpBoardForFlip());
         board.flipBoard();
         for (int row = 0; row < board.getHeight(); ++row) {

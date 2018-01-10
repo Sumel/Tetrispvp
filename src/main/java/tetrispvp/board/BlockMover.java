@@ -18,4 +18,6 @@ public interface BlockMover {
     boolean isBlockCollidingBelow();
 
     void addBlockCollidedBelowListener(BlockCollidedBelowListener newListener);
+
+    void addBlockSpawnedListener(BlockSpawnedListener newListener);
 }

@@ -4,7 +4,6 @@ package tetrispvp.board;
 import com.google.inject.Inject;
 import tetrispvp.board.Mocks.Block;
 
-import javax.annotation.Resource;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -17,7 +16,8 @@ class DTETBlockMover implements BlockMover {
     private Block currentBlock;
     private MutableBoard board;
     private CollisionChecker collisionChecker;
-    private List<BlockCollidedBelowListener> listeners = new LinkedList<BlockCollidedBelowListener>();
+    private List<BlockCollidedBelowListener> blockCollidedBelowListeners = new LinkedList<BlockCollidedBelowListener>();
+    private List<BlockSpawnedListener> blockSpawnedListeners = new LinkedList<BlockSpawnedListener>();
     private final static Point[] wallkicksClockwise = {
             new Point(1, 0),
             new Point(-1, 0),
@@ -48,6 +48,7 @@ class DTETBlockMover implements BlockMover {
         blockPosition.setLocation(board.getWidth() / 2, -2);
         currentBlock = newBlock;
         showNewBlock();
+        onBlockSpawned(currentBlock);
     }
 
     private void solidifyBlock() {
@@ -144,7 +145,9 @@ class DTETBlockMover implements BlockMover {
                     int row = i + position.y;
                     int column = j + position.x;
                     removeFieldFromList(fields, new Point(column, row));
-                    fields.add(new GridFieldWithPosition(row, column, emptyField));
+                    if(column >= 0 && row >= 0 && !board.getFieldAtPosition(column,row).isLocked()){
+                        fields.add(new GridFieldWithPosition(row, column, emptyField));
+                    }
                 }
             }
         }
@@ -159,7 +162,9 @@ class DTETBlockMover implements BlockMover {
                     int row = i + position.y;
                     int column = j + position.x;
                     removeFieldFromList(fields, new Point(column, row));
-                    fields.add(new GridFieldWithPosition(row, column, currentBlockField));
+                    if(column >= 0 && row >= 0 && !board.getFieldAtPosition(column,row).isLocked()){
+                        fields.add(new GridFieldWithPosition(row, column, currentBlockField));
+                    }
                 }
             }
         }
@@ -252,12 +257,23 @@ class DTETBlockMover implements BlockMover {
 
     @Override
     public void addBlockCollidedBelowListener(BlockCollidedBelowListener newListener) {
-        listeners.add(newListener);
+        blockCollidedBelowListeners.add(newListener);
+    }
+
+    @Override
+    public void addBlockSpawnedListener(BlockSpawnedListener newListener) {
+        blockSpawnedListeners.add(newListener);
     }
 
     private void onCollision(List<Point> points) {
-        for (BlockCollidedBelowListener listener : listeners) {
+        for (BlockCollidedBelowListener listener : blockCollidedBelowListeners) {
             listener.BlockCollidedBelow(points);
+        }
+    }
+
+    private void onBlockSpawned(Block block){
+        for (BlockSpawnedListener listener : blockSpawnedListeners) {
+            listener.blockSpawned(block);
         }
     }
 }

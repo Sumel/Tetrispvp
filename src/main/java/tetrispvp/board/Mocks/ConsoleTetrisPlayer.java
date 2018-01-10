@@ -33,6 +33,12 @@ public class ConsoleTetrisPlayer {
                 ret.spawnNewBlock(new BlockImplementation('I'));
             }
         });
+        ret.addGameStateChangedListener(new GameStateChangedListener() {
+            @Override
+            public void stateChanged(GameState oldState, GameState newState) {
+                System.out.println("\nStary stan: " + oldState.toString() + " nowy stan: " + newState.toString());
+            }
+        });
         return ret;
     }
 
@@ -66,7 +72,13 @@ public class ConsoleTetrisPlayer {
             String rowRepresentation = "";
             for (int col = 0; col < board.getWidth(); ++col) {
                 if (fields.get(row).get(col).isOccupied()) {
-                    rowRepresentation = rowRepresentation.concat("|x");
+                    if (fields.get(row).get(col).isLocked()) {
+                        rowRepresentation = rowRepresentation.concat("|x");
+                    }
+                    else{
+                        rowRepresentation = rowRepresentation.concat("|o");
+                    }
+
                 } else {
                     rowRepresentation = rowRepresentation.concat("|_");
                 }

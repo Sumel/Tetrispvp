@@ -10,7 +10,7 @@ import java.util.List;
 
 import com.google.inject.*;
 
-public class TetrisBoard implements BlockMover, MutableBoard {
+public class TetrisBoard implements BlockMover, MutableBoard, GameStateTracker {
 
     private BlockMover blockMover;
     private final static int boardWidth = 10;
@@ -18,14 +18,17 @@ public class TetrisBoard implements BlockMover, MutableBoard {
     private List<List<GridField>> boardFields;
     private List<BoardStateChangedListener> stateChangedListeners = new LinkedList<BoardStateChangedListener>();
     private List<LinesClearedListener> lineClearedListeners = new LinkedList<LinesClearedListener>();
+    private GameStateTracker gameStateTracker;
 
     @Inject
-    public TetrisBoard(BlockMover blockMover) {
+    public TetrisBoard(BlockMover blockMover, GameStateTracker gameStateTracker) {
         boardFields = new ArrayList<List<GridField>>();
+
         for (int i = 0; i < boardHeight; ++i) {
             boardFields.add(createEmptyRow());
         }
         this.blockMover = blockMover;
+        this.gameStateTracker = gameStateTracker;
     }
 
     private List<GridField> createEmptyRow() {
@@ -80,6 +83,11 @@ public class TetrisBoard implements BlockMover, MutableBoard {
     @Override
     public void addBlockCollidedBelowListener(BlockCollidedBelowListener newListener) {
         blockMover.addBlockCollidedBelowListener(newListener);
+    }
+
+    @Override
+    public void addBlockSpawnedListener(BlockSpawnedListener newListener) {
+        blockMover.addBlockSpawnedListener(newListener);
     }
 
     @Override
@@ -260,5 +268,15 @@ public class TetrisBoard implements BlockMover, MutableBoard {
         for (LinesClearedListener listener : lineClearedListeners) {
             listener.linesCleared(clearedLines);
         }
+    }
+
+    @Override
+    public void addGameStateChangedListener(GameStateChangedListener newListener) {
+        gameStateTracker.addGameStateChangedListener(newListener);
+    }
+
+    @Override
+    public GameState getCurrentGameState() {
+        return gameStateTracker.getCurrentGameState();
     }
 }
