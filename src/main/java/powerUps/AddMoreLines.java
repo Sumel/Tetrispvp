@@ -1,9 +1,11 @@
 package powerUps;
 
+import powerUps.mocks.FieldState;
+import powerUps.mocks.GridField;
+
 public class AddMoreLines implements PowerUp{
 	
-	int maxAllowedSimultaneousActivations = 1;
-	int numberOfAddingLines = 1;
+	int maxAllowedSimultaneousActivations = 2;
 	private static AddMoreLines addMoreLines = null;
 
 	private AddMoreLines() {}
@@ -19,6 +21,6 @@ public class AddMoreLines implements PowerUp{
 		if(powerUpPresence > maxAllowedSimultaneousActivations)
 			powerUpPresence = maxAllowedSimultaneousActivations;
 
-
+        PowerUpManager.getPowerUpManager().getMockNetwork().send("addLines", powerUpPresence);
 	}
 }

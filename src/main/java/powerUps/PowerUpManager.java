@@ -5,15 +5,16 @@ import java.util.Random;
 
 import powerUps.mocks.*;
 
-public class PowerUpManager {
+import javax.sound.sampled.Line;
+
+public class PowerUpManager implements LineClearedListener {
     private static PowerUpManager powerUpManager = null;
     private Random random = new Random();
     private MutableBoard board;
     private GameController gameController;
+    private MockNetwork mockNetwork;
 
-	private PowerUpManager() {
-		
-    }
+	private PowerUpManager() { }
 
     public static PowerUpManager getPowerUpManager(){
         if(powerUpManager == null){
@@ -21,22 +22,6 @@ public class PowerUpManager {
         }
         return powerUpManager;
     }
-    
-    public GameController getGameController() {
-		return gameController;
-	}
-
-	public void setGameController(GameController gameController) {
-		this.gameController = gameController;
-	}
-
-	public MutableBoard getBoard() {
-		return board;
-	}
-
-	public void setBoard(MutableBoard board) {
-		this.board = board;
-	}
 
     public int randomPowerUp(){
         int powerUp = random.nextInt(PowerUpTypes.values().length);
@@ -44,7 +29,7 @@ public class PowerUpManager {
         return powerUp;
 	}
 
-	public void checkForPowerUps(List<GridField> lines){
+	public int[] checkForPowerUps(List<GridField> lines){
         int[] powerUpsPresence = new int[PowerUpTypes.values().length];
         for(GridField field: lines){
             if(field.hasPowerUp()){
@@ -52,21 +37,52 @@ public class PowerUpManager {
             }
         }
 
+        return powerUpsPresence;
+    }
+
+    @Override
+    public void lineCleared(List<GridField> lines) {
+        int[] powerUpsPresence = checkForPowerUps(lines);
+
         for(int i = 0; i < powerUpsPresence.length; i++){
             switch (PowerUpTypes.values()[i]){
                 case ADD_MORE_LINES:
+                    AddMoreLines.getAddMoreLines().activate(powerUpsPresence[i]);
                     break;
                 case CLEAR_BOTTOM_LINE:
-                	ClearBottomLine.getClearBottomLine().activate(powerUpsPresence[i]);
+                    ClearBottomLine.getClearBottomLine().activate(powerUpsPresence[i]);
                     break;
                 case REVERSE_BOARD:
+                    ReverseBoard.getReverseBoard().activate(powerUpsPresence[i]);
                     break;
                 case STRAIGHT_LINE_NEXT:
                     StraightLineNext.getStraightLineNext().activate(powerUpsPresence[i]);
                     break;
             }
         }
-
     }
 
+    public GameController getGameController() {
+        return gameController;
+    }
+
+    public void setGameController(GameController gameController) {
+        this.gameController = gameController;
+    }
+
+    public MutableBoard getBoard() {
+        return board;
+    }
+
+    public void setBoard(MutableBoard board) {
+        this.board = board;
+    }
+
+    public MockNetwork getMockNetwork() {
+        return mockNetwork;
+    }
+
+    public void setMockNetwork(MockNetwork mockNetwork) {
+        this.mockNetwork = mockNetwork;
+    }
 }

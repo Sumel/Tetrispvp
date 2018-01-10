@@ -20,13 +20,25 @@ public class BoardForTests {
         }
         b.add(line);
 
-        for(int i = 1; i < board.getHeight() - 3; i++){
+        for(int i = 1; i < board.getHeight() - 4; i++){
             line = new ArrayList<>();
             for(int j = 0; j < board.getWidth(); j++){
                 line.add(new GridField());
             }
             b.add(line);
         }
+
+        line = new ArrayList<>();
+        for (int j = 0; j < board.getWidth(); j++) {
+            GridField gf = new GridField();
+            if (j%3 == 1){
+                gf.setState(FieldState.EMPTY);
+            } else{
+                gf.setState(FieldState.OCCUPIED);
+            }
+            line.add(gf);
+        }
+        b.add(line);
 
         line = new ArrayList<>();
         for(int i = board.getHeight() - 3; i < board.getHeight(); i++) {
@@ -38,7 +50,6 @@ public class BoardForTests {
             b.add(line);
         }
         board.setBoard(b);
-        printBoard(board);
 
         return board;
     }

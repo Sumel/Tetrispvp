@@ -11,6 +11,10 @@ public class MockNetwork implements MessageSender,MessageReceiver {
         this.expected = new HashMap<>();
     }
 
+    public MockNetwork(){
+        this.expected = new HashMap<>();
+    }
+
     @Override
     public void expect(String messageName, MessageHandler handler) {
         expected.putIfAbsent(messageName, handler);
@@ -25,5 +29,13 @@ public class MockNetwork implements MessageSender,MessageReceiver {
         if(expected.get(messageName) != null){
             expected.get(messageName).arrived(messageName, with, null);
         }
+    }
+
+    public MockNetwork getOpponent() {
+        return opponent;
+    }
+
+    public void setOpponent(MockNetwork opponent) {
+        this.opponent = opponent;
     }
 }
