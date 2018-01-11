@@ -1,8 +1,15 @@
 package tetrispvp.powerUp;
 
+import org.junit.Before;
 import org.junit.Test;
-import powerUps.PowerUpManager;
-import powerUps.PowerUpTypes;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.mockito.runners.MockitoJUnitRunner;
+import static org.mockito.Mockito.doNothing;
+
+import powerUps.*;
 import powerUps.mocks.GridField;
 import powerUps.mocks.MockNetwork;
 import powerUps.mocks.MutableBoard;
@@ -11,11 +18,32 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.atLeast;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 import java.util.*;
 
+//@RunWith(MockitoJUnitRunner.class)
 public class PowerUpManagerTest {
-    
+	
+//	@Mock
+//	AddMoreLines addMoreLinesMock;
+//	@Mock
+//	ReverseBoard reverseBoardMock;
+//	@Mock
+//	ClearBottomLine clearBottomLineMock;
+//	@Mock
+//	StraightLineNext straightLineNextMock;
+//	
+//	@InjectMocks
+//	PowerUpManager powerUpManager;
+//    
+//	@Before  
+//    public void prepareDependencies() { 
+//		MockitoAnnotations.initMocks(this);      
+//	}
+	
     @Test
     public void getSamePowerUpManager(){
         PowerUpManager p1 = PowerUpManager.getPowerUpManager();
@@ -48,7 +76,7 @@ public class PowerUpManagerTest {
     }
     
     @Test
-    public void checkForPowerUps_NoPowerUps(){
+    public void checkForPowerUpsNoPowerUps(){
     	List<GridField> line = new ArrayList<GridField>();
     	for(int i = 0; i < 10; i++){
     		GridField gf = mock(GridField.class);
@@ -61,7 +89,7 @@ public class PowerUpManagerTest {
     }
     
     @Test
-    public void checkForPowerUps_RandomPowerUps(){
+    public void checkForPowerUpsRandomPowerUps(){
     	List<GridField> line = new ArrayList<GridField>();
     	Random random = new Random();
     	int powerUpsN = 0;
@@ -82,7 +110,7 @@ public class PowerUpManagerTest {
     }
     
     @Test
-    public void checkForPowerUps_DifferentPowerUps(){
+    public void checkForPowerUpsDifferentPowerUps(){
     	List<GridField> line = new ArrayList<GridField>();
     	int[] powerUpsPresence = {0, 3, 2, 3};
     	GridField gf = new GridField();
@@ -113,4 +141,36 @@ public class PowerUpManagerTest {
     	p.setBoard(board);
     	assertEquals(board.lineClearedListenersSize(), 1);
     }
+    
+//    @Test
+//    public void lineClearedTest(){
+//    	List<GridField> line = new ArrayList<GridField>();
+//    	int[] powerUpsPresence = {3, 0, 2, 1};
+//    	GridField gf = new GridField();
+//    	line.add(gf);
+//    	for(int i = 1; i < 20; i++){
+//    		GridField gf1 = new GridField();
+//    		if(i % 6 == 0){
+//    			gf1.setPowerUp(0);
+//    		}
+//    		else if(i % 8 == 0){
+//    			gf1.setPowerUp(2);
+//    		}
+//    		else if(i % 11 == 0){
+//    			gf1.setPowerUp(3);
+//    		}
+//    		line.add(gf1);
+//    	}
+//    	when(addMoreLinesMock.getAddMoreLines()).thenReturn(addMoreLinesMock);
+//    	when(clearBottomLineMock.getClearBottomLine()).thenReturn(clearBottomLineMock);
+//    	when(reverseBoardMock.getReverseBoard()).thenReturn(reverseBoardMock);
+//    	when(straightLineNextMock.getStraightLineNext()).thenReturn(straightLineNextMock);
+//    	doNothing().when(addMoreLinesMock).activate(3);
+//    	doNothing().when(clearBottomLineMock).activate(0);
+//    	doNothing().when(reverseBoardMock).activate(2);
+//    	doNothing().when(straightLineNextMock).activate(1);
+//    	
+//        powerUpManager.lineCleared(line);
+//        verify(addMoreLinesMock, times(3)).activate(3);
+//    }
 }

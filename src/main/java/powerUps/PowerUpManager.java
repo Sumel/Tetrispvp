@@ -43,7 +43,6 @@ public class PowerUpManager {
 
     public void lineCleared(List<GridField> lines) {
         int[] powerUpsPresence = checkForPowerUps(lines);
-
         for(int i = 0; i < powerUpsPresence.length; i++){
             switch (PowerUpTypes.values()[i]){
                 case ADD_MORE_LINES:

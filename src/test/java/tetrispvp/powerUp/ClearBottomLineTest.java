@@ -77,7 +77,6 @@ public class ClearBottomLineTest {
         PowerUpManager.getPowerUpManager().setBoard(board);
         ClearBottomLine clearBottomLine = ClearBottomLine.getClearBottomLine();
 
-
         clearBottomLine.activate(4);
 
         System.out.println();

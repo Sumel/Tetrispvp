@@ -6,7 +6,7 @@ import java.util.List;
 public class MutableBoard {
 	
 	private List<List<GridField>> board;
-	private List<LinesClearedListener> lineClearedListeners = new ArrayList<>();
+	private List<LinesClearedListener> linesClearedListeners = new ArrayList<>();
 
 
 	
@@ -30,19 +30,19 @@ public class MutableBoard {
 	}
 	
 	public void clearLine(int linePosition){
+
 		List<GridField> clearedLine = board.get(linePosition);
 		for(int i = linePosition; i > 0; i--){
 			board.set(i, board.get(i-1));
 		}
-
 		List<GridField> newLine = new ArrayList<>();
 		for(int i = 0; i < getWidth(); i++) {
             newLine.add(new GridField());
         }
 		board.set(0, newLine);
 
-		for(LinesClearedListener l : lineClearedListeners)
-			l.lineCleared(clearedLine);
+//		for(LinesClearedListener l : linesClearedListeners)
+//			l.lineCleared(clearedLine);
 	}
 	
 	public void addLine(int lineNumber, GridField field, boolean moveUp){
@@ -63,7 +63,7 @@ public class MutableBoard {
 	}
 	
 	public void addLinesClearedListener(LinesClearedListener newListener){
-		lineClearedListeners.add(newListener);
+		linesClearedListeners.add(newListener);
 	}
 	
 	public int getHeight() {
@@ -83,20 +83,15 @@ public class MutableBoard {
     }
     
     public int lineClearedListenersSize(){
-    	return lineClearedListeners.size();
+    	return linesClearedListeners.size();
     }
     
     public int highestRowWithLockedFields() {
         for (int i = 0; i < getHeight(); i++) {
-            boolean blocked = false;
             for (int j = 0; j < getWidth(); j++) {
                 if (board.get(i).get(j).getState() == FieldState.BLOCKED) {
-                    blocked = true;
-                    break;
+                    return i;
                 }
-            }
-            if (blocked) {
-                return i;
             }
         }
         return getHeight();
