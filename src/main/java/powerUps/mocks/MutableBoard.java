@@ -11,12 +11,22 @@ public class MutableBoard {
 
 	
 	public void flipBoard(){
-		int size = board.size();
-		for(int i = 0; i < size / 2; i++){
-			List<GridField> temp = board.get(i);
-			board.set(i, board.get(size - i - 1));
-			board.set(size - i - 1, temp);
+		boolean end = false;
+		int notToReverse = 0;
+		for(int i = 0; i < getHeight() && !end; i++){
+			for(int j = 0; j < getWidth() && !end; j++){
+				if(board.get(i).get(j).getState() == FieldState.OCCUPIED)
+					end = true;
+			}
+			if(!end)
+				notToReverse++;
 		}
+		for(int i = notToReverse; i < getHeight() -((getHeight() - notToReverse)/2) ; i++){
+			List<GridField> temp = board.get(i);
+			board.set(i, board.get(getHeight() - (i - notToReverse) - 1));
+			board.set(getHeight() - (i - notToReverse) - 1, temp);
+		}
+
 	}
 	
 	public void clearLine(int linePosition){
@@ -70,5 +80,21 @@ public class MutableBoard {
 
     public void setBoard(List<List<GridField>> board) {
         this.board = board;
+    }
+    
+    public int highestRowWithLockedFields() {
+        for (int i = 0; i < getHeight(); i++) {
+            boolean blocked = false;
+            for (int j = 0; j < getWidth(); j++) {
+                if (board.get(i).get(j).getState() == FieldState.BLOCKED) {
+                    blocked = true;
+                    break;
+                }
+            }
+            if (blocked) {
+                return i;
+            }
+        }
+        return getHeight();
     }
 }

@@ -30,6 +30,7 @@ public class ClearBottomLineTest {
         clearBottomLine.activate(1);
 
         System.out.println();
+        System.out.println("Lines = 1");
         boardForTests.printBoard(board);
 
         List<GridField> testedLineOccupied1 = board.getBoard().get(1);
@@ -54,11 +55,12 @@ public class ClearBottomLineTest {
         clearBottomLine.activate(2);
 
         System.out.println();
+        System.out.println("Lines = 2");
         boardForTests.printBoard(board);
 
         List<GridField> testedLineOccupied1 = board.getBoard().get(2);
         List<GridField> testedLineOccupied2 = board.getBoard().get(board.getHeight() - 1);
-        List<GridField> testedLineEmpty2 = board.getBoard().get(board.getHeight() - 2);
+        List<GridField> testedLineEmpty2 = board.getBoard().get(board.getHeight() - 3);
         List<GridField> testedLineEmpty1 = board.getBoard().get(0);
 
         for(int i = 0; i < board.getWidth(); i++){
@@ -75,14 +77,16 @@ public class ClearBottomLineTest {
         PowerUpManager.getPowerUpManager().setBoard(board);
         ClearBottomLine clearBottomLine = ClearBottomLine.getClearBottomLine();
 
+
         clearBottomLine.activate(4);
 
         System.out.println();
+        System.out.println("Lines = 4");
         boardForTests.printBoard(board);
 
         List<GridField> testedLineOccupied1 = board.getBoard().get(2);
         List<GridField> testedLineOccupied2 = board.getBoard().get(board.getHeight() - 1);
-        List<GridField> testedLineEmpty2 = board.getBoard().get(board.getHeight() - 2);
+        List<GridField> testedLineEmpty2 = board.getBoard().get(board.getHeight() - 3);
         List<GridField> testedLineEmpty1 = board.getBoard().get(0);
 
         for(int i = 0; i < board.getWidth(); i++){

@@ -17,7 +17,7 @@ public class ReverseBoardTest {
 
     private PowerUpManager getOpponentPowerUpManager(){
         PowerUpManager powerUpManager = mock(PowerUpManager.class);
-        MutableBoard board = boardForTests.getBoard();
+        MutableBoard board = boardForTests.getBoardToReverse();
         when(powerUpManager.getMockNetwork()).thenReturn(new MockNetwork());
         when(powerUpManager.getBoard()).thenReturn(board);
 
@@ -43,7 +43,8 @@ public class ReverseBoardTest {
 
         PowerUpManager.getPowerUpManager().setBoard(board);
         PowerUpManager.getPowerUpManager().setMockNetwork(mockNetwork);
-
+        System.out.println();
+        System.out.println("Once");
         boardForTests.printBoard(opponent.getBoard());
 
         ReverseBoard reverseBoard = ReverseBoard.getReverseBoard();
@@ -52,10 +53,11 @@ public class ReverseBoardTest {
         System.out.println();
         boardForTests.printBoard(opponent.getBoard());
 
-        List<GridField> testedLineOccupied1 = opponent.getBoard().getBoard().get(board.getHeight() - 1);
-        List<GridField> testedLineEmpty1 = opponent.getBoard().getBoard().get(board.getHeight() - 2);
-        List<GridField> testedLineOccupied2 = opponent.getBoard().getBoard().get(0);
-        List<GridField> testedLinePartiallyOccupied1 = opponent.getBoard().getBoard().get(3);
+        
+        List<GridField> testedLineEmpty1 = opponent.getBoard().getBoard().get(0);
+        List<GridField> testedLineOccupied1 = opponent.getBoard().getBoard().get(board.getHeight() - 4);
+        List<GridField> testedLineOccupied2 = opponent.getBoard().getBoard().get(board.getHeight() - 2);
+        List<GridField> testedLinePartiallyOccupied1 = opponent.getBoard().getBoard().get(board.getHeight() - 1);
 
         for(int i = 0; i < opponent.getBoard().getWidth(); i++){
             assertEquals(testedLineEmpty1.get(i).getState(), FieldState.EMPTY);
@@ -70,6 +72,35 @@ public class ReverseBoardTest {
 
     @Test
     public void reverseBoardTwice(){
+    	MutableBoard board = boardForTests.getBoard();
+        PowerUpManager opponent = getOpponentPowerUpManager();
+        MockNetwork mockNetwork = new MockNetwork(opponent.getMockNetwork());
 
+        PowerUpManager.getPowerUpManager().setBoard(board);
+        PowerUpManager.getPowerUpManager().setMockNetwork(mockNetwork);
+        System.out.println();
+        System.out.println("Twice");
+        boardForTests.printBoard(opponent.getBoard());
+        ReverseBoard reverseBoard = ReverseBoard.getReverseBoard();
+        reverseBoard.activate(2);
+        System.out.println();
+        boardForTests.printBoard(opponent.getBoard());
+
+        List<GridField> testedLineOccupied1 = opponent.getBoard().getBoard().get(board.getHeight() - 1);
+        List<GridField> testedLineEmpty1 = opponent.getBoard().getBoard().get(0);
+        List<GridField> testedLineEmpty2 = opponent.getBoard().getBoard().get(board.getHeight() - 5);
+        List<GridField> testedLineOccupied2 = opponent.getBoard().getBoard().get(board.getHeight() - 3);
+        List<GridField> testedLinePartiallyOccupied1 = opponent.getBoard().getBoard().get(board.getHeight() - 4);
+
+        for(int i = 0; i < opponent.getBoard().getWidth(); i++){
+            assertEquals(testedLineEmpty1.get(i).getState(), FieldState.EMPTY);
+            assertEquals(testedLineEmpty2.get(i).getState(), FieldState.EMPTY);
+            if(i %3 == 1)
+                assertEquals(testedLinePartiallyOccupied1.get(i).getState(), FieldState.EMPTY);
+            else
+                assertEquals(testedLinePartiallyOccupied1.get(i).getState(), FieldState.OCCUPIED);
+            assertEquals(testedLineOccupied1.get(i).getState(), FieldState.OCCUPIED);
+            assertEquals(testedLineOccupied2.get(i).getState(), FieldState.OCCUPIED);
+        }
     }
 }
