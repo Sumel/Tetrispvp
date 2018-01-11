@@ -91,4 +91,8 @@ public class PowerUpManager {
     public void setMockNetwork(MockNetwork mockNetwork) {
         this.mockNetwork = mockNetwork;
     }
+    
+    public LinesClearedListener getLinesClearedListener(){
+    	return this.linesClearedListener;
+    }
 }
