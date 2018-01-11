@@ -1,7 +1,7 @@
 package tetrispvp.powerUp;
 
 import org.junit.Test;
-import powerUps.ClearBottomLine;
+import powerUps.ClearBottomLinePowerUp;
 import powerUps.PowerUpManager;
 import powerUps.mocks.FieldState;
 import powerUps.mocks.GridField;
@@ -11,23 +11,24 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
-public class ClearBottomLineTest {
+public class ClearBottomLinePowerUpTest {
     BoardForTests boardForTests = new BoardForTests();
     @Test
     public void getSameClearBottomLineInstance(){
-        ClearBottomLine clearBottomLine1 = ClearBottomLine.getClearBottomLine();
-        ClearBottomLine clearBottomLine2 = ClearBottomLine.getClearBottomLine();
+        ClearBottomLinePowerUp clearBottomLinePowerUp1 = ClearBottomLinePowerUp.getClearBottomLinePowerUp();
+        ClearBottomLinePowerUp clearBottomLinePowerUp2 = ClearBottomLinePowerUp.getClearBottomLinePowerUp();
 
-        assertEquals(clearBottomLine1, clearBottomLine2);
+        assertEquals(clearBottomLinePowerUp1, clearBottomLinePowerUp2);
     }
 
     @Test
     public void clearOneLine(){
         MutableBoard board = boardForTests.getBoard();
         PowerUpManager.getPowerUpManager().setBoard(board);
-        ClearBottomLine clearBottomLine = ClearBottomLine.getClearBottomLine();
+        ClearBottomLinePowerUp clearBottomLinePowerUp = ClearBottomLinePowerUp.getClearBottomLinePowerUp();
+        boardForTests.printBoard(board);
 
-        clearBottomLine.activate(1);
+        clearBottomLinePowerUp.activate(1);
 
         System.out.println();
         System.out.println("Lines = 1");
@@ -50,12 +51,12 @@ public class ClearBottomLineTest {
     public void clearOneLineWithBlockedFields(){
         MutableBoard board = boardForTests.getBoardWithBlockedFields();
         PowerUpManager.getPowerUpManager().setBoard(board);
-        ClearBottomLine clearBottomLine = ClearBottomLine.getClearBottomLine();
+        ClearBottomLinePowerUp clearBottomLinePowerUp = ClearBottomLinePowerUp.getClearBottomLinePowerUp();
         
         System.out.println();
         System.out.println("Lines = 1, blocked lines: 1");
         boardForTests.printBoard(board);
-        clearBottomLine.activate(1);
+        clearBottomLinePowerUp.activate(1);
 
         System.out.println();
         boardForTests.printBoard(board);
@@ -75,9 +76,10 @@ public class ClearBottomLineTest {
     public void clearTwoLines(){
         MutableBoard board = boardForTests.getBoard();
         PowerUpManager.getPowerUpManager().setBoard(board);
-        ClearBottomLine clearBottomLine = ClearBottomLine.getClearBottomLine();
+        ClearBottomLinePowerUp clearBottomLinePowerUp = ClearBottomLinePowerUp.getClearBottomLinePowerUp();
+        boardForTests.printBoard(board);
 
-        clearBottomLine.activate(2);
+        clearBottomLinePowerUp.activate(2);
 
         System.out.println();
         System.out.println("Lines = 2");
@@ -100,9 +102,10 @@ public class ClearBottomLineTest {
     public void clearMoreThanTwoLines(){
         MutableBoard board = boardForTests.getBoard();
         PowerUpManager.getPowerUpManager().setBoard(board);
-        ClearBottomLine clearBottomLine = ClearBottomLine.getClearBottomLine();
+        ClearBottomLinePowerUp clearBottomLinePowerUp = ClearBottomLinePowerUp.getClearBottomLinePowerUp();
+        boardForTests.printBoard(board);
 
-        clearBottomLine.activate(4);
+        clearBottomLinePowerUp.activate(4);
 
         System.out.println();
         System.out.println("Lines = 4");

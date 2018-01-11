@@ -1,7 +1,7 @@
 package tetrispvp.powerUp;
 
 import org.junit.Test;
-import powerUps.AddMoreLines;
+import powerUps.AddMoreLinesPowerUp;
 import powerUps.PowerUpManager;
 import powerUps.mocks.*;
 
@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class AddMoreLinesTest {
+public class AddMoreLinesPowerUpTest {
     private BoardForTests boardForTests = new BoardForTests();
 
     private PowerUpManager getOpponentPowerUpManager(){
@@ -28,10 +28,10 @@ public class AddMoreLinesTest {
 
     @Test
     public void getSameAddMoreLinesInstance(){
-        AddMoreLines addMoreLines1 = AddMoreLines.getAddMoreLines();
-        AddMoreLines addMoreLines2 = AddMoreLines.getAddMoreLines();
+        AddMoreLinesPowerUp addMoreLinesPowerUp1 = AddMoreLinesPowerUp.getAddMoreLinesPowerUp();
+        AddMoreLinesPowerUp addMoreLinesPowerUp2 = AddMoreLinesPowerUp.getAddMoreLinesPowerUp();
 
-        assertEquals(addMoreLines1, addMoreLines2);
+        assertEquals(addMoreLinesPowerUp1, addMoreLinesPowerUp2);
     }
 
     @Test
@@ -48,8 +48,8 @@ public class AddMoreLinesTest {
         System.out.println("Lines = 1"); 
         boardForTests.printBoard(opponent.getBoard());
 
-        AddMoreLines addMoreLines = AddMoreLines.getAddMoreLines();
-        addMoreLines.activate(1);
+        AddMoreLinesPowerUp addMoreLinesPowerUp = AddMoreLinesPowerUp.getAddMoreLinesPowerUp();
+        addMoreLinesPowerUp.activate(1);
         System.out.println();
         boardForTests.printBoard(opponent.getBoard());
 
@@ -77,8 +77,8 @@ public class AddMoreLinesTest {
         System.out.println("Lines = 2"); 
         boardForTests.printBoard(opponent.getBoard());
         System.out.println(); 
-        AddMoreLines addMoreLines = AddMoreLines.getAddMoreLines();
-        addMoreLines.activate(2);
+        AddMoreLinesPowerUp addMoreLinesPowerUp = AddMoreLinesPowerUp.getAddMoreLinesPowerUp();
+        addMoreLinesPowerUp.activate(2);
         System.out.println();
         boardForTests.printBoard(opponent.getBoard());
         List<GridField> testedLineBlocked1 = opponent.getBoard().getBoard().get(board.getHeight() - 1);
@@ -108,8 +108,8 @@ public class AddMoreLinesTest {
         System.out.println("Lines = 5"); 
         boardForTests.printBoard(opponent.getBoard());
         System.out.println(); 
-        AddMoreLines addMoreLines = AddMoreLines.getAddMoreLines();
-        addMoreLines.activate(5);
+        AddMoreLinesPowerUp addMoreLinesPowerUp = AddMoreLinesPowerUp.getAddMoreLinesPowerUp();
+        addMoreLinesPowerUp.activate(5);
         System.out.println();
         boardForTests.printBoard(opponent.getBoard());
         List<GridField> testedLineBlocked1 = opponent.getBoard().getBoard().get(board.getHeight() - 1);

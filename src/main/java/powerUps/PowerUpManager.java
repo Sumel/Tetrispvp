@@ -1,12 +1,13 @@
 package powerUps;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
 import powerUps.mocks.*;
-
-import javax.sound.sampled.Line;
+import static powerUps.AddMoreLinesPowerUp.getAddMoreLinesPowerUp;
+import static powerUps.ClearBottomLinePowerUp.getClearBottomLinePowerUp;
+import static powerUps.ReverseBoardPowerUp.getReverseBoardPowerUp;
+import static powerUps.StraightLineNextPowerUp.getStraightLineNextPowerUp;
 
 public class PowerUpManager {
     private static PowerUpManager powerUpManager = null;
@@ -48,16 +49,16 @@ public class PowerUpManager {
         	if(powerUpsPresence[i] > 0){
                 switch (PowerUpTypes.values()[i]){
                 case ADD_MORE_LINES:
-                    AddMoreLines.getAddMoreLines().activate(powerUpsPresence[i]);
+                    getAddMoreLinesPowerUp().activate(powerUpsPresence[i]);
                     break;
                 case CLEAR_BOTTOM_LINE:
-                    ClearBottomLine.getClearBottomLine().activate(powerUpsPresence[i]);
+                    getClearBottomLinePowerUp().activate(powerUpsPresence[i]);
                     break;
                 case REVERSE_BOARD:
-                    ReverseBoard.getReverseBoard().activate(powerUpsPresence[i]);
+                    getReverseBoardPowerUp().activate(powerUpsPresence[i]);
                     break;
                 case STRAIGHT_LINE_NEXT:
-                    StraightLineNext.getStraightLineNext().activate(powerUpsPresence[i]);
+                    getStraightLineNextPowerUp().activate(powerUpsPresence[i]);
                     break;
                 default:
                 	break;

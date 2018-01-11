@@ -139,7 +139,6 @@ public class BoardForTests {
         }
         b.add(line);
         board.setBoard(b);
-        System.out.println("ccccc");
         printBoard(board);
         return board;
     }

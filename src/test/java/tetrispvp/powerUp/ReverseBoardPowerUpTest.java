@@ -2,7 +2,7 @@ package tetrispvp.powerUp;
 
 import org.junit.Test;
 import powerUps.PowerUpManager;
-import powerUps.ReverseBoard;
+import powerUps.ReverseBoardPowerUp;
 import powerUps.mocks.*;
 
 import java.util.List;
@@ -12,7 +12,7 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class ReverseBoardTest {
+public class ReverseBoardPowerUpTest {
     private BoardForTests boardForTests = new BoardForTests();
 
     private PowerUpManager getOpponentPowerUpManager(){
@@ -29,10 +29,10 @@ public class ReverseBoardTest {
 
     @Test
     public void getSameReverseBoardInstance() {
-        ReverseBoard reverseBoard1 = ReverseBoard.getReverseBoard();
-        ReverseBoard reverseBoard2 = ReverseBoard.getReverseBoard();
+        ReverseBoardPowerUp reverseBoardPowerUp1 = ReverseBoardPowerUp.getReverseBoardPowerUp();
+        ReverseBoardPowerUp reverseBoardPowerUp2 = ReverseBoardPowerUp.getReverseBoardPowerUp();
 
-        assertTrue(reverseBoard1 == reverseBoard2);
+        assertTrue(reverseBoardPowerUp1 == reverseBoardPowerUp2);
     }
 
     @Test
@@ -47,8 +47,8 @@ public class ReverseBoardTest {
         System.out.println("Once");
         boardForTests.printBoard(opponent.getBoard());
 
-        ReverseBoard reverseBoard = ReverseBoard.getReverseBoard();
-        reverseBoard.activate(1);
+        ReverseBoardPowerUp reverseBoardPowerUp = ReverseBoardPowerUp.getReverseBoardPowerUp();
+        reverseBoardPowerUp.activate(1);
 
         System.out.println();
         boardForTests.printBoard(opponent.getBoard());
@@ -81,8 +81,8 @@ public class ReverseBoardTest {
         System.out.println();
         System.out.println("Twice");
         boardForTests.printBoard(opponent.getBoard());
-        ReverseBoard reverseBoard = ReverseBoard.getReverseBoard();
-        reverseBoard.activate(2);
+        ReverseBoardPowerUp reverseBoardPowerUp = ReverseBoardPowerUp.getReverseBoardPowerUp();
+        reverseBoardPowerUp.activate(2);
         System.out.println();
         boardForTests.printBoard(opponent.getBoard());
 

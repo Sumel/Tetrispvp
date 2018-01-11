@@ -1,16 +1,16 @@
 package powerUps;
 
-public class ClearBottomLine implements PowerUp {
+public class ClearBottomLinePowerUp implements PowerUp {
 	
 	private int maxAllowedSimultaneousActivations = 2;
-	private static ClearBottomLine clearBottomLine = null;
+	private static ClearBottomLinePowerUp clearBottomLinePowerUp = null;
 
-	private ClearBottomLine() { }
+	private ClearBottomLinePowerUp() { }
 	
-	public static ClearBottomLine getClearBottomLine(){
-		if(clearBottomLine == null)
-			clearBottomLine = new ClearBottomLine();
-		return clearBottomLine;
+	public static ClearBottomLinePowerUp getClearBottomLinePowerUp(){
+		if(clearBottomLinePowerUp == null)
+			clearBottomLinePowerUp = new ClearBottomLinePowerUp();
+		return clearBottomLinePowerUp;
 	}
 
 	private void clearLine(){

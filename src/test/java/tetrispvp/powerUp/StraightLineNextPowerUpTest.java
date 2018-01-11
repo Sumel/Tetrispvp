@@ -2,7 +2,7 @@ package tetrispvp.powerUp;
 
 import org.junit.Test;
 import powerUps.PowerUpManager;
-import powerUps.StraightLineNext;
+import powerUps.StraightLineNextPowerUp;
 import powerUps.mocks.Block;
 import powerUps.mocks.BlockType;
 import powerUps.mocks.GameController;
@@ -12,7 +12,7 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class StraightLineNextTest {
+public class StraightLineNextPowerUpTest {
     private GameController getGameController(){
         GameController gameController = new GameController();
 
@@ -26,19 +26,20 @@ public class StraightLineNextTest {
 
     @Test
     public void getSameStraightLineInstance(){
-        StraightLineNext straightLineNext1 = StraightLineNext.getStraightLineNext();
-        StraightLineNext straightLineNext2 = StraightLineNext.getStraightLineNext();
+        StraightLineNextPowerUp straightLineNextPowerUp1 = StraightLineNextPowerUp.getStraightLineNextPowerUp();
+        StraightLineNextPowerUp straightLineNextPowerUp2 = StraightLineNextPowerUp.getStraightLineNextPowerUp();
 
-        assertEquals(straightLineNext1, straightLineNext2);
+        assertEquals(straightLineNextPowerUp1, straightLineNextPowerUp2);
     }
 
     @Test
     public void addOneStraightLine(){
-        StraightLineNext straightLineNext = StraightLineNext.getStraightLineNext();
+        StraightLineNextPowerUp straightLineNextPowerUp = StraightLineNextPowerUp.getStraightLineNextPowerUp();
         GameController gameController = getGameController();
         PowerUpManager.getPowerUpManager().setGameController(gameController);
+        gameController.getNextBlocks();
 
-        straightLineNext.activate(1);
+        straightLineNextPowerUp.activate(1);
         List<Block> nextBlocks = gameController.getNextBlocks();
 
         assertTrue(nextBlocks.get(0).getType() == BlockType.STRAIGHT_LINE);
@@ -46,11 +47,12 @@ public class StraightLineNextTest {
 
     @Test
     public void addTwoStraightLines(){
-        StraightLineNext straightLineNext = StraightLineNext.getStraightLineNext();
+        StraightLineNextPowerUp straightLineNextPowerUp = StraightLineNextPowerUp.getStraightLineNextPowerUp();
         GameController gameController = getGameController();
         PowerUpManager.getPowerUpManager().setGameController(gameController);
+        gameController.getNextBlocks();
 
-        straightLineNext.activate(2);
+        straightLineNextPowerUp.activate(2);
         List<Block> nextBlocks = gameController.getNextBlocks();
 
         assertTrue(nextBlocks.get(0).getType() == BlockType.STRAIGHT_LINE &&
@@ -59,11 +61,12 @@ public class StraightLineNextTest {
 
     @Test
     public void addThreeStraightLines(){
-        StraightLineNext straightLineNext = StraightLineNext.getStraightLineNext();
+        StraightLineNextPowerUp straightLineNextPowerUp = StraightLineNextPowerUp.getStraightLineNextPowerUp();
         GameController gameController = getGameController();
         PowerUpManager.getPowerUpManager().setGameController(gameController);
+        gameController.getNextBlocks();
 
-        straightLineNext.activate(3);
+        straightLineNextPowerUp.activate(3);
         List<Block> nextBlocks = gameController.getNextBlocks();
 
         for(int i = 0; i < 3; i++){
@@ -73,11 +76,11 @@ public class StraightLineNextTest {
 
     @Test
     public void addMoreThanGameControllerSizeStraightLines(){
-        StraightLineNext straightLineNext = StraightLineNext.getStraightLineNext();
+        StraightLineNextPowerUp straightLineNextPowerUp = StraightLineNextPowerUp.getStraightLineNextPowerUp();
         GameController gameController = getGameController();
         PowerUpManager.getPowerUpManager().setGameController(gameController);
 
-        straightLineNext.activate(gameController.getNextBlocks().size()+1);
+        straightLineNextPowerUp.activate(gameController.getNextBlocks().size()+1);
         List<Block> nextBlocks = gameController.getNextBlocks();
 
         for(Block b:nextBlocks){
