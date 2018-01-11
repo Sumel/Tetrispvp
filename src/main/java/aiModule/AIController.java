@@ -1,19 +1,25 @@
 package aiModule;
 
 
+import aiModule.mocks.AIBoard;
+
 public class AIController implements  IAIController{
-    private double difficultLevel;
-    private Board mainBoard;
+    private final double difficultLevel;
+    private AIBoard mainAIBoard;
 
     private Thread moveThread = null;
+    private MoveMaker moveMaker = null;
 
-    public AIController(double difficultLevel, Board mainBoard) {
+    public AIController(double difficultLevel, AIBoard mainAIBoard) {
         this.difficultLevel = difficultLevel;
-        this.mainBoard = mainBoard;
+        this.mainAIBoard = mainAIBoard;
     }
 
-    public void notifyNextTetromino(Tetromino tetromino) {
-        MoveMaker moveMaker = new MoveMaker(this.mainBoard, this.difficultLevel);
+    public void notifyNextTetromino() {
+        if(this.moveMaker != null){
+            this.moveMaker.setEndFlag();
+        }
+        this.moveMaker = new MoveMaker(this.mainAIBoard, this.difficultLevel);
         this.moveThread = new Thread(moveMaker);
         this.moveThread.start();
     }

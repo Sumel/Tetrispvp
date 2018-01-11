@@ -1,102 +1,120 @@
 package aiModule;
 
-import java.util.List;
+import aiModule.mocks.AIBoard;
+
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 public class MoveMaker implements Runnable, IMoveMaker {
-    private final double difficultLevel;
-    private Board mainBoard;
-    private boolean endMove=false;
 
-    public MoveMaker(Board mainBoard, double difficultLevel) {
-        this.mainBoard = mainBoard;
-        this.difficultLevel = difficultLevel;
+    private final static Coefficients defaultCoefficients =
+            new Coefficients(-.5, 0.5, -0.5, -0.5 );
+
+    private AIBoard mainAIBoard;
+    private boolean stopFlag = false;
+
+    private boolean isBestMove;
+    private MoveInformation currentMove;
+
+
+    MoveMaker(AIBoard mainAIBoard, double difficultLevel) {
+        this.mainAIBoard = mainAIBoard;
+        choseTypeOfMove(difficultLevel);
+    }
+
+    private void choseTypeOfMove(double difficultLevel) {
+        Random random = new Random();
+        this.isBestMove = random.nextDouble() < difficultLevel;
+        if (!this.isBestMove) {
+            int position = random.nextInt(10) - 5;
+            int rotation = random.nextInt(4);
+            this.currentMove = new MoveInformation(position, rotation);
+        }
     }
 
     @Override
     public void run() {
-        while (!this.endMove) {
+        while (!this.stopFlag) {
             try {
                 TimeUnit.SECONDS.sleep(1);
+                if(this.isBestMove){
+                    findBestMove();
+                }
+                makeMove();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
     }
 
-    public void update(){
-        this.endMove = true;
+
+    @Override
+    public void setEndFlag() {
+        this.stopFlag = true;
     }
 
     private void findBestMove() {
-        List<List<Field>> originalBoardStatus = this.mainBoard.getBoardStatus();
+        BoardStatus originalBoardStatus = new BoardStatus(this.mainAIBoard.getBoardState());
+        Score score = new Score(originalBoardStatus, defaultCoefficients);
 
-        int bestEndPosition = 0;
-        int bestRotation = 0;
-        double bestScore = Double.NEGATIVE_INFINITY;
+        this.currentMove = new MoveInformation(0,0);
+        Score bestScore = new Score(Double.NEGATIVE_INFINITY);
 
-        for (int endPosition = 0; endPosition < this.mainBoard.boardLength; endPosition++) {
+        for (int endPosition = -9; endPosition <= 9; endPosition++) {
             for (int tetrominoRotation = 0; tetrominoRotation < 4; tetrominoRotation++) {
-                Board copiedBoard = new Board(originalBoardStatus);
+                AIBoard copiedAIBoard = new AIBoard(originalBoardStatus.value);
 
-                setRotation(copiedBoard, tetrominoRotation);
-                setEndPosition(copiedBoard, endPosition);
-                simulateGravity(copiedBoard);
-                double currentScore = getScore(copiedBoard);
+                setRotation(copiedAIBoard, tetrominoRotation);
+                setEndPosition(copiedAIBoard, endPosition);
+                simulateGravity(copiedAIBoard);
 
-                if (currentScore > bestScore) {
-                    bestScore = currentScore;
-                    bestEndPosition = endPosition;
-                    bestRotation = tetrominoRotation;
+                score.compareWithNewBoard(new BoardStatus(copiedAIBoard.getBoardState()));
+
+                if(score.hasBetterValue(bestScore)){
+                    bestScore = score;
+                    this.currentMove = new MoveInformation(endPosition, tetrominoRotation);
                 }
             }
         }
-
-        makeMove(bestEndPosition, bestRotation);
     }
 
-    private void simulateGravity(Board copiedBoard) {
-        for (int i = 0; i < 25; i++) {
-            copiedBoard.moveDown();
+    private void simulateGravity(AIBoard copiedAIBoard) {
+        copiedAIBoard.totalMoveDown();
+    }
+
+    private void makeMove() {
+        if (this.currentMove.rotation != 0) {
+            this.mainAIBoard.rotate();
+        } else if (this.currentMove.position < 0) {
+            this.mainAIBoard.moveLeft();
+        } else if (this.currentMove.position > 0) {
+            this.mainAIBoard.moveRight();
+        } else {
+            this.mainAIBoard.totalMoveDown();
         }
     }
 
-    private void makeMove(int endPosition, int rotation) {
-        if(rotation != 0){
-            this.mainBoard.rotate();
-        }else if(endPosition<0){
-            this.mainBoard.moveLeft();
-        }else if(endPosition>0){
-            this.mainBoard.moveRight();
-        }else {
-            this.mainBoard.moveDown();
-        }
-    }
-
-    private void setEndPosition(Board copiedBoard, int endPosition) {
-        int mid = (this.mainBoard.boardLength - 1) / 2;
-        int move = endPosition - mid;
-
-        while (move > 0) {
-            copiedBoard.moveRight();
-            move -= 1;
-        }
-
-        while (move < 0) {
-            copiedBoard.moveLeft();
-            move += 1;
+    private void setEndPosition(AIBoard copiedAIBoard, int endPosition) {
+        if (endPosition < 0) {
+            while (endPosition != 0) {
+                endPosition += 1;
+                copiedAIBoard.moveLeft();
+            }
+        } else {
+            while (endPosition != 0) {
+                endPosition -= 1;
+                copiedAIBoard.moveRight();
+            }
         }
 
     }
 
-    private void setRotation(Board copiedBoard, int tetrominoRotation) {
+    private void setRotation(AIBoard copiedAIBoard, int tetrominoRotation) {
         for (int k = 0; k < tetrominoRotation; k++) {
-            copiedBoard.rotate();
+            copiedAIBoard.rotate();
         }
     }
 
-    private double getScore(Board board) {
-        return 0;
-    }
+
 
 }

@@ -1,5 +1,7 @@
 package aiModule;
 
 public interface IMoveMaker {
-    void update();
+
+    void setEndFlag();
+
 }
