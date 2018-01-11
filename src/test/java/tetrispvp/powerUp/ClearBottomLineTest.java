@@ -45,6 +45,31 @@ public class ClearBottomLineTest {
             assertEquals(testedLineOccupied3.get(i).getState(), FieldState.OCCUPIED);
         }
     }
+    
+    @Test
+    public void clearOneLineWithBlockedFields(){
+        MutableBoard board = boardForTests.getBoardWithBlockedFields();
+        PowerUpManager.getPowerUpManager().setBoard(board);
+        ClearBottomLine clearBottomLine = ClearBottomLine.getClearBottomLine();
+        
+        System.out.println();
+        System.out.println("Lines = 1, blocked lines: 1");
+        boardForTests.printBoard(board);
+        clearBottomLine.activate(1);
+
+        System.out.println();
+        boardForTests.printBoard(board);
+
+        List<GridField> testedLineOccupied1 = board.getBoard().get(board.getHeight() - 2);
+        List<GridField> testedLineBlocked1 = board.getBoard().get(board.getHeight() - 1);
+        List<GridField> testedLineEmpty1 = board.getBoard().get(board.getHeight() - 4);
+
+        for(int i = 0; i < board.getWidth(); i++){
+            assertEquals(testedLineEmpty1.get(i).getState(), FieldState.EMPTY);
+            assertEquals(testedLineOccupied1.get(i).getState(), FieldState.OCCUPIED);
+            assertEquals(testedLineBlocked1.get(i).getState(), FieldState.BLOCKED);
+        }
+    }
 
     @Test
     public void clearTwoLines(){

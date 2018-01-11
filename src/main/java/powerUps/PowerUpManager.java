@@ -1,5 +1,6 @@
 package powerUps;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -44,7 +45,8 @@ public class PowerUpManager {
     public void lineCleared(List<GridField> lines) {
         int[] powerUpsPresence = checkForPowerUps(lines);
         for(int i = 0; i < powerUpsPresence.length; i++){
-            switch (PowerUpTypes.values()[i]){
+        	if(powerUpsPresence[i] > 0){
+                switch (PowerUpTypes.values()[i]){
                 case ADD_MORE_LINES:
                     AddMoreLines.getAddMoreLines().activate(powerUpsPresence[i]);
                     break;
@@ -57,7 +59,11 @@ public class PowerUpManager {
                 case STRAIGHT_LINE_NEXT:
                     StraightLineNext.getStraightLineNext().activate(powerUpsPresence[i]);
                     break;
-            }
+                default:
+                	break;
+                }
+        	}
+
         }
     }
 

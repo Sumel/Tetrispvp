@@ -1,16 +1,13 @@
 package tetrispvp.powerUp;
 
-import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.mockito.runners.MockitoJUnitRunner;
-import static org.mockito.Mockito.doNothing;
 
 import powerUps.*;
+import powerUps.mocks.FieldState;
 import powerUps.mocks.GridField;
+import powerUps.mocks.MockHandler;
 import powerUps.mocks.MockNetwork;
 import powerUps.mocks.MutableBoard;
 
@@ -18,31 +15,23 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import static org.mockito.Mockito.atLeast;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
 
 import java.util.*;
 
-//@RunWith(MockitoJUnitRunner.class)
 public class PowerUpManagerTest {
+	BoardForTests boardForTests = new BoardForTests();
 	
-//	@Mock
-//	AddMoreLines addMoreLinesMock;
-//	@Mock
-//	ReverseBoard reverseBoardMock;
-//	@Mock
-//	ClearBottomLine clearBottomLineMock;
-//	@Mock
-//	StraightLineNext straightLineNextMock;
-//	
-//	@InjectMocks
-//	PowerUpManager powerUpManager;
-//    
-//	@Before  
-//    public void prepareDependencies() { 
-//		MockitoAnnotations.initMocks(this);      
-//	}
+	 private PowerUpManager getOpponentPowerUpManager(){
+	        PowerUpManager powerUpManager = mock(PowerUpManager.class);
+	        MutableBoard board = boardForTests.getBoard();
+	        when(powerUpManager.getMockNetwork()).thenReturn(new MockNetwork());
+	        when(powerUpManager.getBoard()).thenReturn(board);
+
+	        powerUpManager.getMockNetwork().expect("addLines", new MockHandler(board));
+	        powerUpManager.getMockNetwork().expect("flipBoard", new MockHandler(board));
+
+	        return powerUpManager;
+	    }
 	
     @Test
     public void getSamePowerUpManager(){
@@ -142,35 +131,36 @@ public class PowerUpManagerTest {
     	assertEquals(board.lineClearedListenersSize(), 1);
     }
     
-//    @Test
-//    public void lineClearedTest(){
-//    	List<GridField> line = new ArrayList<GridField>();
-//    	int[] powerUpsPresence = {3, 0, 2, 1};
-//    	GridField gf = new GridField();
-//    	line.add(gf);
-//    	for(int i = 1; i < 20; i++){
-//    		GridField gf1 = new GridField();
-//    		if(i % 6 == 0){
-//    			gf1.setPowerUp(0);
-//    		}
-//    		else if(i % 8 == 0){
-//    			gf1.setPowerUp(2);
-//    		}
-//    		else if(i % 11 == 0){
-//    			gf1.setPowerUp(3);
-//    		}
-//    		line.add(gf1);
-//    	}
-//    	when(addMoreLinesMock.getAddMoreLines()).thenReturn(addMoreLinesMock);
-//    	when(clearBottomLineMock.getClearBottomLine()).thenReturn(clearBottomLineMock);
-//    	when(reverseBoardMock.getReverseBoard()).thenReturn(reverseBoardMock);
-//    	when(straightLineNextMock.getStraightLineNext()).thenReturn(straightLineNextMock);
-//    	doNothing().when(addMoreLinesMock).activate(3);
-//    	doNothing().when(clearBottomLineMock).activate(0);
-//    	doNothing().when(reverseBoardMock).activate(2);
-//    	doNothing().when(straightLineNextMock).activate(1);
-//    	
-//        powerUpManager.lineCleared(line);
-//        verify(addMoreLinesMock, times(3)).activate(3);
-//    }
+    @Test
+    public void lineClearedTest(){
+    	MutableBoard board = boardForTests.getBoard();
+        PowerUpManager opponent = getOpponentPowerUpManager();
+        MockNetwork mockNetwork = new MockNetwork(opponent.getMockNetwork());
+
+        PowerUpManager.getPowerUpManager().setBoard(board);
+        PowerUpManager.getPowerUpManager().setMockNetwork(mockNetwork);
+    	List<GridField> line = new ArrayList<GridField>();
+    	GridField gf = new GridField();
+    	gf.setPowerUp(0);
+    	line.add(gf);
+    	for(int i = 1; i < 10; i++){
+    		GridField gf1 = new GridField();
+    		line.add(gf1);
+    	}
+    	boardForTests.printBoard(opponent.getBoard());
+        PowerUpManager.getPowerUpManager().lineCleared(line);
+        System.out.println();
+        boardForTests.printBoard(opponent.getBoard());
+        List<GridField> testedLineBlocked1 = opponent.getBoard().getBoard().get(board.getHeight() - 1);
+        List<GridField> testedLineOccupied1 = opponent.getBoard().getBoard().get(board.getHeight() - 2);
+        List<GridField> testedLineOccupied2 = opponent.getBoard().getBoard().get(board.getHeight() - 3);
+        List<GridField> testedLineEmpty1 = opponent.getBoard().getBoard().get(0);
+
+        for(int i = 0; i < opponent.getBoard().getWidth(); i++){
+            assertEquals(testedLineEmpty1.get(i).getState(), FieldState.EMPTY);
+            assertEquals(testedLineBlocked1.get(i).getState(), FieldState.BLOCKED);
+            assertEquals(testedLineOccupied1.get(i).getState(), FieldState.OCCUPIED);
+            assertEquals(testedLineOccupied2.get(i).getState(), FieldState.OCCUPIED);
+        }
+    }
 }

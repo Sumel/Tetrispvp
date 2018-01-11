@@ -41,8 +41,8 @@ public class MutableBoard {
         }
 		board.set(0, newLine);
 
-//		for(LinesClearedListener l : linesClearedListeners)
-//			l.lineCleared(clearedLine);
+		for(LinesClearedListener l : linesClearedListeners)
+			l.lineCleared(clearedLine);
 	}
 	
 	public void addLine(int lineNumber, GridField field, boolean moveUp){

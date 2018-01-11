@@ -20,7 +20,6 @@ public class AddMoreLines implements PowerUp{
 	public void activate(int powerUpPresence) {
 		if(powerUpPresence > maxAllowedSimultaneousActivations)
 			powerUpPresence = maxAllowedSimultaneousActivations;
-
         PowerUpManager.getPowerUpManager().getMockNetwork().send("addLines", powerUpPresence);
 	}
 }
