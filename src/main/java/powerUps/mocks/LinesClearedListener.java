@@ -2,7 +2,7 @@ package powerUps.mocks;
 
 import java.util.List;
 
-public interface LineClearedListener {
+public interface LinesClearedListener {
 	
 	void lineCleared(List<GridField> lines);
 

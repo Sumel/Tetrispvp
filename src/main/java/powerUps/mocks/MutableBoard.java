@@ -6,7 +6,7 @@ import java.util.List;
 public class MutableBoard {
 	
 	private List<List<GridField>> board;
-	private List<LineClearedListener> lineClearedListeners = new ArrayList<>();
+	private List<LinesClearedListener> lineClearedListeners = new ArrayList<>();
 
 
 	
@@ -41,7 +41,7 @@ public class MutableBoard {
         }
 		board.set(0, newLine);
 
-		for(LineClearedListener l : lineClearedListeners)
+		for(LinesClearedListener l : lineClearedListeners)
 			l.lineCleared(clearedLine);
 	}
 	
@@ -62,7 +62,7 @@ public class MutableBoard {
         }
 	}
 	
-	void addLinesClearedListener(LineClearedListener newListener){
+	public void addLinesClearedListener(LinesClearedListener newListener){
 		lineClearedListeners.add(newListener);
 	}
 	

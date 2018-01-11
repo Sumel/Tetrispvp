@@ -7,12 +7,13 @@ import powerUps.mocks.*;
 
 import javax.sound.sampled.Line;
 
-public class PowerUpManager implements LineClearedListener {
+public class PowerUpManager {
     private static PowerUpManager powerUpManager = null;
     private Random random = new Random();
     private MutableBoard board;
     private GameController gameController;
     private MockNetwork mockNetwork;
+    private LinesClearedListener linesClearedListener = new PowerUpLinesClearedListener();
 
 	private PowerUpManager() { }
 
@@ -40,7 +41,6 @@ public class PowerUpManager implements LineClearedListener {
         return powerUpsPresence;
     }
 
-    @Override
     public void lineCleared(List<GridField> lines) {
         int[] powerUpsPresence = checkForPowerUps(lines);
 
@@ -76,6 +76,7 @@ public class PowerUpManager implements LineClearedListener {
 
     public void setBoard(MutableBoard board) {
         this.board = board;
+        board.addLinesClearedListener(this.linesClearedListener);
     }
 
     public MockNetwork getMockNetwork() {
