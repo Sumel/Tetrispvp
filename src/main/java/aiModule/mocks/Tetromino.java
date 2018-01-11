@@ -1,9 +1,10 @@
 package aiModule.mocks;
 
 
+import java.io.Serializable;
 import java.util.*;
 
-public class Tetromino {
+public class Tetromino implements Serializable{
     private final static Map<ShapeType, List<String[]>> shapes = new HashMap<>();
 
     static {

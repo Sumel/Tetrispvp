@@ -1,7 +1,13 @@
 package aiModule.mocks;
 
-public class GridField {
-    class OccupiedException extends Exception{
+import java.io.Serializable;
+
+public class GridField implements Serializable{
+    public boolean isTempOccupied() {
+        return this.isTempOccupied;
+    }
+
+    class OccupiedException extends Exception {
 
     }
 
@@ -12,7 +18,7 @@ public class GridField {
         this.isOccupied = isOccupied;
     }
 
-    public GridField(){
+    public GridField() {
         isOccupied = false;
         isTempOccupied = false;
     }
@@ -27,10 +33,15 @@ public class GridField {
 
 
     public void setTempOccupied(boolean occupied) throws OccupiedException {
-        if(occupied && this.isOccupied){
+        if (occupied && this.isOccupied) {
             throw new OccupiedException();
         }
         this.isTempOccupied = occupied;
 
+    }
+
+    @Override
+    public String toString() {
+        return this.isOccupied ? "x" : this.isTempOccupied ? "+" : "o";
     }
 }

@@ -1,6 +1,8 @@
 package aiModule;
 
-public class MoveInformation {
+import java.io.Serializable;
+
+public class MoveInformation implements Serializable {
     int position;
     int rotation;
 

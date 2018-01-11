@@ -1,5 +1,6 @@
 package aiModule;
 
+import aiModule.mocks.AIBoard;
 import aiModule.mocks.GridField;
 import org.junit.Test;
 
@@ -9,11 +10,8 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 public class ScoreTest {
-    private Coefficients defaultCoefficients =
-            new Coefficients(-.5, 0.5, -0.5, -0.5);
 
-
-    private BoardStatus getEmptyBoard() {
+    static BoardStatus getEmptyBoard() {
         ArrayList<List<GridField>> status = new ArrayList<>();
         for (int i = 0; i < 22; i++) {
             List<GridField> gridField = new ArrayList<>();
@@ -33,12 +31,56 @@ public class ScoreTest {
             // bottom line empty, second line full
             bs.insertAt(i, 20, new GridField(true));
         }
-        assertEquals(Score.countGridFields(bs), 10);
+        assertEquals(10, Score.countGridFields(bs));
 
         bs.insertAt(7, 13, new GridField(true));
-        assertEquals(Score.countGridFields(bs), 11);
+        assertEquals(11, Score.countGridFields(bs));
         bs.insertAt(7, 13, new GridField(false));
-        assertEquals(Score.countGridFields(bs), 10);
+        assertEquals(10, Score.countGridFields(bs));
+
+    }
+
+    @Test
+    public void getDeletedLinesTest() {
+        BoardStatus bs = getEmptyBoard();
+        for (int i = 0; i < 10; i++) {
+            // bottom line half empty, second line full
+            bs.insertAt(i, 20, new GridField(true));
+            if (i < 5) {
+                bs.insertAt(i, 21, new GridField(true));
+            }
+        }
+
+        Score score = new Score(bs, Score.defaultCoefficients);
+        AIBoard aiBoard = new AIBoard(bs.value);
+        aiBoard.removeLines();
+        bs = new BoardStatus(aiBoard.getBoardState());
+
+        assertEquals(1, score.getDeletedLines(bs));
+
+        for (int i = 5; i < 10; i++) {
+            bs.insertAt(i, 21, new GridField(true));
+        }
+
+        aiBoard = new AIBoard(bs.value);
+        aiBoard.removeLines();
+        bs = new BoardStatus(aiBoard.getBoardState());
+
+        assertEquals(1, score.getDeletedLines(bs));
+
+    }
+
+    @Test
+    public void gestValueTest() {
+        Score score = new Score(getEmptyBoard(), Score.defaultCoefficients);
+
+        score.deletedLines = 10;
+        score.holes = 3;
+        score.bumpiness = 12;
+        score.height = 30;
+
+        double expectedValue = 10 * 0.5 + 3 * -0.5 + 12 * -0.5 + 30 * -0.5;
+        assertEquals(score.getValue(), expectedValue, 1e-9);
 
     }
 

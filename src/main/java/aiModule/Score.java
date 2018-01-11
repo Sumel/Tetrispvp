@@ -4,24 +4,27 @@ import aiModule.mocks.GridField;
 
 import java.util.List;
 
-class Score{
+public class Score {
+    public static Coefficients defaultCoefficients =
+            new Coefficients(-.5, 0.5, -0.5, -0.5);
+
 
     private int totalGridFields;
     private Coefficients coefficients;
 
-    private int deletedLines;
-    private int holes;
-    private int bumpiness;
-    private int height;
+    public int deletedLines;
+    public int holes;
+    public int bumpiness;
+    public int height;
 
     private double value;
 
-    Score(BoardStatus originalBoardStatus, Coefficients coefficients) {
+    public Score(BoardStatus originalBoardStatus, Coefficients coefficients) {
         this.totalGridFields = countGridFields(originalBoardStatus);
         this.coefficients = coefficients;
     }
 
-    Score(double value){
+    public Score(double value) {
         this.value = value;
     }
 
@@ -46,7 +49,7 @@ class Score{
         this.value = getValue();
     }
 
-    private int getDeletedLines(BoardStatus boardStatus) {
+    public int getDeletedLines(BoardStatus boardStatus) {
         int newTotalGridFields = countGridFields(boardStatus);
         int deletedLines = 0;
         if (newTotalGridFields < this.totalGridFields) {
@@ -63,7 +66,7 @@ class Score{
                 + this.deletedLines * this.coefficients.lines;
     }
 
-    public boolean hasBetterValue(Score score){
+    public boolean hasBetterValue(Score score) {
         return this.value > score.value;
     }
 }

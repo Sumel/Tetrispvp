@@ -4,24 +4,26 @@ import aiModule.mocks.GridField;
 
 import java.util.List;
 
-class BoardStatus {
-    List<List<GridField>> value;
+public class BoardStatus {
+    public List<List<GridField>> value;
 
-    BoardStatus(List<List<GridField>> value) {
+    public BoardStatus(List<List<GridField>> value) {
         this.value = value;
     }
 
     public int getHoles() {
         int total = 0;
-        for (List<GridField> line : this.value) {
+        for (int column = 0; column < 10; column++) {
             boolean check = false;
-            for (GridField gridField : line) {
+            for (int row = 0; row < 22; row++) {
+                GridField gridField = this.value.get(row).get(column);
                 if (gridField.isOccupied()) {
                     check = true;
                 } else if (!gridField.isOccupied() && check) {
                     total++;
                 }
             }
+
         }
         return total;
     }
@@ -33,7 +35,7 @@ class BoardStatus {
         return total;
     }
 
-    private int getColumnHeight(int column) {        //column - [0, 1, ..., 9]
+    public int getColumnHeight(int column) {        //column - [0, 1, ..., 9]
         int boardHeight = 22;
         int currentRow = 0;
         while (isInBoardRange(currentRow, boardHeight) && isEmpty(currentRow, column)) {
@@ -42,12 +44,12 @@ class BoardStatus {
         return boardHeight - currentRow;
     }
 
-    private boolean isInBoardRange(int currentColumn, int boardHeight) {
-        return currentColumn < boardHeight;
+    private boolean isInBoardRange(int currentRow, int boardHeight) {
+        return currentRow < boardHeight;
     }
 
     private boolean isEmpty(int row, int column) {
-        return this.value.get(row).get(column).isOccupied();
+        return !this.value.get(row).get(column).isOccupied();
     }
 
     public int getAggregateHeight() {
@@ -58,9 +60,20 @@ class BoardStatus {
         return total;
     }
 
-    public void insertAt(int x, int y, GridField value){
+    public void insertAt(int x, int y, GridField value) {
         this.value.get(y).set(x, value);
     }
 
+    @Override
+    public String toString() {
+        StringBuilder b = new StringBuilder();
+        for (List<GridField> line : this.value) {
+            for (GridField gf : line) {
+                b.append(gf);
+            }
+            b.append('\n');
+        }
+        return "BoardStatus{\n" + b.toString() + "}";
+    }
 }
 

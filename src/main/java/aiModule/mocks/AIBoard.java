@@ -1,9 +1,13 @@
 package aiModule.mocks;
 
+import aiModule.MoveMaker;
+
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-public class AIBoard implements Board {
+public class AIBoard implements Board, Serializable {
     private final static int boardWidth = 10;
     private final static int boardHeight = 22;
     private List<List<GridField>> boardStatus; // 22 list of 10 GridFields
@@ -12,7 +16,8 @@ public class AIBoard implements Board {
     private int tetrominoPosX = 0, tetrominoPosY = 0;
     private int completedLines = 0;
 
-    private class BoardSizeException extends Exception {}
+    private class BoardSizeException extends Exception {
+    }
 
     AIBoard() {
         this.boardStatus = new ArrayList<>();
@@ -23,6 +28,23 @@ public class AIBoard implements Board {
 
     public AIBoard(List<List<GridField>> boardStatus) {
         this.boardStatus = boardStatus;
+    }
+
+    /**
+     * This method makes a "deep clone" of any Java object it is given.
+     */
+    public static AIBoard deepClone(AIBoard object) {
+        try {
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ObjectOutputStream oos = new ObjectOutputStream(baos);
+            oos.writeObject(object);
+            ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+            ObjectInputStream ois = new ObjectInputStream(bais);
+            return (AIBoard) ois.readObject();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override
@@ -88,10 +110,58 @@ public class AIBoard implements Board {
 
     @Override
     public void totalMoveDown() {
-        boolean isMoved = moveDown();
-        while (isMoved) {
-            isMoved = moveDown();
+        while (canMoveDown()) {
+            moveDown();
         }
+        stopListener();
+        replace();
+    }
+
+    private void replace() {
+        for (List<GridField> line: this.boardStatus){
+            for (GridField gf: line) {
+                if(gf.isTempOccupied()){
+                    try {
+                        gf.setTempOccupied(false);
+                    } catch (GridField.OccupiedException e) {
+                        e.printStackTrace();
+                    }
+                    gf.setOccupied(true);
+                }
+            }
+        }
+    }
+
+    private MoveMaker listener = null;
+    private void stopListener(){
+        if(listener!=null){
+            listener.setEndFlag();
+        }
+    }
+    public void addListener(MoveMaker moveMaker){
+        this.listener = moveMaker;
+    }
+
+    private boolean canMoveDown() {
+        try {
+            for (int i = tetrominoPosX; i < tetrominoPosX + this.currentTetromino.getWidth(); i++) {
+                if (i >= boardWidth || i < 0) {
+                    throw new BoardSizeException();
+                }
+                for (int j = tetrominoPosY + 1; j < tetrominoPosY +1 + this.currentTetromino.getHeight(); j++) {
+                    if (j >= boardHeight || j < 0) {
+                        throw new BoardSizeException();
+                    }
+                    GridField gf = getFieldAtPosition(i, j);
+                    if(gf.isOccupied()){
+                        return false;
+                    }
+                }
+            }
+        } catch (BoardSizeException e) {
+            return false;
+        }
+        return true;
     }
 
     private boolean updateTempTetromino() {
@@ -114,26 +184,26 @@ public class AIBoard implements Board {
     }
 
     private void setTempTetromino() throws BoardSizeException, GridField.OccupiedException {
-        for (int i = tetrominoPosX; i < this.currentTetromino.getWidth(); i++) {
+        for (int i = tetrominoPosX; i < tetrominoPosX + this.currentTetromino.getWidth(); i++) {
             if (i >= boardWidth || i < 0) {
                 throw new BoardSizeException();
             }
-            for (int j = tetrominoPosY; j < this.currentTetromino.getHeight(); j++) {
+            for (int j = tetrominoPosY; j < tetrominoPosY + this.currentTetromino.getHeight(); j++) {
                 if (j >= boardHeight || j < 0) {
                     throw new BoardSizeException();
                 }
                 GridField gf = getFieldAtPosition(i, j);
-                gf.setTempOccupied(false);
+                gf.setTempOccupied(true);
             }
         }
 
         removeLines();
     }
 
-    private void removeLines() {
+    public void removeLines() {
         int deletedLines = 0;
-        for (int i = boardHeight; i>=0; i--) {
-            if(this.boardStatus.get(i).stream().allMatch(GridField::isOccupied)){
+        for (int i = boardHeight - 1; i >= 0; i--) {
+            if (this.boardStatus.get(i).stream().allMatch(GridField::isOccupied)) {
                 deletedLines += 1;
                 this.boardStatus.remove(i);
             }
