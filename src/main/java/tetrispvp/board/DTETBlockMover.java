@@ -33,6 +33,7 @@ class DTETBlockMover implements BlockMover {
             new Point(-1, 1),
             new Point(1, 1)
     };
+
     @Inject
     public DTETBlockMover(MutableBoard board, CollisionChecker collisionChecker) {
         this.board = board;
@@ -132,7 +133,7 @@ class DTETBlockMover implements BlockMover {
 
     @Override
     public Point getPosition() {
-        return (Point)blockPosition.clone();
+        return (Point) blockPosition.clone();
     }
 
     private void removeFieldFromList(List<GridFieldWithPosition> fields, Point point) {
@@ -150,7 +151,7 @@ class DTETBlockMover implements BlockMover {
                     int row = i + position.y;
                     int column = j + position.x;
                     removeFieldFromList(fields, new Point(column, row));
-                    if(column >= 0 && row >= 0 && !board.getFieldAtPosition(column,row).isLocked()){
+                    if (column >= 0 && row >= 0 && !board.getFieldAtPosition(column, row).isLocked()) {
                         fields.add(new GridFieldWithPosition(row, column, emptyField));
                     }
                 }
@@ -167,7 +168,7 @@ class DTETBlockMover implements BlockMover {
                     int row = i + position.y;
                     int column = j + position.x;
                     removeFieldFromList(fields, new Point(column, row));
-                    if(column >= 0 && row >= 0 && !board.getFieldAtPosition(column,row).isLocked()){
+                    if (column >= 0 && row >= 0 && !board.getFieldAtPosition(column, row).isLocked()) {
                         fields.add(new GridFieldWithPosition(row, column, currentBlockField));
                     }
                 }
@@ -276,7 +277,7 @@ class DTETBlockMover implements BlockMover {
         }
     }
 
-    private void onBlockSpawned(Block block){
+    private void onBlockSpawned(Block block) {
         for (BlockSpawnedListener listener : blockSpawnedListeners) {
             listener.blockSpawned(block);
         }

@@ -6,7 +6,7 @@ import tetrispvp.board.Mocks.MessageReceiver;
 import tetrispvp.board.Mocks.MessageSender;
 import tetrispvp.board.Mocks.NetworkModuleMock;
 
-public class TetrisBoardModule extends AbstractModule{
+public class TetrisBoardModule extends AbstractModule {
     @Override
     protected void configure() {
         bind(TetrisBoard.class).in(Singleton.class);

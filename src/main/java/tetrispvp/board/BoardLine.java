@@ -7,7 +7,7 @@ public class BoardLine implements LinesClearedListener.Line {
     private final int lineNumber;
     private final List<GridField> fields;
 
-    public BoardLine(int lineNumber, List<GridField> fields){
+    public BoardLine(int lineNumber, List<GridField> fields) {
         this.lineNumber = lineNumber;
         this.fields = fields;
     }

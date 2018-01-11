@@ -56,10 +56,9 @@ public class ConsoleTetrisPlayer {
             board.spawnNewBlock(new BlockImplementation('I'));
         } else if (input.equals("f") || input.toLowerCase().equals("flip")) {
             board.flipBoard();
-        }
-        else if (input.equals("add")){
+        } else if (input.equals("add")) {
             BoardField field = new BoardField(true, true, Color.gray, -1, false);
-            board.addLine(board.getHeight()-1, field,true);
+            board.addLine(board.getHeight() - 1, field, true);
         } else {
             return false;
         }
@@ -74,14 +73,13 @@ public class ConsoleTetrisPlayer {
             for (int col = 0; col < board.getWidth(); ++col) {
                 if (fields.get(row).get(col).isOccupied()) {
                     if (fields.get(row).get(col).isLocked()) {
-                        if (fields.get(row).get(col).canBeCleared()){
+                        if (fields.get(row).get(col).canBeCleared()) {
                             rowRepresentation = rowRepresentation.concat("|x");
-                        } else{
+                        } else {
                             rowRepresentation = rowRepresentation.concat("|g");
                         }
 
-                    }
-                    else{
+                    } else {
                         rowRepresentation = rowRepresentation.concat("|o");
                     }
 

@@ -31,7 +31,7 @@ public class GreyLinesManager {
                 if (messageName.equals("linesCleared")) {
                     BoardField field = new BoardField(true, true, Color.gray, -1, false);
                     for (int i = 0; i < (Integer) with; ++i) {
-                        board.addLine(board.getHeight()-1, field,true);
+                        board.addLine(board.getHeight() - 1, field, true);
                     }
                 }
             }
