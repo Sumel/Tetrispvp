@@ -82,6 +82,10 @@ public class MutableBoard {
         this.board = board;
     }
     
+    public int lineClearedListenersSize(){
+    	return lineClearedListeners.size();
+    }
+    
     public int highestRowWithLockedFields() {
         for (int i = 0; i < getHeight(); i++) {
             boolean blocked = false;
