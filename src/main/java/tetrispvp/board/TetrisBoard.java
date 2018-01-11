@@ -1,7 +1,6 @@
 package tetrispvp.board;
 
 
-import javafx.scene.chart.LineChart;
 import tetrispvp.board.Mocks.Block;
 
 import java.awt.*;
@@ -11,7 +10,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import com.google.inject.*;
-import tetrispvp.board.Mocks.BlockField;
 
 public class TetrisBoard implements BlockMover, MutableBoard, GameStateTracker {
 
@@ -24,7 +22,7 @@ public class TetrisBoard implements BlockMover, MutableBoard, GameStateTracker {
     private GameStateTracker gameStateTracker;
 
     @Inject
-    public TetrisBoard(BlockMover blockMover, GameStateTracker gameStateTracker) {
+    TetrisBoard(BlockMover blockMover, GameStateTracker gameStateTracker) {
         boardFields = new ArrayList<List<GridField>>();
 
         for (int i = 0; i < boardHeight; ++i) {
@@ -146,7 +144,7 @@ public class TetrisBoard implements BlockMover, MutableBoard, GameStateTracker {
         onBoardChanged();
     }
 
-    private void moveBlockUp(){
+    private void moveBlockUp() {
         Point point = blockMover.getPosition();
         point.y--;
         changePosition(point);
@@ -160,7 +158,6 @@ public class TetrisBoard implements BlockMover, MutableBoard, GameStateTracker {
         }
         moveBlockUp();
     }
-
 
 
     @Override
