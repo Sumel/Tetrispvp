@@ -45,25 +45,25 @@ public class GridField {
         this.state=FieldState.OCCUPIED;
         switch (type) {
             case I:
-                this.color=Color.CYAN;
+                this.color= Color.CYAN;
                 break;
             case T:
-                this.color=Color.PURPLE;
+                this.color= Color.PURPLE;
                 break;
             case L:
-                this.color=Color.ORANGE;
+                this.color= Color.ORANGE;
                 break;
             case J:
-                this.color=Color.BLUE;
+                this.color= Color.BLUE;
                 break;
             case S:
-                this.color=Color.GREEN;
+                this.color= Color.GREEN;
                 break;
             case Z:
-                this.color=Color.RED;
+                this.color= Color.RED;
                 break;
             case O:
-                this.color=Color.YELLOW;
+                this.color= Color.YELLOW;
                 break;
         }
     }

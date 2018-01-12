@@ -1,15 +1,13 @@
 package GUI;
 
+import GUI.controller.GuiController;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import GUI.controller.GuiController;
-
-import static java.lang.Thread.sleep;
 
 public class Main extends Application {
 
 	private Stage primaryStage;
-	private GuiController GuiController;
+	private GUI.controller.GuiController GuiController;
 
 	@Override
 	public void start(Stage primaryStage) {

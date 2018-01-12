@@ -1,7 +1,6 @@
 package GUI.controller;
 
 import GUI.Comunication.GameModeData;
-import javafx.scene.layout.GridPane;
 
 public class PaneController {
     protected GuiController guiController;

@@ -44,7 +44,7 @@ public class GuiController {
             // load layout from FXML file
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("/" + Pane + ".fxml"));
-            Pane rootLayout = loader.load();
+            javafx.scene.layout.Pane rootLayout = loader.load();
 
             PaneController controller = loader.getController();
             controller.setGuiController(this);
