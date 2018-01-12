@@ -1,0 +1,88 @@
+@font-face {
+    src: url("./textFont.ttf");
+}
+
+#pane {
+
+    -fx-background-image: url("./sky.jpg");
+    -fx-background-color: transparent;
+    -fx-background-repeat: stretch;
+    -fx-background-size: 1024 600;
+    -fx-background-radius: 12;
+    -fx-background-position: center center;
+    -fx-effect: dropshadow(three-pass-box, black, 30, 0.5, 0, 0);
+}
+
+#Title {
+    -fx-font-family: "Joystix Monospace";
+    -fx-text-alignment: CENTER;
+    -fx-font-size: 70;
+    -fx-text-fill: red;
+    -fx-fill: linear-gradient(from 0% 0% to 100% 50%, repeat, cyan 0%, blue 14%, orange 29%, yellow 43%, green 57%, purple 86%, red 100%);
+}
+
+#ChoseText {
+    -fx-font-family: "Joystix Monospace";
+    -fx-text-alignment: CENTER;
+    -fx-font-size: 35;
+    -fx-fill: gold;
+}
+
+#NextBlock {
+    -fx-font-family: "Joystix Monospace";
+    -fx-text-alignment: CENTER;
+    -fx-font-size: 15;
+    -fx-fill: black;
+}
+
+.button {
+    -fx-background-color: linear-gradient(#ef2a24, #c155b4),
+    linear-gradient(#ef2a24, #c155b4),
+    linear-gradient(skyblue, blue, skyblue);
+    -fx-background-insets: 0, 1, 4, 5, 6;
+    -fx-background-radius: 9, 8, 5, 4, 3;
+    -fx-padding: 8;
+    /*-fx-font-family: "Helvetica";*/
+    -fx-font-family: "Joystix Monospace";
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: gold;
+    -fx-effect: dropshadow(three-pass-box, rgba(255, 255, 255, 0.2), 1, 0.0, 0, 1);
+}
+
+.button:hover {
+    -fx-text-fill: #00d800;
+}
+
+.button:pressed {
+    -fx-background-color: linear-gradient(#00D800, #008c00),
+    linear-gradient(#00D800, #008c00),
+    linear-gradient(skyblue, blue, skyblue);
+}
+
+.text-field {
+    -fx-background-color: transparent;
+    -fx-border-color: linear-gradient(#ef2a24, #c155b4);
+    -fx-border-width: 5;
+
+    -fx-font-family: "Joystix Monospace";
+    -fx-alignment: CENTER;
+    -fx-font-size: 20;
+    -fx-text-fill: green;
+
+}
+
+.gameBoard {
+    -fx-border-color: linear-gradient(#ef2a24, #c155b4);
+    -fx-border-width: 6px;
+    -fx-border-radius: 2px;
+    -fx-background-color: linear-gradient(transparent 0%,skyblue 2%, ghostwhite 98%,transparent 100%);
+}
+
+
+#Dot {
+    -fx-font-family: "Joystix Monospace";
+    -fx-text-alignment: CENTER;
+    -fx-font-size: 40;
+    -fx-fill: GREEN;
+}
