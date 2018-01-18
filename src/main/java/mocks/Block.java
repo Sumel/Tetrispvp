@@ -22,7 +22,7 @@ public class Block {
 
     /* sets powerUp on field of given id,
      * fieldId is integer from 0 to 4 */
-    public void setPowerUpAtFiled(int fieldId, PowerUp powerUp) {
+    public void setPowerUpAtFiled(int fieldId, int powerUp) {
         this.fields.get(fieldId).setPowerUp(powerUp);
     }
 

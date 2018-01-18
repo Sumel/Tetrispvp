@@ -66,7 +66,7 @@ public class GameController {
      */
     private void spawnBlock(Board board) {
         Block block = blockGenerator.nextRandomBlock();
-        PowerUp powerUp = powerUpGenerator.nextRandomPowerUp();
+        int powerUp = powerUpGenerator.nextRandomPowerUp();
         int powerUpPostition = powerUpGenerator.randPowerUpPosition();
         block.setPowerUpAtFiled(powerUpPostition, powerUp);
         board.spawnNextBlock(block);
@@ -77,4 +77,7 @@ public class GameController {
         visualisation.updateView();
     }
 
+    public void setAIDifficulty(double difficulty) {
+
+    }
 }

@@ -22,8 +22,8 @@ public class PowerUpGenerator {
         return powerUpGenerator;
     }
 
-    public PowerUp nextRandomPowerUp() {
-        return powerUpManager.getPowerUp(powerUpManager.randomPowerUp());
+    public int nextRandomPowerUp() {
+        return powerUpManager.randomPowerUp();
     }
 
     public int randPowerUpPosition() {
