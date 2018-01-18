@@ -3,6 +3,7 @@ package tetrispvp.board.ConsolePlayer;
 
 import tetrispvp.board.*;
 import tetrispvp.board.Mocks.BlockImplementation;
+import tetrispvp.network.NetworkModuleFactory;
 
 import java.awt.*;
 import java.util.List;
@@ -11,6 +12,9 @@ import java.util.Scanner;
 public class ConsoleTetrisPlayer {
 
     public static void main(String[] args) {
+        if (NetworkModuleFactory.last() == null) {
+            NetworkModuleFactory.getNetworkModule();
+        }
         ConsoleTetrisPlayer player = new ConsoleTetrisPlayer();
         player.play();
     }
