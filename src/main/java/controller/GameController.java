@@ -9,6 +9,8 @@ import static controller.GameMode.HUMAN;
 
 public class GameController {
 
+    int queueSize = 5;
+
     GameMode gameMode;
 
     PowerUpGenerator powerUpGenerator;
@@ -31,7 +33,7 @@ public class GameController {
     GameController(GameMode gameMode){
         this.gameMode = gameMode;
         this.powerUpGenerator = PowerUpGenerator.getPowerUpGenerator();
-        this.blockGenerator = BlockGenerator.getBlockGenerator();
+        this.blockGenerator = BlockGenerator.getBlockGenerator(queueSize);
         this.humanBoard = new Board();
         this.visualisation = new Visualisation();
         this.humanController = new HumanController(new MoveController(humanBoard, new TetrisTimer(1000)), visualisation);
@@ -64,14 +66,15 @@ public class GameController {
     /**
      * Spawn next Block with or without PowerUp - PowerUpManager decidec if powerUp is active or no
      */
-    private void spawnBlock(Board board) {
-        Block block = blockGenerator.nextRandomBlock();
-        int powerUp = powerUpGenerator.nextRandomPowerUp();
-        int powerUpPostition = powerUpGenerator.randPowerUpPosition();
-        block.setPowerUpAtFiled(powerUpPostition, powerUp);
-        board.spawnNextBlock(block);
-        visualisation.updateNextBlockView(block);
-    }
+
+//    private void spawnBlock(Board board) {
+//        Block block = blockGenerator.nextRandomBlock();
+//        PowerUp powerUp = powerUpGenerator.nextRandomPowerUp();
+//        int powerUpPostition = powerUpGenerator.randPowerUpPosition();
+//        block.setPowerUpAtFiled(powerUpPostition, powerUp);
+//        board.spawnNextBlock(block);
+//        visualisation.updateNextBlockView(block);
+//    }
 
     private void updateView() {
         visualisation.updateView();
