@@ -2,7 +2,11 @@ package tetrispvp.board;
 
 
 import com.google.inject.Inject;
-import tetrispvp.board.Mocks.*;
+import tetrispvp.board.Mocks.Block;
+import tetrispvp.network.MessageContext;
+import tetrispvp.network.MessageHandler;
+import tetrispvp.network.MessageReceiver;
+import tetrispvp.network.MessageSender;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -51,6 +55,16 @@ public class GameStateNetworkSynchronizer implements GameStateTracker {
                 if (otherSideState == GameState.Draw) {
                     setCurrentState(GameState.Draw);
                 }
+            }
+
+            @Override
+            public boolean shouldBeForgotten() {
+                return false;
+            }
+
+            @Override
+            public void wasForgotten() {
+
             }
         });
 
