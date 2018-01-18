@@ -1,9 +1,8 @@
-package tetrispvp.board.Mocks;
+package tetrispvp.board.ConsolePlayer;
 
 
-import com.google.inject.Guice;
-import com.google.inject.Injector;
 import tetrispvp.board.*;
+import tetrispvp.board.Mocks.BlockImplementation;
 
 import java.awt.*;
 import java.util.List;
