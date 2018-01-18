@@ -3,7 +3,7 @@ package powerUps.mocks;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MockHandler implements MessageHandler{
+public class MockHandler implements tetrispvp.network.MessageHandler {
     private List<String> allMessages = new ArrayList<>();
     private MutableBoard board;
 
@@ -12,7 +12,7 @@ public class MockHandler implements MessageHandler{
     }
 
     @Override
-    public void arrived(String messageName, Object with, MessageContext within) {
+    public void arrived(String messageName, Object with, tetrispvp.network.MessageContext within) {
         allMessages.add(messageName);
         System.out.println(with);
         getAllMessages();

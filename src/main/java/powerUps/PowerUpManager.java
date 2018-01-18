@@ -3,6 +3,7 @@ package powerUps;
 import java.util.List;
 import java.util.Random;
 
+import powerUps.NetworkIntegration.RealNetwork;
 import powerUps.mocks.*;
 import static powerUps.AddMoreLinesPowerUp.getAddMoreLinesPowerUp;
 import static powerUps.ClearBottomLinePowerUp.getClearBottomLinePowerUp;
@@ -94,7 +95,12 @@ public class PowerUpManager {
         mockNetwork.expect("flipBoard", new MockHandler(getBoard()));
         mockNetwork.expect("addLines", new MockHandler(getBoard()));
     }
-    
+
+    public void initNetwork() {
+        mockNetwork = new RealNetwork();
+        setMockNetwork(mockNetwork);
+    }
+
     public LinesClearedListener getLinesClearedListener(){
     	return this.linesClearedListener;
     }

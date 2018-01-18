@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 public class MockNetwork implements MessageSender,MessageReceiver {
     private MockNetwork opponent;
-    private HashMap<String, MessageHandler> expected;
+    private HashMap<String, tetrispvp.network.MessageHandler> expected;
 
     public MockNetwork(MockNetwork opponent) {
         this.opponent = opponent;
@@ -16,7 +16,7 @@ public class MockNetwork implements MessageSender,MessageReceiver {
     }
 
     @Override
-    public void expect(String messageName, MessageHandler handler) {
+    public void expect(String messageName, tetrispvp.network.MessageHandler handler) {
         expected.putIfAbsent(messageName, handler);
     }
 
