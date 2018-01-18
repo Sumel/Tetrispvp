@@ -12,23 +12,23 @@ public class BlockGenerator {
     private BlockManager blockManager;
 
     private List<Block> blockQueue;
+    private int queueSize = 5;
 
-    public BlockGenerator(int queueSize) {
+    public BlockGenerator() {
 
         this.blockManager = BlockManager.getBlockManager();
         blockQueue = new ArrayList<>();
 
-        for(int i =0; i< queueSize; i++){
+        for(int i =0; i < queueSize; i++){
             nextRandomBlock();
         }
     }
 
-    public static BlockGenerator getBlockGenerator(int size) {
+    public static BlockGenerator getBlockGenerator() {
         if(blockGenerator == null) {
-            blockGenerator = new BlockGenerator(size);
+            blockGenerator = new BlockGenerator();
         }
         return blockGenerator;
-
     }
 
     private void nextRandomBlock() {

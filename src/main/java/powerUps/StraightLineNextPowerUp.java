@@ -1,5 +1,8 @@
 package powerUps;
 
+
+import controller.BlockGenerator;
+
 public class StraightLineNextPowerUp implements PowerUp{
 
 	private int maxAllowedSimultaneousActivations = 3;
@@ -19,6 +22,6 @@ public class StraightLineNextPowerUp implements PowerUp{
 		if(powerUpPresence > maxAllowedSimultaneousActivations)
 			powerUpPresence = maxAllowedSimultaneousActivations;
 
-		BlockGenerator.getBlockGenerator.nextStraightLineBlock(powerUpPresence);
+		BlockGenerator.getBlockGenerator().nextStraightLineBlock(powerUpPresence);
 	}
 }
