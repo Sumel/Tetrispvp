@@ -3,8 +3,11 @@ package tetrispvp.board;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import tetrispvp.board.Mocks.BlockImplementation;
+import tetrispvp.network.NetworkModuleFactory;
 
 import java.util.List;
 
@@ -15,8 +18,20 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.internal.verification.VerificationModeFactory.times;
 
 public class BoardIntegrationTest {
+    @Before
+    public void startNetwork() {
+        if (NetworkModuleFactory.last() == null) {
+            NetworkModuleFactory.getNetworkModule();
+        }
+    }
+
+    @After
+    public void stopNetwork() {
+        NetworkModuleFactory.last().connectionContext().disconnect();
+    }
+
     @Test
-    public void fromEmptyBoardToLineClear(){
+    public void fromEmptyBoardToLineClear() {
         Injector injector = Guice.createInjector(new TetrisBoardModule());
         TetrisBoard board = injector.getInstance(TetrisBoard.class);
         LinesClearedListener listener = mock(LinesClearedListener.class);
@@ -33,7 +48,9 @@ public class BoardIntegrationTest {
         board.moveLeft();
         board.moveLeft();
         board.moveLeft();
-        for(int i = 0;i<50;++i){board.moveDown();}
+        for (int i = 0; i < 50; ++i) {
+            board.moveDown();
+        }
         board.spawnNewBlock(new BlockImplementation('I'));
         board.moveRight();
         board.moveRight();
@@ -59,10 +76,9 @@ public class BoardIntegrationTest {
     }
 
     @Test
-    public void fromEmptyBoardToLose(){
+    public void fromEmptyBoardToLose() {
         Injector injector = Guice.createInjector(new TetrisBoardModule());
         TetrisBoard board = injector.getInstance(TetrisBoard.class);
-
 
 
         //sample game
