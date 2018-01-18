@@ -91,6 +91,8 @@ public class PowerUpManager {
 
     public void setMockNetwork(MockNetwork mockNetwork) {
         this.mockNetwork = mockNetwork;
+        mockNetwork.expect("flipBoard", new MockHandler(getBoard()));
+        mockNetwork.expect("addLines", new MockHandler(getBoard()));
     }
     
     public LinesClearedListener getLinesClearedListener(){
