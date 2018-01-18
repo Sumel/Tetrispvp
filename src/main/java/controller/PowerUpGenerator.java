@@ -1,7 +1,6 @@
 package controller;
 
-import mocks.PowerUp;
-import mocks.PowerUpManager;
+import powerUps.PowerUpManager;
 
 import java.util.Random;
 

@@ -32,23 +32,18 @@ public class BlockGenerator {
     }
 
     private void nextRandomBlock() {
-
         blockQueue.add(blockManager.randomBlock());
-
     }
 
     public Block spawnBlock(){
-
         Block block = blockQueue.remove(0);
         nextRandomBlock();
         return block;
     }
 
     public void nextStraightLineBlock(int numberOfLines) {
-
         for(int i=0;i<numberOfLines; i++){
             blockQueue.set(i, blockManager.straightBlock());
-
         }
     }
 
