@@ -19,7 +19,6 @@ public class StraightLineNextPowerUp implements PowerUp{
 		if(powerUpPresence > maxAllowedSimultaneousActivations)
 			powerUpPresence = maxAllowedSimultaneousActivations;
 
-		PowerUpManager.getPowerUpManager().getGameController().
-				setNextBlockAsStraightLine(powerUpPresence);
+		BlockGenerator.getBlockGenerator.nextStraightLineBlock(powerUpPresence);
 	}
 }

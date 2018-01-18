@@ -14,7 +14,6 @@ public class PowerUpManager {
     private static PowerUpManager powerUpManager = null;
     private Random random = new Random();
     private MutableBoard board;
-    private GameController gameController;
     private MockNetwork mockNetwork;
     private LinesClearedListener linesClearedListener = new PowerUpLinesClearedListener();
 
@@ -67,14 +66,6 @@ public class PowerUpManager {
         	}
 
         }
-    }
-
-    public GameController getGameController() {
-        return gameController;
-    }
-
-    public void setGameController(GameController gameController) {
-        this.gameController = gameController;
     }
 
     public MutableBoard getBoard() {
