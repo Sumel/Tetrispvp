@@ -10,7 +10,7 @@ public class Block {
         for (int j = 0; j < 4; j++) {
             initialShape.add(new LinkedList<>());
             for (int i = 0; i < 4; i++) {
-                initialShape.get(j).add(new GridField());
+                initialShape.get(j).add(new BlockGridField());
             }
         }
     }
@@ -22,7 +22,7 @@ public class Block {
     public void printBlock(){
         for(int i=0; i<4; i++){
             for(int j=0; j<4; j++){
-                System.out.print(initialShape.get(i).get(j).getBlockType()+",\t");
+                System.out.print(initialShape.get(i).get(j).isOccupied()+",\t");
             }
             System.out.println();
         }

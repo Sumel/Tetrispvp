@@ -22,10 +22,17 @@
 }
 
 #ChoseText {
+     -fx-font-family: "Joystix Monospace";
+     -fx-text-alignment: CENTER;
+     -fx-font-size: 35;
+     -fx-fill: gold;
+ }
+
+#IpAddress {
     -fx-font-family: "Joystix Monospace";
     -fx-text-alignment: CENTER;
     -fx-font-size: 35;
-    -fx-fill: gold;
+    -fx-fill: red;
 }
 
 #NextBlock {
@@ -76,7 +83,10 @@
     -fx-border-color: linear-gradient(#ef2a24, #c155b4);
     -fx-border-width: 6px;
     -fx-border-radius: 2px;
-    -fx-background-color: linear-gradient(transparent 0%,skyblue 2%, ghostwhite 98%,transparent 100%);
+   /* -fx-background-color: linear-gradient(transparent 0%,whitesmoke 2%, #000000 98%,
+transparent 100%);*/
+    -fx-background-color:linear-gradient(transparent 0%,black 2%, black 98%,
+    transparent 100%);
 }
 
 

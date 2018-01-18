@@ -3,76 +3,54 @@ package GUI.Block;
 
 import javafx.scene.paint.Color;
 
-public class GridField {
+public interface GridField {
+    /**
+     * Returns information about occupation state of this GridField.
+     *
+     * @return Returns true if there is currently a field at this position (regardless if it's locked in place, or if it's the current block). Returns false otherwise.
+     */
+    boolean isOccupied();
 
-    private long powerUpId = -1;
-    private FieldState state = FieldState.EMPTY;
-    private BlockType blockType=null;
-    private Color color;
+    /**
+     * Returns information about whether this field is locked on the board (no longer a part of BlockMover's block).
+     *
+     * @return Returns true if this field isn't a part of BlockMover's current block. Returns false otherwise.
+     */
+    boolean isLocked();
 
-    public FieldState getState() {
-        return state;
-    }
-
-    public void setState(FieldState state) {
-        this.state = state;
-    }
-
-    boolean hasPowerUp(){
-        if(powerUpId == -1)
-            return false;
+    /**
+     * Returns information about whether this field can be cleared (grey lines cannot be cleared).
+     *
+     * @return Returns true if this field can be cleared. Returns false otherwise.
+     */
+    default boolean canBeCleared() {
         return true;
     }
 
-    long getPowerUp(){
-        return powerUpId;
+    /**
+     * Gets the color of this field. Should only be used if the field is occupied.
+     *
+     * @return Returns the color of this field.
+     */
+    Color getColor();
+
+    /**
+     * Used to get potential power up strategy ID for this field. Calling the strategy implementation is handled by PowerUpManager.
+     *
+     * @return Returns this field's PowerUp ID.
+     */
+    default int getPowerUpID() {
+        return -1;
     }
 
-    public void setPowerUp(long powerUpId) {
-        this.powerUpId = powerUpId;
+    /**
+     * Used to determine whether this field has a power up attached.
+     *
+     * @return Returns true if this field has a power up attached. Returns false otherwise.
+     */
+    default boolean hasPowerUp() {
+        return getPowerUpID() != -1;
     }
 
-    public void setBlockType(BlockType blockType) {
-        this.blockType = blockType;
-    }
 
-    public BlockType getBlockType() {
-        return blockType;
-    }
-
-    public void setBlock(BlockType type){
-        this.blockType=type;
-        this.state=FieldState.OCCUPIED;
-        switch (type) {
-            case I:
-                this.color= Color.CYAN;
-                break;
-            case T:
-                this.color= Color.PURPLE;
-                break;
-            case L:
-                this.color= Color.ORANGE;
-                break;
-            case J:
-                this.color= Color.BLUE;
-                break;
-            case S:
-                this.color= Color.GREEN;
-                break;
-            case Z:
-                this.color= Color.RED;
-                break;
-            case O:
-                this.color= Color.YELLOW;
-                break;
-        }
-    }
-
-    public Color getColor() {
-        return color;
-    }
-
-    public void setColor(Color color) {
-        this.color = color;
-    }
 }

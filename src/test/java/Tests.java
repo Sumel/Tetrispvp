@@ -21,7 +21,7 @@ class Tests {
         //System.out.println(block.getInitialShape().get(0).get(0).getState());
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
-                assertEquals(block.getInitialShape().get(i).get(j).getState(), FieldState.EMPTY);
+                assertEquals(block.getInitialShape().get(i).get(j), FieldState.EMPTY);
             }
         }
     }
@@ -32,7 +32,7 @@ class Tests {
         Block block = manager.generateBlock(BlockType.O);
         for (int i = 2; i < 4; i++) {
             for (int j = 1; j < 3; j++) {
-                assertEquals(block.getInitialShape().get(i).get(j).getBlockType(), BlockType.O);
+                assertEquals(block.getInitialShape().get(i).get(j), BlockType.O);
             }
         }
 

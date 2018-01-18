@@ -13,7 +13,7 @@ import java.util.List;
 
 public class BoardPaneController extends PaneController {
 
-    private static final int BRICK_SIZE = 20;
+    private static final int blockSize = 20;
     @FXML
     public GridPane gamePane1;
     @FXML
@@ -23,10 +23,22 @@ public class BoardPaneController extends PaneController {
 
     @FXML
     private void initialize() {
+
+        gamePane1.setPrefSize(blockSize*10,blockSize*18);
+        gamePane2.setPrefSize(blockSize*10,blockSize*18);
+
         BlockManager manager = new BlockManager();
         addBlockToPane(manager.getRandomBlock());
-        updateGameView(manager.generateBlock(BlockType.O).getInitialShape());
+        //updateGameView(manager.generateBlock(BlockType.O).getInitialShape());
         updateEnemyGameView(manager.generateBlock(BlockType.O).getInitialShape());
+
+        /*TetrisBoard ret = TetrisBoardProvider.getTetrisBoard();
+        ret.addBoardStateChangedListener(new BoardStateChangedListener() {
+            @Override
+            public void stateChanged() {
+                updateGameView(TetrisBoardProvider.getTetrisBoard().getBoardState());
+            }
+        });*/
     }
 
 
@@ -34,9 +46,9 @@ public class BoardPaneController extends PaneController {
         blockPane.getChildren().clear();
         for (int i = 0; i < nextBrick.getInitialShape().size(); i++) {
             for (int j = 0; j < nextBrick.getInitialShape().get(i).size(); j++) {
-                Rectangle rectangle = new Rectangle(BRICK_SIZE, BRICK_SIZE);
+                Rectangle rectangle = new Rectangle(blockSize, blockSize);
                 setRectangle(nextBrick.getInitialShape().get(i).get(j).getColor(), rectangle);
-                if (nextBrick.getInitialShape().get(i).get(j).getBlockType() != null) {
+                if (nextBrick.getInitialShape().get(i).get(j).isOccupied()) {
                     blockPane.add(rectangle, j, i);
                 }
             }
@@ -51,11 +63,11 @@ public class BoardPaneController extends PaneController {
 
 
     private void updateGameView(List<List<GridField>> boardMatrix) {
-
+        gamePane1.getChildren().clear();
         for (int i = 2; i < boardMatrix.size(); i++) {
             for (int j = 0; j < boardMatrix.get(i).size(); j++) {
-                Rectangle rectangle = new Rectangle(BRICK_SIZE, BRICK_SIZE);
-                if (boardMatrix.get(i).get(j).getBlockType() == null)
+                Rectangle rectangle = new Rectangle(blockSize, blockSize);
+                if (!boardMatrix.get(i).get(j).isOccupied())
                     setRectangle(Color.TRANSPARENT, rectangle);
                 else
                     setRectangle(boardMatrix.get(i).get(j).getColor(), rectangle);
@@ -68,8 +80,8 @@ public class BoardPaneController extends PaneController {
 
         for (int i = 2; i < boardMatrix.size(); i++) {
             for (int j = 0; j < boardMatrix.get(i).size(); j++) {
-                Rectangle rectangle = new Rectangle(BRICK_SIZE, BRICK_SIZE);
-                if (boardMatrix.get(i).get(j).getBlockType() == null)
+                Rectangle rectangle = new Rectangle(blockSize, blockSize);
+                if (!boardMatrix.get(i).get(j).isOccupied())
                     setRectangle(Color.TRANSPARENT, rectangle);
                 else
                     setRectangle(boardMatrix.get(i).get(j).getColor(), rectangle);

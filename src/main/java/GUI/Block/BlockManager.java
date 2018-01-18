@@ -25,7 +25,7 @@ public class BlockManager {
         Block block = new Block();
         List<List<GridField>> initialShape = block.getInitialShape();
 
-        switch (type) {
+        /*switch (type) {
             case I:
                 for (int i = 0; i < 4; i++)
                     initialShape.get(2).get(i).setBlock(BlockType.I);
@@ -63,7 +63,7 @@ public class BlockManager {
                 for (int i = 1; i < 3; i++)
                     initialShape.get(3).get(i).setBlock(BlockType.O);
                 break;
-        }
+        }*/
 
         return block;
     }

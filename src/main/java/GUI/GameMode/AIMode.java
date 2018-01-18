@@ -1,8 +1,8 @@
 package GUI.GameMode;
 
 public class AIMode implements GameMode {
-    Mode gameType = Mode.AI;
-    int level;
+    private Mode gameType = Mode.AI;
+    private int level;
 
     public AIMode(int level) {
         this.level = level;

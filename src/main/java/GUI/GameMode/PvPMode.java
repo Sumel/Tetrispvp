@@ -1,11 +1,11 @@
 package GUI.GameMode;
 
 public class PvPMode implements GameMode {
-    Mode gameType = Mode.PVP;
-    String ipA; // A - gracz, który wcisnal klawisz "Host"
-    String ipB; // B - gracz, który wcisnal klawisz "Join"
-    PlayerStatus statusA = PlayerStatus.UNDEFINED;
-    PlayerStatus statusB = PlayerStatus.UNDEFINED;
+    private Mode gameType = Mode.PVP;
+    private String ipA; // A - gracz, który wcisnal klawisz "Host"
+    private String ipB; // B - gracz, który wcisnal klawisz "Join"
+    private PlayerStatus statusA = PlayerStatus.UNDEFINED;
+    private PlayerStatus statusB = PlayerStatus.UNDEFINED;
 
     public PvPMode() {
     }
