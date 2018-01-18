@@ -1,10 +1,10 @@
 package tetrispvp.board;
 
 import com.google.inject.Inject;
-import tetrispvp.board.Mocks.MessageContext;
-import tetrispvp.board.Mocks.MessageHandler;
-import tetrispvp.board.Mocks.MessageReceiver;
-import tetrispvp.board.Mocks.MessageSender;
+import tetrispvp.network.MessageContext;
+import tetrispvp.network.MessageHandler;
+import tetrispvp.network.MessageReceiver;
+import tetrispvp.network.MessageSender;
 
 import java.awt.*;
 import java.util.List;
@@ -34,6 +34,16 @@ public class GreyLinesManager {
                         board.addLine(board.getHeight() - 1, field, true);
                     }
                 }
+            }
+
+            @Override
+            public boolean shouldBeForgotten() {
+                return false;
+            }
+
+            @Override
+            public void wasForgotten() {
+
             }
         });
     }
