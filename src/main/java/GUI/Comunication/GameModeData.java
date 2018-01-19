@@ -28,7 +28,7 @@ public class GameModeData implements Sender {
     @Override
     public void notifyListeners() {
         for (int i = 0; i < listeners.size(); i++) {
-            Listener listener = (Listener)listeners.get(i);
+            Listener listener = (Listener) listeners.get(i);
             listener.update(gameMode);
         }
     }

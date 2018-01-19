@@ -9,5 +9,5 @@ public interface Block {
 
     void rotateCounterClockwise();
 
-    void setPowerUp(int number, int powerUpId);
+    void setPowerUp(int numberOfField, int powerUpId);
 }

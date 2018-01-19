@@ -10,7 +10,7 @@ public class BlockManager {
     public BlockManager() {
         blocks = new HashMap<>();
         for (int i = 0; i < BlockType.values().length; i++) {
-            blocks.put(BlockType.values()[i],new BlockImplementation(BlockType.values()[i]));
+            blocks.put(BlockType.values()[i], new BlockImplementation(BlockType.values()[i]));
         }
     }
 

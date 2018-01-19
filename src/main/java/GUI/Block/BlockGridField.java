@@ -27,10 +27,6 @@ public class BlockGridField implements GridField {
         return powerUpId;
     }
 
-    public void setPowerUpId(int powerUpId) {
-        this.powerUpId = powerUpId;
-    }
-
     @Override
     public boolean isOccupied() {
         return isOccupied;

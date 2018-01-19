@@ -63,14 +63,14 @@ public class BlockImplementation implements Block {
     }
 
     public void setPowerUp(int numberOfField, int powerUpId) {
-        if(numberOfField<4 && numberOfField>=0) {
+        if (numberOfField < 4 && numberOfField >= 0) {
             int[][][] indexes = new TetrominoIndexes().takeIndexes(type);
             for (int i = 0; i < possibleRotations; i++) {
                 int x = indexes[i][numberOfField][0];
                 int y = indexes[i][numberOfField][1];
-                ((BlockGridField) fields[i][x][y]).setPowerUpId(powerUpId);
+                GridField field = fields[i][x][y];
+                fields[i][x][y] = new BlockGridField(field.isOccupied(), field.getColor(), powerUpId);
             }
         }
     }
-
 }
