@@ -6,17 +6,17 @@ import javafx.scene.control.Button;
 
 public class PvpPaneController extends PaneController {
     @FXML
-    public Button HostButton;
+    private Button HostButton;
     @FXML
-    public Button JoinButton;
+    private Button JoinButton;
 
     @FXML
-    public void handleHostAction(ActionEvent actionEvent) {
+    private void handleHostAction(ActionEvent actionEvent) {
         super.guiController.changeScene("WaitingPane");
     }
 
     @FXML
-    public void handleJoinAction(ActionEvent actionEvent) {
+    private void handleJoinAction(ActionEvent actionEvent) {
         super.guiController.changeScene("JoinPane");
     }
 }

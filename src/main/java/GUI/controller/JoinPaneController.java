@@ -7,12 +7,12 @@ import javafx.scene.control.Button;
 
 public class JoinPaneController extends PaneController {
     @FXML
-    public Button AcceptButton;
+    private Button AcceptButton;
     @FXML
-    public Button CancelButton;
+    private Button CancelButton;
 
     @FXML
-    public void handleAcceptAction(ActionEvent actionEvent) {
+    private void handleAcceptAction(ActionEvent actionEvent) {
         if (gameModeData.getMode() == null) {
            gameModeData.setGameMode(new PvPMode());
         }
@@ -26,7 +26,7 @@ public class JoinPaneController extends PaneController {
     }
 
     @FXML
-    public void handleCancelAction(ActionEvent actionEvent) {
+    private void handleCancelAction(ActionEvent actionEvent) {
         super.guiController.changeScene("MenuPane");
     }
 }

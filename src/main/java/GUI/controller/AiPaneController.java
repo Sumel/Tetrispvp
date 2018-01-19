@@ -7,12 +7,12 @@ import javafx.scene.control.Button;
 
 public class AiPaneController extends PaneController {
     @FXML
-    public Button AcceptButton;
+    private Button AcceptButton;
     @FXML
-    public Button CancelButton;
+    private Button CancelButton;
 
     @FXML
-    public void handleAcceptAction(ActionEvent actionEvent) {
+    private void handleAcceptAction(ActionEvent actionEvent) {
         gameModeData.setGameMode(new AIMode(0)); // zamiast "0" podac wybrany poziom trudnosci
         gameModeData.notifyListeners();
         // czekamy odpowiedzi i zmienamy scene na BoardPane
@@ -21,7 +21,7 @@ public class AiPaneController extends PaneController {
     }
 
     @FXML
-    public void handleCancelAction(ActionEvent actionEvent) {
+    private void handleCancelAction(ActionEvent actionEvent) {
         super.guiController.changeScene("MenuPane");
     }
 }

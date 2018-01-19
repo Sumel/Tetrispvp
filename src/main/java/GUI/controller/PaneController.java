@@ -4,14 +4,14 @@ import GUI.Comunication.GameModeData;
 
 public abstract class PaneController {
     protected GuiController guiController;
-    public GameModeData gameModeData= new GameModeData();
+    protected GameModeData gameModeData= new GameModeData();
 
-    public void setGuiController(GuiController guiController) {
+    void setGuiController(GuiController guiController) {
         this.guiController = guiController;
         //gameModeData = new GameModeData();
     }
 
-    public GameModeData getGameModeData() {
+    protected GameModeData getGameModeData() {
         return gameModeData;
     }
 }

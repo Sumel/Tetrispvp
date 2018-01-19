@@ -17,7 +17,6 @@ public class GuiController {
         this.primaryStage=primaryStage;
     }
 
-
     public void initRootLayout() {
         try {
             this.primaryStage.setTitle("Tetris PVP");
@@ -30,7 +29,7 @@ public class GuiController {
 
             // load layout from FXML file
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("/BoardPane.fxml"));
+            loader.setLocation(Main.class.getResource("/MenuPane.fxml"));
             Pane rootLayout = loader.load();
 
             // set initial data into controller
@@ -47,7 +46,7 @@ public class GuiController {
         }
     }
 
-    public void changeScene(String Pane){
+    protected void changeScene(String Pane){
         try {
             // load layout from FXML file
             FXMLLoader loader = new FXMLLoader();

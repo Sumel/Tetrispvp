@@ -12,11 +12,9 @@ public enum BlockType {
     O(Color.YELLOW);
 
     private Color color;
-
     BlockType(Color color) {
         this.color = color;
     }
-
     public Color getColor() {
         return color;
     }

@@ -6,18 +6,17 @@ import javafx.scene.control.Button;
 
 public class MenuController extends PaneController {
     @FXML
-    public Button PlayerButton;
+    private Button PlayerButton;
     @FXML
-    public Button AiButton;
-
+    private Button AiButton;
 
     @FXML
-    public void handlePlayerAction(ActionEvent actionEvent) {
+    private void handlePlayerAction(ActionEvent actionEvent) {
         super.guiController.changeScene("PvpPane");
     }
 
     @FXML
-    public void handleAiAction(ActionEvent actionEvent) {
+    private void handleAiAction(ActionEvent actionEvent) {
         super.guiController.changeScene("AiPane");
     }
 }

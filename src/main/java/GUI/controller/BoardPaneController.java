@@ -12,11 +12,11 @@ public class BoardPaneController extends PaneController {
 
     private static final int blockSize = 23;
     @FXML
-    public GridPane gamePane1;
+    private GridPane gamePane1;
     @FXML
-    public GridPane gamePane2;
+    private GridPane gamePane2;
     @FXML
-    public GridPane blockPane;
+    private GridPane blockPane;
 
     @FXML
     private void initialize() {

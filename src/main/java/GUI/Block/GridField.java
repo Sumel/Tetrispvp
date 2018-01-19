@@ -51,6 +51,4 @@ public interface GridField {
     default boolean hasPowerUp() {
         return getPowerUpID() != -1;
     }
-
-
 }
