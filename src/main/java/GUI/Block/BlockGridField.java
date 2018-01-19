@@ -22,7 +22,7 @@ public class BlockGridField implements GridField {
     public boolean hasPowerUp() {
         return powerUpId != -1;
     }
-
+    @Override
     public int getPowerUpID() {
         return powerUpId;
     }

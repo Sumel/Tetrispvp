@@ -49,7 +49,6 @@ public class BlockImplementation implements Block {
         }
     }
 
-
     private void createTetromino() {
         Color color = type.getColor();
         int[][][] indexes = new TetrominoIndexes().takeIndexes(type);
