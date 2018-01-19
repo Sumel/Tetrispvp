@@ -1,10 +1,12 @@
 package GUI.controller;
 
 import GUI.Main;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 
@@ -19,10 +21,16 @@ public class GuiController {
     public void initRootLayout() {
         try {
             this.primaryStage.setTitle("Tetris PVP");
+            this.primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                @Override
+                public void handle(WindowEvent event) {
+                    System.out.println("close");
+                }
+            });
 
             // load layout from FXML file
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("/MenuPane.fxml"));
+            loader.setLocation(Main.class.getResource("/BoardPane.fxml"));
             Pane rootLayout = loader.load();
 
             // set initial data into controller

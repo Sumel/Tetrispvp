@@ -2,7 +2,7 @@ package GUI.controller;
 
 import GUI.Comunication.GameModeData;
 
-public class PaneController {
+public abstract class PaneController {
     protected GuiController guiController;
     public GameModeData gameModeData= new GameModeData();
 

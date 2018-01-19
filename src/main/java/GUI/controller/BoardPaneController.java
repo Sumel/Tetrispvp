@@ -1,9 +1,6 @@
 package GUI.controller;
 
-import GUI.Block.Block;
-import GUI.Block.BlockManager;
-import GUI.Block.BlockType;
-import GUI.Block.GridField;
+import GUI.Block.*;
 import javafx.fxml.FXML;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
@@ -13,7 +10,7 @@ import java.util.List;
 
 public class BoardPaneController extends PaneController {
 
-    private static final int blockSize = 20;
+    private static final int blockSize = 23;
     @FXML
     public GridPane gamePane1;
     @FXML
@@ -24,13 +21,14 @@ public class BoardPaneController extends PaneController {
     @FXML
     private void initialize() {
 
-        gamePane1.setPrefSize(blockSize*10,blockSize*18);
-        gamePane2.setPrefSize(blockSize*10,blockSize*18);
+        gamePane1.setPrefSize(blockSize * 10, blockSize * 18);
+        gamePane2.setPrefSize(blockSize * 10, blockSize * 18);
 
         BlockManager manager = new BlockManager();
-        addBlockToPane(manager.getRandomBlock());
+        addNextBlockToPane(manager.getRandomBlock());
         //updateGameView(manager.generateBlock(BlockType.O).getInitialShape());
-        updateEnemyGameView(manager.generateBlock(BlockType.O).getInitialShape());
+        BlockImplementation block = new BlockImplementation(BlockType.I);
+        updateEnemyGameView(block.getBoardFields());
 
         /*TetrisBoard ret = TetrisBoardProvider.getTetrisBoard();
         ret.addBoardStateChangedListener(new BoardStateChangedListener() {
@@ -42,17 +40,19 @@ public class BoardPaneController extends PaneController {
     }
 
 
-    private void addBlockToPane(Block nextBrick) {
+    private void addNextBlockToPane(Block nextBlock) {
         blockPane.getChildren().clear();
-        for (int i = 0; i < nextBrick.getInitialShape().size(); i++) {
-            for (int j = 0; j < nextBrick.getInitialShape().get(i).size(); j++) {
+        nextBlock.rotateClockwise();
+        for (int i = 0; i < nextBlock.getBoardFields().size(); i++) {
+            for (int j = 0; j < nextBlock.getBoardFields().get(i).size(); j++) {
                 Rectangle rectangle = new Rectangle(blockSize, blockSize);
-                setRectangle(nextBrick.getInitialShape().get(i).get(j).getColor(), rectangle);
-                if (nextBrick.getInitialShape().get(i).get(j).isOccupied()) {
+                setRectangle(nextBlock.getBoardFields().get(i).get(j).getColor(), rectangle);
+                if (nextBlock.getBoardFields().get(i).get(j).isOccupied()) {
                     blockPane.add(rectangle, j, i);
                 }
             }
         }
+        nextBlock.rotateCounterClockwise();
     }
 
     private void setRectangle(Color color, Rectangle rectangle) {
@@ -77,7 +77,7 @@ public class BoardPaneController extends PaneController {
     }
 
     private void updateEnemyGameView(List<List<GridField>> boardMatrix) {
-
+        gamePane2.getChildren().clear();
         for (int i = 2; i < boardMatrix.size(); i++) {
             for (int j = 0; j < boardMatrix.get(i).size(); j++) {
                 Rectangle rectangle = new Rectangle(blockSize, blockSize);

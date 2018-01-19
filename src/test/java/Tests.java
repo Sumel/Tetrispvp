@@ -1,7 +1,7 @@
-import GUI.Block.Block;
+import GUI.Block.BlockImplementation;
 import GUI.Block.BlockManager;
 import GUI.Block.BlockType;
-import GUI.Block.FieldState;
+import GUI.Block.GridField;
 import GUI.Comunication.GameModeData;
 import GUI.GameMode.AIMode;
 import GUI.GameMode.GameMode;
@@ -9,30 +9,40 @@ import GUI.GameMode.Mode;
 import GUI.GameMode.PvPMode;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 class Tests {
 
     @Test
     void blockTest() {
-        Block block = new Block();
+        BlockImplementation block = new BlockImplementation(BlockType.L);
+        block.setPowerUp(3,3);
+        block.setPowerUp(0,2);
+        block.setPowerUp(1,1);
+        block.setPowerUp(2,0);
         //System.out.println(block.getInitialShape().get(0).get(0).getState());
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 4; j++) {
-                assertEquals(block.getInitialShape().get(i).get(j), FieldState.EMPTY);
+
+        for(int k=0; k<4; k++) {
+            List<List<GridField>> fields = block.getBoardFields();
+            for (int i = 0; i < 4; i++) {
+                for (int j = 0; j < 4; j++) {
+                    System.out.print(fields.get(i).get(j).getPowerUpID() + "\t");
+                }
+                System.out.println();
             }
+            System.out.println();
+            block.rotateClockwise();
         }
     }
 
     @Test
     void blockManagerTest() {
         BlockManager manager = new BlockManager();
-        Block block = manager.generateBlock(BlockType.O);
         for (int i = 2; i < 4; i++) {
             for (int j = 1; j < 3; j++) {
-                assertEquals(block.getInitialShape().get(i).get(j), BlockType.O);
+
             }
         }
 

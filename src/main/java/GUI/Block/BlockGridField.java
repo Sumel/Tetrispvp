@@ -1,82 +1,59 @@
 package GUI.Block;
 
-
 import javafx.scene.paint.Color;
 
-public class BlockGridField implements GridField{
+public class BlockGridField implements GridField {
 
-    private long powerUpId = -1;
-    private FieldState state = FieldState.EMPTY;
-    private BlockType blockType=null;
+    private int powerUpId = -1;
     private Color color;
+    private boolean isOccupied;
+    private boolean isLocked;
 
-    public FieldState getState() {
-        return state;
+    public BlockGridField(boolean isOccupied, Color color) {
+        this.isOccupied = isOccupied;
+        this.color = color;
     }
 
-    public void setState(FieldState state) {
-        this.state = state;
-    }
-
-    long getPowerUp(){
-        return powerUpId;
-    }
-
-    public void setPowerUp(long powerUpId) {
+    public BlockGridField(boolean isOccupied, Color color, int powerUpId) {
+        this(isOccupied, color);
         this.powerUpId = powerUpId;
     }
 
-    public void setBlockType(BlockType blockType) {
-        this.blockType = blockType;
+    public boolean hasPowerUp() {
+        return powerUpId != -1;
     }
 
-    public BlockType getBlockType() {
-        return blockType;
+    public int getPowerUpID() {
+        return powerUpId;
     }
 
-    public void setBlock(BlockType type){
-        this.blockType=type;
-        this.state=FieldState.OCCUPIED;
-        switch (type) {
-            case I:
-                this.color= Color.CYAN;
-                break;
-            case T:
-                this.color= Color.PURPLE;
-                break;
-            case L:
-                this.color= Color.ORANGE;
-                break;
-            case J:
-                this.color= Color.BLUE;
-                break;
-            case S:
-                this.color= Color.GREEN;
-                break;
-            case Z:
-                this.color= Color.RED;
-                break;
-            case O:
-                this.color= Color.YELLOW;
-                break;
-        }
+    public void setPowerUpId(int powerUpId) {
+        this.powerUpId = powerUpId;
     }
 
     @Override
     public boolean isOccupied() {
-        return false;
+        return isOccupied;
     }
 
     @Override
     public boolean isLocked() {
-        return false;
+        return isLocked;
     }
 
     public Color getColor() {
         return color;
     }
 
-    public void setColor(Color color) {
-        this.color = color;
+    @Override
+    public boolean equals(Object object) {
+        if (object == null || !(object instanceof GridField)) {
+            return false;
+        }
+        GridField otherBoardField = (GridField) object;
+        return isOccupied() == otherBoardField.isOccupied() &&
+                isLocked() == otherBoardField.isLocked() &&
+                (getColor() == null && otherBoardField.getColor() == null || getColor().equals(otherBoardField.getColor())) &&
+                getPowerUpID() == otherBoardField.getPowerUpID();
     }
 }

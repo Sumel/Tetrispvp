@@ -17,6 +17,7 @@ public class AiPaneController extends PaneController {
         gameModeData.notifyListeners();
         // czekamy odpowiedzi i zmienamy scene na BoardPane
         // super.guiController.changeScene("BoardPane");
+        super.guiController.changeScene("BoardPane");
     }
 
     @FXML
