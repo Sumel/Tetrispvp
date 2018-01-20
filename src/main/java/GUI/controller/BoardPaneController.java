@@ -73,7 +73,7 @@ public class BoardPaneController extends PaneController {
         }
     }
 
-    private void updateEnemyGameView(List<List<GridField>> boardMatrix) {
+    private void updateEnemyGameView(List<List<tetrispvp.board.GridField>> boardMatrix) {
         gamePane2.getChildren().clear();
         for (int i = 2; i < boardMatrix.size(); i++) {
             for (int j = 0; j < boardMatrix.get(i).size(); j++) {

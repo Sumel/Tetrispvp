@@ -3,7 +3,7 @@ package GUI.Block;
 import java.util.List;
 
 public interface Block {
-    List<List<GridField>> getBoardFields();
+    List<List<tetrispvp.board.GridField>> getBoardFields();
 
     void rotateClockwise();
 

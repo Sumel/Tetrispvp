@@ -1,7 +1,7 @@
 package tetrispvp.board;
 
 
-import java.awt.*;
+import javafx.scene.paint.Color;
 
 public class BoardField implements GridField {
     private boolean isOccupied;

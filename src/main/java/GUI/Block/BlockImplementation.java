@@ -10,7 +10,7 @@ import java.util.List;
 public class BlockImplementation implements Block {
     private static final int boundingBoxSize = 4;
     private static final int possibleRotations = 4;
-    private GridField[][][] fields;
+    private tetrispvp.board.GridField[][][] fields;
     private int currentRotation = 0;
     private BlockType type;
 
@@ -21,9 +21,9 @@ public class BlockImplementation implements Block {
     }
 
     @Override
-    public List<List<GridField>> getBoardFields() {
-        List<List<GridField>> out = new ArrayList<>();
-        for (GridField[] col : fields[currentRotation]) {
+    public List<List<tetrispvp.board.GridField>> getBoardFields() {
+        List<List<tetrispvp.board.GridField>> out = new ArrayList<>();
+        for (tetrispvp.board.GridField[] col : fields[currentRotation]) {
             out.add(Collections.unmodifiableList(Arrays.asList(col)));
         }
         return Collections.unmodifiableList(out);
@@ -42,8 +42,8 @@ public class BlockImplementation implements Block {
     private void fillWithEmpty() {
         BlockGridField emptyField = new BlockGridField(false, Color.BLACK, -1);
         fields = new BlockGridField[possibleRotations][boundingBoxSize][boundingBoxSize];
-        for (GridField[][] mtx : fields) {
-            for (GridField[] row : mtx) {
+        for (tetrispvp.board.GridField[][] mtx : fields) {
+            for (tetrispvp.board.GridField[] row : mtx) {
                 Arrays.fill(row, emptyField);
             }
         }
@@ -67,7 +67,7 @@ public class BlockImplementation implements Block {
             for (int i = 0; i < possibleRotations; i++) {
                 int x = indexes[i][numberOfField][0];
                 int y = indexes[i][numberOfField][1];
-                GridField field = fields[i][x][y];
+                tetrispvp.board.GridField field = fields[i][x][y];
                 fields[i][x][y] = new BlockGridField(field.isOccupied(), field.getColor(), powerUpId);
             }
         }

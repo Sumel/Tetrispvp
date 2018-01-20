@@ -2,7 +2,7 @@ package GUI.Block;
 
 import javafx.scene.paint.Color;
 
-public class BlockGridField implements GridField {
+public class BlockGridField implements tetrispvp.board.GridField {
 
     private int powerUpId = -1;
     private Color color;

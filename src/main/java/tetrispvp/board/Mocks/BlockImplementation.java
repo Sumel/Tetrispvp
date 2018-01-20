@@ -7,7 +7,7 @@ import java.awt.*;
 import java.util.*;
 import java.util.List;
 
-public class BlockImplementation implements Block {
+public class BlockImplementation implements GUI.Block.Block {
 
     private static final int boundingBoxSize = 4;
     private static final int possibleRotations = 4;
@@ -24,12 +24,6 @@ public class BlockImplementation implements Block {
                 throw new NotImplementedException();
 
         }
-    }
-
-
-    @Override
-    public GridField getFieldAtPosition(int x, int y) {
-        return fields[currentRotation][x][y];
     }
 
     @Override
@@ -49,6 +43,11 @@ public class BlockImplementation implements Block {
     @Override
     public void rotateCounterClockwise() {
         currentRotation = (currentRotation - 1 + possibleRotations) % possibleRotations;
+    }
+
+    @Override
+    public void setPowerUp(int numberOfField, int powerUpId) {
+        //do nothing
     }
 
     private void fillWithEmpty() {

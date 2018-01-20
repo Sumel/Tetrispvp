@@ -2,7 +2,7 @@ package tetrispvp.board.Mocks;
 
 import tetrispvp.board.GridField;
 
-import java.awt.*;
+import javafx.scene.paint.Color;
 import java.util.Optional;
 
 public class BlockField implements GridField {
