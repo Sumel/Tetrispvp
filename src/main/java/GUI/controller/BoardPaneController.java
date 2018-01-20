@@ -20,7 +20,6 @@ public class BoardPaneController extends PaneController {
 
     @FXML
     private void initialize() {
-
         gamePane1.setPrefSize(blockSize * 10, blockSize * 18);
         gamePane2.setPrefSize(blockSize * 10, blockSize * 18);
 
@@ -38,7 +37,6 @@ public class BoardPaneController extends PaneController {
             }
         });*/
     }
-
 
     private void addNextBlockToPane(Block nextBlock) {
         blockPane.getChildren().clear();
@@ -60,7 +58,6 @@ public class BoardPaneController extends PaneController {
         rectangle.setArcHeight(9);
         rectangle.setArcWidth(9);
     }
-
 
     private void updateGameView(List<List<GridField>> boardMatrix) {
         gamePane1.getChildren().clear();

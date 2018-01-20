@@ -3,8 +3,7 @@
 }
 
 #pane {
-
-    -fx-background-image: url("./sky.jpg");
+    -fx-background-image: url("./gray.jpg");
     -fx-background-color: transparent;
     -fx-background-repeat: stretch;
     -fx-background-size: 1024 600;
@@ -18,15 +17,15 @@
     -fx-text-alignment: CENTER;
     -fx-font-size: 70;
     -fx-text-fill: red;
-    -fx-fill: linear-gradient(from 0% 0% to 100% 50%, repeat, cyan 0%, blue 14%, orange 29%, yellow 43%, green 57%, purple 86%, red 100%);
+    -fx-fill: linear-gradient(from 0% 0% to 100% 100%, repeat, cyan 0%, blue 14%, orange 29%, yellow 43%, green 57%, purple 86%, red 100%);
 }
 
 #ChoseText {
-     -fx-font-family: "Joystix Monospace";
-     -fx-text-alignment: CENTER;
-     -fx-font-size: 35;
-     -fx-fill: gold;
- }
+    -fx-font-family: "Joystix Monospace";
+    -fx-text-alignment: CENTER;
+    -fx-font-size: 35;
+    -fx-fill: gold;
+}
 
 #IpAddress {
     -fx-font-family: "Joystix Monospace";
@@ -39,13 +38,13 @@
     -fx-font-family: "Joystix Monospace";
     -fx-text-alignment: CENTER;
     -fx-font-size: 15;
-    -fx-fill: black;
+    -fx-fill: gold;
 }
 
 .button {
-    -fx-background-color: linear-gradient(#ef2a24, #c155b4),
-    linear-gradient(#ef2a24, #c155b4),
-    linear-gradient(skyblue, blue, skyblue);
+    -fx-background-color: linear-gradient(black, black),
+    linear-gradient(black, black),
+    linear-gradient(silver 0%, dimgray 50%, silver 100%);
     -fx-background-insets: 0, 1, 4, 5, 6;
     -fx-background-radius: 9, 8, 5, 4, 3;
     -fx-padding: 8;
@@ -58,13 +57,17 @@
 }
 
 .button:hover {
-    -fx-text-fill: #00d800;
+    -fx-text-fill: yellowgreen;
+    -fx-background-color: linear-gradient(black, black),
+    linear-gradient(black, black),
+    linear-gradient(#9dc094 0%, dimgray 50%, #9dc094 100%);
 }
 
 .button:pressed {
-    -fx-background-color: linear-gradient(#00D800, #008c00),
-    linear-gradient(#00D800, #008c00),
-    linear-gradient(skyblue, blue, skyblue);
+    -fx-text-fill: darkgreen;
+    -fx-background-color: linear-gradient(black, black),
+    linear-gradient(black, black),
+    linear-gradient(#c09293 0%, dimgray 50%, #c09293 100%);
 }
 
 .text-field {
@@ -83,12 +86,11 @@
     -fx-border-color: linear-gradient(#ef2a24, #c155b4);
     -fx-border-width: 6px;
     -fx-border-radius: 2px;
-   /* -fx-background-color: linear-gradient(transparent 0%,whitesmoke 2%, #000000 98%,
-transparent 100%);*/
-    -fx-background-color:linear-gradient(transparent 0%,black 2%, black 98%,
+    /* -fx-background-color: linear-gradient(transparent 0%,whitesmoke 2%, #000000 98%,
+ transparent 100%);*/
+    -fx-background-color: linear-gradient(transparent 0%, black 2%, black 98%,
     transparent 100%);
 }
-
 
 #Dot {
     -fx-font-family: "Joystix Monospace";
