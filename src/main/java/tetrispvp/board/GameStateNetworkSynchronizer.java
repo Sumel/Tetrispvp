@@ -2,7 +2,7 @@ package tetrispvp.board;
 
 
 import com.google.inject.Inject;
-import tetrispvp.board.Mocks.Block;
+import GUI.Block.Block;
 import tetrispvp.network.MessageContext;
 import tetrispvp.network.MessageHandler;
 import tetrispvp.network.MessageReceiver;

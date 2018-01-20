@@ -6,7 +6,7 @@ import tetrispvp.network.MessageHandler;
 import tetrispvp.network.MessageReceiver;
 import tetrispvp.network.MessageSender;
 
-import java.awt.*;
+import javafx.scene.paint.Color;
 import java.util.List;
 
 public class GreyLinesManager {
@@ -29,7 +29,7 @@ public class GreyLinesManager {
             @Override
             public void arrived(String messageName, Object with, MessageContext within) {
                 if (messageName.equals("linesCleared")) {
-                    BoardField field = new BoardField(true, true, Color.gray, -1, false);
+                    BoardField field = new BoardField(true, true, Color.GRAY, -1, false);
                     for (int i = 0; i < (Integer) with; ++i) {
                         board.addLine(board.getHeight() - 1, field, true);
                     }

@@ -1,10 +1,11 @@
 package tetrispvp.board;
 
 import org.junit.Test;
-import tetrispvp.board.Mocks.Block;
+import GUI.Block.Block;
 import tetrispvp.board.Mocks.BlockImplementation;
 
-import java.awt.*;
+import java.awt.Point;
+import javafx.scene.paint.Color;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,7 +48,7 @@ public class NormalCollisionCheckerTest {
     @Test
     public void collidesTopLeftCorner() throws Exception {
         List<List<GridField>> boardState = TestingUtils.getEmptyBoard();
-        BoardField boardField = new BoardField(true, true, Color.red, -1);
+        BoardField boardField = new BoardField(true, true, Color.RED, -1);
         boardState.get(0).set(0, boardField);
 
         Board board = TestingUtils.setUpMockBoardSize();

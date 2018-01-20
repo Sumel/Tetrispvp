@@ -1,9 +1,10 @@
 package tetrispvp.board;
 
 import java.awt.*;
+import GUI.Block.Block;
 
 public interface BlockMover {
-    void spawnNewBlock(tetrispvp.board.Mocks.Block newBlock);
+    void spawnNewBlock(Block newBlock);
 
     void changePosition(Point point);
 

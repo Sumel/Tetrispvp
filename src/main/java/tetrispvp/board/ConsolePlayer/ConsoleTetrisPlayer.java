@@ -5,7 +5,8 @@ import tetrispvp.board.*;
 import tetrispvp.board.Mocks.BlockImplementation;
 import tetrispvp.network.NetworkModuleFactory;
 
-import java.awt.*;
+import java.awt.Point;
+import javafx.scene.paint.Color;
 import java.util.List;
 import java.util.Scanner;
 
@@ -60,7 +61,7 @@ public class ConsoleTetrisPlayer {
         } else if (input.equals("f") || input.toLowerCase().equals("flip")) {
             board.flipBoard();
         } else if (input.equals("add")) {
-            BoardField field = new BoardField(true, true, Color.gray, -1, false);
+            BoardField field = new BoardField(true, true, Color.GRAY, -1, false);
             board.addLine(board.getHeight() - 1, field, true);
         } else {
             return false;

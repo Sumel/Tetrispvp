@@ -6,6 +6,7 @@ import tetrispvp.board.GridField;
 import java.awt.*;
 import java.util.*;
 import java.util.List;
+import javafx.scene.paint.Color;
 
 public class BlockImplementation implements GUI.Block.Block {
 
@@ -51,7 +52,7 @@ public class BlockImplementation implements GUI.Block.Block {
     }
 
     private void fillWithEmpty() {
-        BlockField emptyField = new BlockField(false, Color.black, -1);
+        BlockField emptyField = new BlockField(false, Color.BLACK, -1);
         fields = new BlockField[possibleRotations][boundingBoxSize][boundingBoxSize];
         for (GridField[][] mtx : fields) {
             for (GridField[] row : mtx) {
@@ -61,7 +62,7 @@ public class BlockImplementation implements GUI.Block.Block {
     }
 
     private void createTetrominoI() {
-        Color color = Color.cyan;
+        Color color = Color.AQUA;
         BlockField block = new BlockField(true, color, -1);
         int[][][] indexes =
                 {

@@ -24,7 +24,7 @@ class Tests {
         //System.out.println(block.getInitialShape().get(0).get(0).getState());
         Block block1 = block;
         for(int k=0; k<4; k++) {
-            List<List<GridField>> fields = block1.getBoardFields();
+            List<List<tetrispvp.board.GridField>> fields = block1.getBoardFields();
             for (int i = 0; i < 4; i++) {
                 for (int j = 0; j < 4; j++) {
                     System.out.print(fields.get(i).get(j).getPowerUpID() + "\t");

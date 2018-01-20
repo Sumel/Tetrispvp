@@ -1,7 +1,7 @@
 package tetrispvp.board;
 
 
-import tetrispvp.board.Mocks.Block;
+import GUI.Block.Block;
 
 import java.awt.*;
 import java.util.*;

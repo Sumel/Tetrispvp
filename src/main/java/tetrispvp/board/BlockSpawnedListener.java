@@ -1,6 +1,6 @@
 package tetrispvp.board;
 
-import tetrispvp.board.Mocks.Block;
+import GUI.Block.Block;
 
 public interface BlockSpawnedListener {
     void blockSpawned(Block block);

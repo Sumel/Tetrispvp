@@ -6,12 +6,13 @@ import org.mockito.*;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.mockito.stubbing.Answer;
-import tetrispvp.board.Mocks.Block;
+import GUI.Block.Block;
 import tetrispvp.board.Mocks.BlockField;
 import tetrispvp.board.Mocks.BlockImplementation;
 import org.mockito.internal.util.reflection.Whitebox;
 
-import java.awt.*;
+import javafx.scene.paint.Color;
+import java.awt.Point;
 import java.util.*;
 import java.util.List;
 
@@ -56,7 +57,7 @@ public class DTETBlockMoverTest {
         ArgumentCaptor<List> argCaptor = ArgumentCaptor.forClass(List.class);
         Mockito.verify(board).setFields(argCaptor.capture());
         List<GridFieldWithPosition> capturedArguments = argCaptor.<List<GridFieldWithPosition>>getValue();
-        GridField blockField = new BlockField(true, Color.cyan, -1);
+        GridField blockField = new BlockField(true, Color.AQUA, -1);
         GridFieldWithPosition[] expectedResult = {
                 new GridFieldWithPosition(5, 6, BoardField.GetEmptyBoardField()),
                 new GridFieldWithPosition(6, 6, blockField),
@@ -98,7 +99,7 @@ public class DTETBlockMoverTest {
         ArgumentCaptor<List> argCaptor = ArgumentCaptor.forClass(List.class);
         Mockito.verify(board).setFields(argCaptor.capture());
         List<GridFieldWithPosition> capturedArguments = argCaptor.<List<GridFieldWithPosition>>getValue();
-        GridField blockField = new BlockField(true, Color.cyan, -1);
+        GridField blockField = new BlockField(true, Color.AQUA, -1);
         GridFieldWithPosition[] expectedResult = {
                 new GridFieldWithPosition(5, 6, BoardField.GetEmptyBoardField()),
                 new GridFieldWithPosition(6, 6, BoardField.GetEmptyBoardField()),
@@ -142,7 +143,7 @@ public class DTETBlockMoverTest {
         ArgumentCaptor<List> argCaptor = ArgumentCaptor.forClass(List.class);
         Mockito.verify(board).setFields(argCaptor.capture());
         List<GridFieldWithPosition> capturedArguments = argCaptor.<List<GridFieldWithPosition>>getValue();
-        GridField blockField = new BlockField(true, Color.cyan, -1);
+        GridField blockField = new BlockField(true, Color.AQUA, -1);
         GridFieldWithPosition[] expectedResult = {
                 new GridFieldWithPosition(5, 6, BoardField.GetEmptyBoardField()),
                 new GridFieldWithPosition(6, 6, BoardField.GetEmptyBoardField()),
@@ -187,7 +188,7 @@ public class DTETBlockMoverTest {
         ArgumentCaptor<List> argCaptor = ArgumentCaptor.forClass(List.class);
         Mockito.verify(board).setFields(argCaptor.capture());
         List<GridFieldWithPosition> capturedArguments = argCaptor.<List<GridFieldWithPosition>>getValue();
-        GridField blockField = new BlockField(true, Color.cyan, -1);
+        GridField blockField = new BlockField(true, Color.AQUA, -1);
         GridFieldWithPosition[] expectedResult = {
                 new GridFieldWithPosition(5, 6, BoardField.GetEmptyBoardField()),
                 new GridFieldWithPosition(6, 6, BoardField.GetEmptyBoardField()),
@@ -231,7 +232,7 @@ public class DTETBlockMoverTest {
         ArgumentCaptor<List> argCaptor = ArgumentCaptor.forClass(List.class);
         Mockito.verify(board).setFields(argCaptor.capture());
         List<GridFieldWithPosition> capturedArguments = argCaptor.<List<GridFieldWithPosition>>getValue();
-        GridField blockField = new BlockField(true, Color.cyan, -1);
+        GridField blockField = new BlockField(true, Color.AQUA, -1);
         GridFieldWithPosition[] expectedResult = {
                 new GridFieldWithPosition(5, 6, BoardField.GetEmptyBoardField()),
                 new GridFieldWithPosition(6, 6, BoardField.GetEmptyBoardField()),
@@ -274,7 +275,7 @@ public class DTETBlockMoverTest {
         ArgumentCaptor<List> argCaptor = ArgumentCaptor.forClass(List.class);
         Mockito.verify(board).setFields(argCaptor.capture());
         List<GridFieldWithPosition> capturedArguments = argCaptor.<List<GridFieldWithPosition>>getValue();
-        GridField blockField = new BlockField(true, Color.cyan, -1);
+        GridField blockField = new BlockField(true, Color.AQUA, -1);
         GridFieldWithPosition[] expectedResult = {
                 new GridFieldWithPosition(5, 6, BoardField.GetEmptyBoardField()),
                 new GridFieldWithPosition(7, 6, BoardField.GetEmptyBoardField()),
@@ -326,7 +327,7 @@ public class DTETBlockMoverTest {
         ArgumentCaptor<List> argCaptor = ArgumentCaptor.forClass(List.class);
         Mockito.verify(board).setFields(argCaptor.capture());
         List<GridFieldWithPosition> capturedArguments = argCaptor.<List<GridFieldWithPosition>>getValue();
-        GridField blockField = new BlockField(true, Color.cyan, -1);
+        GridField blockField = new BlockField(true, Color.AQUA, -1);
         GridFieldWithPosition[] expectedResult = {
                 new GridFieldWithPosition(5, 6, BoardField.GetEmptyBoardField()),
                 new GridFieldWithPosition(6, 6, BoardField.GetEmptyBoardField()),

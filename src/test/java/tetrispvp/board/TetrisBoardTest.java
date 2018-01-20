@@ -2,9 +2,9 @@ package tetrispvp.board;
 
 import org.junit.Test;
 import org.mockito.internal.util.reflection.Whitebox;
-import tetrispvp.board.Mocks.Block;
+import GUI.Block.Block;
 
-import java.awt.*;
+import javafx.scene.paint.Color;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -107,7 +107,7 @@ public class TetrisBoardTest {
 
     private List<List<GridField>> setUpBoardForFlip() {
         List<List<GridField>> ret = TestingUtils.getEmptyBoard();
-        BoardField field = new BoardField(true, true, Color.black, -1);
+        BoardField field = new BoardField(true, true, Color.BLACK, -1);
         ret.get(19).set(4, field);
         ret.get(18).set(4, field);
         ret.get(17).set(4, field);
@@ -128,7 +128,7 @@ public class TetrisBoardTest {
                         row == 19 && col == 4 ||
                         row == 18 && col == 4 ||
                         row == 17 && col == 4) {
-                    assertEquals(board.getFieldAtPosition(col, row), new BoardField(true, true, Color.black, -1));
+                    assertEquals(board.getFieldAtPosition(col, row), new BoardField(true, true, Color.BLACK, -1));
                 }
                 else {
                     assertEquals(board.getFieldAtPosition(col, row), BoardField.GetEmptyBoardField());
