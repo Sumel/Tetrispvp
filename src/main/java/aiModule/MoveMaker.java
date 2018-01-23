@@ -1,12 +1,12 @@
 package aiModule;
 
 import aiModule.mocks.AIBoardMock;
+import aiModule.mocks.Tetromino;
 
-import java.io.Serializable;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
-public class MoveMaker implements Runnable, IMoveMaker, Serializable {
+public class MoveMaker implements Runnable, IMoveMaker {
 
     private final static Coefficients defaultCoefficients =
             new Coefficients(-.5, 0.5, -0.5, -0.5);
@@ -15,11 +15,14 @@ public class MoveMaker implements Runnable, IMoveMaker, Serializable {
     private boolean stopFlag = false;
 
     private boolean isBestMove;
+    private boolean isBestMoveisFinded = false;
+    private Tetromino tetromino;
     private MoveInformation currentMove;
 
 
-    MoveMaker(AIBoardMock mainAIBoardMock, double difficultLevel) {
+    MoveMaker(AIBoardMock mainAIBoardMock, double difficultLevel, Tetromino tetromino) {
         this.mainAIBoardMock = mainAIBoardMock;
+        this.tetromino = tetromino;
         mainAIBoardMock.addListener(this);
         choseTypeOfMove(difficultLevel);
     }
@@ -38,10 +41,11 @@ public class MoveMaker implements Runnable, IMoveMaker, Serializable {
     public void run() {
         while (!this.stopFlag) {
             try {
-                TimeUnit.MILLISECONDS.sleep(1000); //should be bigger value
-                if (this.isBestMove) {
+                TimeUnit.MILLISECONDS.sleep(1000);
+                if (this.isBestMove && !this.isBestMoveisFinded) {
                     try {
                         findBestMove();
+                        this.isBestMoveisFinded = true;
                     }catch (IndexOutOfBoundsException e){
 
                     }
@@ -93,7 +97,7 @@ public class MoveMaker implements Runnable, IMoveMaker, Serializable {
 
     private void makeMove() {
         if (this.currentMove.rotation != 0) {
-            this.mainAIBoardMock.rotate();
+            this.mainAIBoardMock.rotateClockwise();
         } else if (this.currentMove.position < 0) {
             this.mainAIBoardMock.moveLeft();
         } else if (this.currentMove.position > 0) {

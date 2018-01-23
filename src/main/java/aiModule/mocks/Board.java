@@ -15,12 +15,12 @@ public interface Board {
 
     boolean moveDown();
 
-    boolean rotate();
+    boolean rotateClockwise();
 
     boolean moveLeft();
 
     boolean moveRight();
 
-    void totalMoveDown();
+    void moveToBottom();
 
 }

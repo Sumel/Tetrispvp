@@ -15,7 +15,7 @@ public class Controller {
         Tetromino t = new Tetromino();
         this.AIBoardMock.insertTetromino(t);
         printBoard();
-        this.aiController.notifyNextTetromino();
+        this.aiController.notifyNextTetromino(t);
     }
 
     public void printBoard(){
