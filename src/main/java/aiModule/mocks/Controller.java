@@ -1,26 +1,24 @@
 package aiModule.mocks;
 
 import aiModule.AIController;
-import aiModule.BoardStatus;
 
 public class Controller {
     private AIController aiController;
-    private aiModule.mocks.AIBoard AIBoard;
+    private AIBoardMock AIBoardMock;
 
     public Controller(){
-        this.AIBoard = new AIBoard();
-        this.aiController = new AIController(1, this.AIBoard);
+        this.AIBoardMock = new AIBoardMock();
+        this.aiController = new AIController(1, this.AIBoardMock);
     }
 
     public void nextTetromino(){
         Tetromino t = new Tetromino();
-        this.AIBoard.insertTetromino(t);
+        this.AIBoardMock.insertTetromino(t);
         printBoard();
         this.aiController.notifyNextTetromino();
     }
 
     public void printBoard(){
-        BoardStatus bs = new BoardStatus(AIBoard.getBoardState());
-        System.out.println(bs);
+        System.out.println(this.AIBoardMock);
     }
 }

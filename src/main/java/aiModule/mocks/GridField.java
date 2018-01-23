@@ -1,8 +1,6 @@
 package aiModule.mocks;
 
-import java.io.Serializable;
-
-public class GridField implements Serializable{
+public class GridField {
     public boolean isTempOccupied() {
         return this.isTempOccupied;
     }

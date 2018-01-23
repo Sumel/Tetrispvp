@@ -19,8 +19,7 @@ public class Score {
 
     private double value;
 
-    public Score(BoardStatus originalBoardStatus, Coefficients coefficients) {
-        this.totalGridFields = countGridFields(originalBoardStatus);
+    public Score(Coefficients coefficients) {
         this.coefficients = coefficients;
     }
 
@@ -28,35 +27,13 @@ public class Score {
         this.value = value;
     }
 
-    static int countGridFields(BoardStatus originalBoardStatus) {
-        int total = 0;
-        for (List<GridField> line : originalBoardStatus.value) {
-            for (GridField gridField : line) {
-                if (gridField.isOccupied()) {
-                    total += 1;
-                }
-            }
-        }
-        return total;
-    }
-
     public void compareWithNewBoard(BoardStatus newBoardStatus) {
-        this.deletedLines = getDeletedLines(newBoardStatus);
+        this.deletedLines = newBoardStatus.getCompleteLines();
         this.holes = newBoardStatus.getHoles();
         this.bumpiness = newBoardStatus.getBumpiness();
         this.height = newBoardStatus.getAggregateHeight();
 
         this.value = getValue();
-    }
-
-    public int getDeletedLines(BoardStatus boardStatus) {
-        int newTotalGridFields = countGridFields(boardStatus);
-        int deletedLines = 0;
-        if (newTotalGridFields < this.totalGridFields) {
-            deletedLines = this.totalGridFields - newTotalGridFields;
-            deletedLines /= 10;
-        }
-        return deletedLines;
     }
 
     public double getValue() {
