@@ -97,6 +97,11 @@ public class TetrisBoard implements BlockMover, MutableBoard, GameStateTracker {
     }
 
     @Override
+    public void removeBlockCollidedBelowListener(BlockCollidedBelowListener listenerToRemove) {
+        blockMover.removeBlockCollidedBelowListener(listenerToRemove);
+    }
+
+    @Override
     public void addBlockSpawnedListener(BlockSpawnedListener newListener) {
         blockMover.addBlockSpawnedListener(newListener);
     }

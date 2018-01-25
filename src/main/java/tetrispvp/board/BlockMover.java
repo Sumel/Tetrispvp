@@ -26,5 +26,7 @@ public interface BlockMover {
 
     void addBlockCollidedBelowListener(BlockCollidedBelowListener newListener);
 
+    void removeBlockCollidedBelowListener(BlockCollidedBelowListener listenerToRemove);
+
     void addBlockSpawnedListener(BlockSpawnedListener newListener);
 }

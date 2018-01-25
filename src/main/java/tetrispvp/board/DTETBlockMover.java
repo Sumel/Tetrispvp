@@ -267,6 +267,11 @@ class DTETBlockMover implements BlockMover {
     }
 
     @Override
+    public void removeBlockCollidedBelowListener(BlockCollidedBelowListener listenerToRemove) {
+        blockCollidedBelowListeners.remove(listenerToRemove);
+    }
+
+    @Override
     public void addBlockSpawnedListener(BlockSpawnedListener newListener) {
         blockSpawnedListeners.add(newListener);
     }
