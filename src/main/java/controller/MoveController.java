@@ -1,6 +1,7 @@
 package controller;
 
-import controller.mocks.TetrisBoard;
+
+import tetrispvp.board.TetrisBoard;
 
 public class MoveController implements IMoveController {
 
@@ -31,13 +32,13 @@ public class MoveController implements IMoveController {
 
     @Override
     public void fall() {
-        board.fall();
+        board.moveToBottom();
         tetrisTimer.reset();
     }
 
     @Override
     public void rotate() {
-        board.rotate();
+        board.rotateClockwise();
     }
 
 }

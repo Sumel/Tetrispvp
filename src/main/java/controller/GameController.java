@@ -1,13 +1,17 @@
 package controller;
 
-import controller.mocks.*;
+import GUI.Block.Block;
+import GUI.controller.GuiController;
+import controller.mocks.AIController;
+import controller.mocks.Network;
+import tetrispvp.board.TetrisBoard;
+import tetrispvp.board.TetrisBoardProvider;
 
-
-public class GameController implements BlockSpawnedListener {
+public class GameController {
 
     private Mode gameMode;
     private final Network network;
-    private final GUIController visualisation;
+    private final GuiController visualisation;
     private final TetrisBoard tetrisBoard;
     private final PowerUpBlockProvider blockProvider;
 
@@ -15,15 +19,15 @@ public class GameController implements BlockSpawnedListener {
     private AIController AIController;
 
 
-    public GameController(GUIController guiController) {
+    public GameController(GuiController guiController) {
         this.network = new Network();
-        this.tetrisBoard = new TetrisBoard();
+        this.tetrisBoard = TetrisBoardProvider.getTetrisBoard();
         this.blockProvider = PowerUpBlockProvider.getPowerUpBlockProvider();
         this.visualisation = guiController;
     }
 
     private void initGame() {
-        this.tetrisBoard.addBlockSpawnedListener(this);
+//        this.tetrisBoard.addBlockSpawnedListener(this);
         this.visualisation.setKeyPressedHandler(humanController.getEventHandler());
 
         switch (gameMode) {
@@ -41,7 +45,7 @@ public class GameController implements BlockSpawnedListener {
     }
 
     /* integration with board */
-    @Override
+//    @Override
     public void blockSpawned() {
         Block block = blockProvider.getBlockWithPowerUp();
         tetrisBoard.spawnNewBlock(block);
@@ -49,7 +53,7 @@ public class GameController implements BlockSpawnedListener {
     }
 
 
-    /* integration with GUIController */
+    /* integration with GuiController */
 
     public void setGameMode(Mode mode) {
         this.gameMode = mode;
@@ -84,7 +88,7 @@ public class GameController implements BlockSpawnedListener {
     /* integration with AI */
 
     private void initialiseAI(double difficultyLevel) {
-        this.AIController = new AIController(new MoveController(tetrisBoard, new TetrisTimer(1000)), tetrisBoard, difficultyLevel);
+//        this.AIController = new AIController(new MoveController(tetrisBoard, new TetrisTimer(1000)), tetrisBoard, difficultyLevel);
     }
 
 }

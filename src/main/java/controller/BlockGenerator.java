@@ -1,7 +1,7 @@
 package controller;
 
-import controller.mocks.Block;
-import controller.mocks.BlockManager;
+import GUI.Block.Block;
+import GUI.Block.BlockManager;
 
 import java.util.LinkedList;
 
@@ -14,7 +14,7 @@ public class BlockGenerator {
     private final int blockQueueSize = 20;
 
     private BlockGenerator() {
-        blockManager = BlockManager.getBlockManager();
+        blockManager = BlockManager.getInstance();
         blockQueue = new LinkedList<>();
 
         for (int i = 0; i < blockQueueSize; i++) {

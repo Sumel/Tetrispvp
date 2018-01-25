@@ -1,6 +1,6 @@
 package controller;
 
-import controller.mocks.Block;
+import GUI.Block.Block;
 
 public class PowerUpBlockProvider {
 
