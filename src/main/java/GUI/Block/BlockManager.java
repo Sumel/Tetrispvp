@@ -25,4 +25,8 @@ public class BlockManager {
         int i = generator.nextInt(BlockType.values().length - 1);
         return blocks.get(BlockType.values()[i]);
     }
+
+    public Block getStraightBlock(){
+        return blocks.get(BlockType.I);
+    }
 }

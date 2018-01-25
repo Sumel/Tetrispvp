@@ -1,6 +1,7 @@
 package GUI.controller;
 
 import GUI.GameMode.PvPMode;
+import controller.Mode;
 import javafx.animation.Animation;
 import javafx.animation.Timeline;
 import javafx.animation.Transition;
@@ -34,6 +35,10 @@ public class WaitingController extends PaneController {
         gameModeData.gameModeChanged(); // tutaj informujemy, ze gracz wybral PvP Mode
         // czekamy odpowiedzi... mamy podtwirdzenie... zamieniamy scene na BoardPane
         // super.guiController.changeScene("BoardPane");
+
+        guiController.gameController.setGameMode(Mode.PVP_HOST);
+        //guiController.gameController.setAIDifficulty(AILevel.getValue()/100);
+        guiController.gameController.startGame();
     }
 
     private void setLoader() throws Exception {

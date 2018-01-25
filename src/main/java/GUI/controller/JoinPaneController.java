@@ -1,6 +1,7 @@
 package GUI.controller;
 
 import GUI.GameMode.PvPMode;
+import controller.Mode;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -26,6 +27,10 @@ public class JoinPaneController extends PaneController {
         gameModeData.gameModeChanged(); // tutaj informujemy, ze gracz wybral PvP Mode
         // czekamy odpowiedzi... mamy podtwirdzenie... zamieniamy scene na BoardPane
         // super.guiController.changeScene("BoardPane");
+
+        guiController.gameController.setGameMode(Mode.PVP_JOIN);
+        guiController.gameController.setIP(ipAddress.getText());
+        guiController.gameController.startGame();
     }
 
     @FXML

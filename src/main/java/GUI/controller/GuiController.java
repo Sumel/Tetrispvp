@@ -2,6 +2,7 @@ package GUI.controller;
 
 import GUI.Block.Block;
 import GUI.Main;
+import controller.GameController;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -20,6 +21,7 @@ public class GuiController implements IGuiController {
     private EventHandler<KeyEvent> keyEvent = null;
     private Scene currentScene = null;
     private PaneController controller;
+    protected GameController gameController;
 
     public GuiController(Stage primaryStage) {
         if (NetworkModuleFactory.last() == null) {
@@ -28,6 +30,10 @@ public class GuiController implements IGuiController {
         this.network=NetworkModuleFactory.last();
         this.primaryStage = primaryStage;
         this.initRootLayout();
+    }
+
+    public void setController(GameController controller){
+        this.gameController=controller;
     }
 
     private void initRootLayout() {
