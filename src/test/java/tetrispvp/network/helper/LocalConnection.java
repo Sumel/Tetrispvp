@@ -1,56 +1,62 @@
 package tetrispvp.network.helper;
 
 import tetrispvp.network.detail.Connection;
+import tetrispvp.network.detail.ConnectionFactory;
+import tetrispvp.network.detail.LocalEndpoint;
+import tetrispvp.network.detail.socket.SocketConnectionProvider;
 
 import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Queue;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.SynchronousQueue;
 
 public class LocalConnection implements Connection {
     private final Queue<Object> nearEndMQ;
     private final Queue<Object> farEndMQ;
+    private String address;
 
     private LocalConnection(Queue<Object> nearEndMQ, Queue<Object> farEndMQ) {
         this.nearEndMQ = nearEndMQ;
         this.farEndMQ = farEndMQ;
     }
 
-    public LocalConnection() {
-        this.nearEndMQ = new ArrayDeque<>();
-        this.farEndMQ = new ArrayDeque<>();
+    public LocalConnection(LocalEndpoint from) {
+        address = from.getUID();
+        this.nearEndMQ = new LinkedBlockingQueue<>();
+        this.farEndMQ = new LinkedBlockingQueue<>();
     }
 
     @Override
     public void sendMessage(Object message) {
+        farEndMQ.add(message);
         synchronized (farEndMQ) {
-            farEndMQ.offer(message);
-            if (farEndMQ.size() == 1)
-                notify();
+            farEndMQ.notify();
         }
     }
 
     @Override
     public Object receiveMessage() {
-        synchronized (nearEndMQ) {
-            while (nearEndMQ.isEmpty()) {
-                try {
-                    wait();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+        if (nearEndMQ.isEmpty())
+            try {
+                synchronized (nearEndMQ) {
+                    nearEndMQ.wait();
                 }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
-
-            return nearEndMQ.poll();
-        }
+        return nearEndMQ.poll();
     }
 
     @Override
     public String thisAddress() {
-        throw new IllegalStateException("Not implemented.");
+        return address;
     }
 
     @Override
     public void close() {
-        throw new IllegalStateException("Not implemented.");
+        System.out.println("Connection closed.");
     }
 
     @Override
@@ -61,4 +67,6 @@ public class LocalConnection implements Connection {
     public LocalConnection getFarEnd() {
         return new LocalConnection(farEndMQ, nearEndMQ);
     }
+
+
 }

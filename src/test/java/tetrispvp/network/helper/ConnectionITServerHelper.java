@@ -10,7 +10,7 @@ public class ConnectionITServerHelper {
     private LocalEndpoint here = new LocalEndpoint() {
         @Override
         public String getUID() {
-            return "ba518818-abad-4983-b3d2-45d7154c693d";
+            return "b6f4b2dc-2aa9-4426-a5d2-60c26fd0f3a4";
         }
     };
 
