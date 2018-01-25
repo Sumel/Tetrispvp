@@ -1,15 +1,18 @@
 package powerUps;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import powerUps.mocks.GridField;
-import powerUps.mocks.LinesClearedListener;
+import tetrispvp.board.*;
 
 public class PowerUpLinesClearedListener implements LinesClearedListener {
 
-	@Override
-	public void lineCleared(List<GridField> lines) {
-		powerUps.PowerUpManager.getPowerUpManager().lineCleared(lines);
-	}
+    public void linesCleared(List<Line> lines) {
+        List<GridField> fields = new ArrayList<GridField>();
+        for(Line line : lines){
+            fields.addAll(line.getFieldsInLine());
+        }
+        powerUps.PowerUpManager.getPowerUpManager().lineCleared(fields);
+    }
 
 }

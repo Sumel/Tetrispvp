@@ -15,7 +15,7 @@ public class ClearBottomLinePowerUp implements PowerUp {
 
 	private void clearLine(){
 		PowerUpManager.getPowerUpManager().getBoard().
-			clearLine(PowerUpManager.getPowerUpManager().getBoard().highestRowWithLockedFields() - 1);
+			clearLine(PowerUpManager.getPowerUpManager().getBoard().getHeight()-1);
 	}
 
 	@Override

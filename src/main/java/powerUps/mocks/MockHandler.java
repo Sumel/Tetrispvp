@@ -3,6 +3,11 @@ package powerUps.mocks;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.scene.paint.Color;
+import tetrispvp.board.BoardField;
+import tetrispvp.board.MutableBoard;
+import tetrispvp.board.GridField;
+
 public class MockHandler implements tetrispvp.network.MessageHandler {
     private List<String> allMessages = new ArrayList<>();
     private MutableBoard board;
@@ -17,8 +22,7 @@ public class MockHandler implements tetrispvp.network.MessageHandler {
         System.out.println(with);
         getAllMessages();
         if(messageName.equals("addLines")){
-            GridField gf = new GridField();
-            gf.setState(FieldState.BLOCKED);
+            GridField gf = new BoardField(true, true, Color.BLACK, -1, false);
             board.addLine((int)with, gf, true);
         } else if (messageName.equals("flipBoard")){
             board.flipBoard();

@@ -4,7 +4,9 @@ import java.util.List;
 import java.util.Random;
 
 import powerUps.NetworkIntegration.RealNetwork;
-import powerUps.mocks.*;
+import tetrispvp.board.*;
+import powerUps.mocks.MockNetwork;
+import powerUps.mocks.MockHandler;
 import static powerUps.AddMoreLinesPowerUp.getAddMoreLinesPowerUp;
 import static powerUps.ClearBottomLinePowerUp.getClearBottomLinePowerUp;
 import static powerUps.ReverseBoardPowerUp.getReverseBoardPowerUp;
@@ -36,7 +38,7 @@ public class PowerUpManager {
         int[] powerUpsPresence = new int[PowerUpTypes.values().length];
         for(GridField field: lines){
             if(field.hasPowerUp()){
-                powerUpsPresence[(int)field.getPowerUp()]++;
+                powerUpsPresence[(int)field.getPowerUpID()]++;
             }
         }
 
