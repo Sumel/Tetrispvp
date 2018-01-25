@@ -2,37 +2,36 @@ package controller;
 
 import controller.mocks.*;
 
-import java.util.Optional;
 
 public class GameController implements BlockSpawnedListener {
 
     private Mode gameMode;
     private final Network network;
     private final GUIController visualisation;
-    private final TetrisBoard humanTetrisBoard;
-    private final HumanController humanController;
+    private final TetrisBoard tetrisBoard;
     private final PowerUpBlockProvider blockProvider;
 
-    private Optional<TetrisBoard> AITetrisBoard;
-    private Optional<AIController> AIController;
+    private HumanController humanController;
+    private AIController AIController;
 
 
-    public GameController() {
+    public GameController(GUIController guiController) {
         this.network = new Network();
-        this.humanTetrisBoard = new TetrisBoard();
+        this.tetrisBoard = new TetrisBoard();
         this.blockProvider = PowerUpBlockProvider.getPowerUpBlockProvider();
-         this.humanController = new HumanController(new MoveController(humanTetrisBoard, new TetrisTimer(1000)));
-        this.visualisation = new GUIController();
+        this.visualisation = guiController;
     }
 
-    public void initGame() {
-        this.humanTetrisBoard.addBlockSpawnedListener(this);
+    private void initGame() {
+        this.tetrisBoard.addBlockSpawnedListener(this);
         this.visualisation.setKeyPressedHandler(humanController.getEventHandler());
 
         switch (gameMode) {
             case AI:
+
                 break;
             case PVP:
+                this.humanController = new HumanController(new MoveController(tetrisBoard, new TetrisTimer(1000)));
                 break;
         }
 
@@ -42,7 +41,7 @@ public class GameController implements BlockSpawnedListener {
     @Override
     public void blockSpawned() {
         Block block = blockProvider.getBlockWithPowerUp();
-        humanTetrisBoard.spawnNewBlock(block);
+        tetrisBoard.spawnNewBlock(block);
         visualisation.updateNextBlockView(block);
     }
 
@@ -59,6 +58,10 @@ public class GameController implements BlockSpawnedListener {
 
     public void setAIDifficulty(double difficultyLevel) {
         initialiseAI(difficultyLevel);
+    }
+
+    public void startGame() {
+        initGame();
     }
 
     public void closeGame() {
@@ -78,8 +81,7 @@ public class GameController implements BlockSpawnedListener {
     /* integration with AI */
 
     private void initialiseAI(double difficultyLevel) {
-        this.AITetrisBoard = Optional.of(new TetrisBoard());
-        this.AIController = Optional.of(new AIController(new MoveController(AITetrisBoard.get(), new TetrisTimer(1000)), AITetrisBoard.get(), difficultyLevel));
+        this.AIController = new AIController(new MoveController(tetrisBoard, new TetrisTimer(1000)), tetrisBoard, difficultyLevel);
     }
 
 }
