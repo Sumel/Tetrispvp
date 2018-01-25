@@ -9,16 +9,23 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import tetrispvp.network.NetworkModule;
+import tetrispvp.network.NetworkModuleFactory;
 
 import java.io.IOException;
 
 public class GuiController implements IGuiController {
-    protected Stage primaryStage;
+    private Stage primaryStage;
+    protected NetworkModule network;
     private EventHandler<KeyEvent> keyEvent = null;
     private Scene currentScene = null;
     private PaneController controller;
 
     public GuiController(Stage primaryStage) {
+        if (NetworkModuleFactory.last() == null) {
+            NetworkModuleFactory.getNetworkModule();
+        }
+        this.network=NetworkModuleFactory.last();
         this.primaryStage = primaryStage;
         this.initRootLayout();
     }
