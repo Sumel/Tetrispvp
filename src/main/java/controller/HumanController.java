@@ -1,19 +1,15 @@
 package controller;
 
-import mocks.Visualisation;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import javafx.event.EventHandler;
+import javafx.scene.input.KeyEvent;
 
-public class HumanController implements KeyListener, ActionListener  {
+public class HumanController {
 
     MoveController moveController;
 
-    HumanController(MoveController moveController, Visualisation visualisation) {
+    HumanController(MoveController moveController) {
         this.moveController = moveController;
     }
-
 
     private void pressedRight() {
         moveController.moveRight();
@@ -35,42 +31,28 @@ public class HumanController implements KeyListener, ActionListener  {
         moveController.fall();
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-
+    protected EventHandler<KeyEvent> getEventHandler() {
+        return keyEvent -> {
+            switch (keyEvent.getCode()) {
+                case KP_UP:
+                    pressedUp();
+                    break;
+                case DOWN:
+                    pressedDown();
+                    break;
+                case LEFT:
+                    pressedLeft();
+                    break;
+                case RIGHT:
+                    pressedRight();
+                    break;
+                case SPACE:
+                    pressedSpace();
+                    break;
+                default:
+                    System.out.println(keyEvent.getCode());
+            }
+        };
     }
 
-    public void keyTyped(KeyEvent e) {
-
-    }
-
-    @Override
-    public void keyPressed(KeyEvent e) {
-        switch (e.getKeyCode())
-        {
-            case KeyEvent.VK_DOWN:
-                pressedDown();
-                break;
-            case KeyEvent.VK_LEFT:
-                pressedLeft();
-                break;
-            case KeyEvent.VK_RIGHT:
-                pressedRight();
-                break;
-            case KeyEvent.VK_UP:
-                pressedUp();
-                break;
-            case KeyEvent.VK_SPACE:
-                pressedSpace();
-                break;
-            default:
-                break;
-
-        }
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-
-    }
 }

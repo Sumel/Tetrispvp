@@ -1,13 +1,13 @@
 package controller;
 
-import mocks.Board;
+import controller.mocks.TetrisBoard;
 
-public class MoveController implements IMoveController{
+public class MoveController implements IMoveController {
 
-    Board board;
+    public TetrisBoard board;
     TetrisTimer tetrisTimer;
 
-    MoveController(Board board, TetrisTimer tetrisTimer){
+    MoveController(TetrisBoard board, TetrisTimer tetrisTimer) {
         this.board = board;
         this.tetrisTimer = tetrisTimer;
         tetrisTimer.init();

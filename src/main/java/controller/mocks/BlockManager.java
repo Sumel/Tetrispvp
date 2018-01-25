@@ -1,4 +1,4 @@
-package mocks;
+package controller.mocks;
 
 import java.util.Random;
 
@@ -14,11 +14,11 @@ public class BlockManager {
         return blockManager;
     }
 
-    public Block randomBlock() {
+    public Block getRandomBlock() {
         return new Block(BlockType.values()[random.nextInt(BlockType.values().length)]);
     }
 
-    public Block straightBlock() {
+    public Block getStraightBlock() {
         return new Block(BlockType.I);
     }
 }

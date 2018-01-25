@@ -15,7 +15,7 @@ public class PowerUpGenerator {
     }
 
     public static PowerUpGenerator getPowerUpGenerator() {
-        if(powerUpGenerator == null) {
+        if (powerUpGenerator == null) {
             powerUpGenerator = new PowerUpGenerator();
         }
         return powerUpGenerator;

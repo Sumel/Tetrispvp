@@ -1,6 +1,6 @@
-package mocks;
+package controller.mocks;
 
-public class Board {
+public class TetrisBoard {
 
     public void moveLeft() {
         System.out.println("\tMoved left");
@@ -22,7 +22,7 @@ public class Board {
         System.out.println("\tRotate");
     }
 
-    public void spawnNextBlock(Block block) {
+    public void spawnNewBlock(Block block) {
         System.out.println(("\nNext block spawned"));
     }
 
@@ -30,4 +30,8 @@ public class Board {
         System.out.println("\nGame ended");
     }
 
+
+    public void addBlockSpawnedListener(BlockSpawnedListener listner) {
+
+    }
 }

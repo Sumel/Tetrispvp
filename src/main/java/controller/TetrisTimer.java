@@ -8,20 +8,20 @@ public class TetrisTimer {
     int delay;
     int counter = 0;
 
-    TetrisTimer(int delay){
+    TetrisTimer(int delay) {
         this.delay = delay;
     }
 
-    void reset(){
+    void reset() {
         counter = 0;
     }
 
-    void init(){
+    void init() {
 
         TimerTask timerTask = new TimerTask() {
             @Override
             public void run() {
-                if(counter != 0) {
+                if (counter != 0) {
                     System.out.println("Tick");
                 }
                 counter++;

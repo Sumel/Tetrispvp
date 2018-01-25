@@ -1,4 +1,4 @@
-package mocks;
+package controller.mocks;
 
 public enum BlockType {
     J,

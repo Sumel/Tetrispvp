@@ -1,49 +1,55 @@
 package controller;
 
-import mocks.Block;
-import mocks.BlockManager;
+import controller.mocks.Block;
+import controller.mocks.BlockManager;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedList;
 
 public class BlockGenerator {
 
     private static BlockGenerator blockGenerator;
-    private BlockManager blockManager;
+    private static BlockManager blockManager;
 
-    private List<Block> blockQueue;
-    private int queueSize = 5;
+    private LinkedList<Block> blockQueue;
+    private final int blockQueueSize = 20;
 
-    public BlockGenerator() {
+    private BlockGenerator() {
+        blockManager = BlockManager.getBlockManager();
+        blockQueue = new LinkedList<>();
 
-        this.blockManager = BlockManager.getBlockManager();
-        blockQueue = new ArrayList<>();
-
-        for(int i =0; i < queueSize; i++){
-            nextRandomBlock();
+        for (int i = 0; i < blockQueueSize; i++) {
+            addRandomBlockToQueue();
         }
     }
 
     public static BlockGenerator getBlockGenerator() {
-        if(blockGenerator == null) {
+        if (blockGenerator == null) {
             blockGenerator = new BlockGenerator();
         }
         return blockGenerator;
     }
 
-    private void nextRandomBlock() {
-        blockQueue.add(blockManager.randomBlock());
+    private void addRandomBlockToQueue() {
+        blockQueue.addLast(blockManager.getRandomBlock());
     }
 
-    public Block spawnBlock(){
-        Block block = blockQueue.remove(0);
-        nextRandomBlock();
-        return block;
+
+    private Block getFirstBlock() {
+        return blockQueue.removeFirst();
+    }
+
+    private void addStraightBlockToQueue() {
+        blockQueue.addFirst(blockManager.getStraightBlock());
+    }
+
+    public Block spawnBlock() {
+        addRandomBlockToQueue();
+        return getFirstBlock();
     }
 
     public void nextStraightLineBlock(int numberOfLines) {
-        for(int i=0;i<numberOfLines; i++){
-            blockQueue.set(i, blockManager.straightBlock());
+        for (int line = 0; line < numberOfLines; line++) {
+            addStraightBlockToQueue();
         }
     }
 
