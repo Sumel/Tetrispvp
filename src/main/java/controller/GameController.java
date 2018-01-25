@@ -30,7 +30,10 @@ public class GameController implements BlockSpawnedListener {
             case AI:
 
                 break;
-            case PVP:
+            case PVP_HOST:
+                this.humanController = new HumanController(new MoveController(tetrisBoard, new TetrisTimer(1000)));
+                break;
+            case PVP_JOIN:
                 this.humanController = new HumanController(new MoveController(tetrisBoard, new TetrisTimer(1000)));
                 break;
         }

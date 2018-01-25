@@ -1,5 +1,5 @@
 package controller;
 
 public enum Mode {
-    AI, PVP
+    AI, PVP_HOST, PVP_JOIN
 }
