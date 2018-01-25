@@ -4,8 +4,11 @@ import GUI.GameMode.AIMode;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Slider;
 
 public class AiPaneController extends PaneController {
+    @FXML
+    public Slider AILevel;
     @FXML
     private Button AcceptButton;
     @FXML
@@ -17,7 +20,8 @@ public class AiPaneController extends PaneController {
         gameModeData.notifyListeners();
         // czekamy odpowiedzi i zmienamy scene na BoardPane
         // super.guiController.changeScene("BoardPane");
-        super.guiController.changeScene("BoardPane");
+        //System.out.println(AILevel.getValue());
+        //super.guiController.changeScene("BoardPane");
     }
 
     @FXML

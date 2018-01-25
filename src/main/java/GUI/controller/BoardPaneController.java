@@ -23,11 +23,8 @@ public class BoardPaneController extends PaneController {
         gamePane1.setPrefSize(blockSize * 10, blockSize * 18);
         gamePane2.setPrefSize(blockSize * 10, blockSize * 18);
 
-        BlockManager manager = new BlockManager();
-        addNextBlockToPane(manager.getRandomBlock());
         //updateGameView(manager.generateBlock(BlockType.O).getInitialShape());
-        BlockImplementation block = new BlockImplementation(BlockType.I);
-        updateEnemyGameView(block.getBoardFields());
+
 
         /*TetrisBoard ret = TetrisBoardProvider.getTetrisBoard();
         ret.addBoardStateChangedListener(new BoardStateChangedListener() {
@@ -38,7 +35,7 @@ public class BoardPaneController extends PaneController {
         });*/
     }
 
-    private void addNextBlockToPane(Block nextBlock) {
+    protected void addNextBlockToPane(Block nextBlock) {
         blockPane.getChildren().clear();
         nextBlock.rotateClockwise();
         for (int i = 0; i < nextBlock.getBoardFields().size(); i++) {

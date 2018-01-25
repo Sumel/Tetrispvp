@@ -5,9 +5,15 @@ import java.util.Map;
 import java.util.Random;
 
 public class BlockManager {
+    private static BlockManager instance = new BlockManager();
+
     private Map<BlockType, Block> blocks;
 
-    public BlockManager() {
+    public static BlockManager getInstance(){
+        return instance;
+    };
+
+    private BlockManager() {
         blocks = new HashMap<>();
         for (int i = 0; i < BlockType.values().length; i++) {
             blocks.put(BlockType.values()[i], new BlockImplementation(BlockType.values()[i]));

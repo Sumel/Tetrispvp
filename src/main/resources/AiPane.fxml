@@ -16,6 +16,6 @@
       <Text id="ChoseText" layoutX="138.0" layoutY="236.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose the AI level:" wrappingWidth="745.13671875" />
       <Button fx:id="AcceptButton" layoutX="247.0" layoutY="415.0" mnemonicParsing="false" onAction="#handleAcceptAction" prefHeight="62.0" prefWidth="161.0" text="Accept" />
       <Button fx:id="CancelButton" layoutX="617.0" layoutY="415.0" mnemonicParsing="false" onAction="#handleCancelAction" prefHeight="62.0" prefWidth="161.0" text="Cancel" />
-      <Slider blendMode="SRC_ATOP" cache="true" layoutX="282.0" layoutY="300.0" prefHeight="48.0" prefWidth="458.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" stylesheets="@style.css" value="50.0" />
+      <Slider fx:id="AILevel" blendMode="SRC_ATOP" cache="true" layoutX="282.0" layoutY="300.0" prefHeight="48.0" prefWidth="458.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" stylesheets="@style.css" value="50.0" />
    </children>
 </Pane>

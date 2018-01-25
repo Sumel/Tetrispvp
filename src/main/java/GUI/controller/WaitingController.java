@@ -1,7 +1,6 @@
 package GUI.controller;
 
 import GUI.GameMode.PvPMode;
-import GUI.Mocks.Network;
 import javafx.animation.Animation;
 import javafx.animation.Timeline;
 import javafx.animation.Transition;
@@ -10,6 +9,8 @@ import javafx.geometry.Pos;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
+import tetrispvp.network.NetworkModule;
+import tetrispvp.network.NetworkModuleFactory;
 
 public class WaitingController extends PaneController {
     @FXML
@@ -29,7 +30,7 @@ public class WaitingController extends PaneController {
         }
         //((PvPMode) gameModeData.getMode()).setIpA("192.168.0.1"); //tutaj podajemy IP hosta
         ((PvPMode) gameModeData.getMode()).setStatusForPlayerAToReady();
-        setIp(IpAddress);
+        setIp();
         gameModeData.gameModeChanged(); // tutaj informujemy, ze gracz wybral PvP Mode
         // czekamy odpowiedzi... mamy podtwirdzenie... zamieniamy scene na BoardPane
         // super.guiController.changeScene("BoardPane");
@@ -57,12 +58,11 @@ public class WaitingController extends PaneController {
 
     }
 
-    private void setIp(Text txt) {
-        new Thread(() -> this.takeIP(txt)).start();
-    }
-
-    private void takeIP(Text txt) {
-        String ip = new Network().getIp();
-        txt.setText(ip);
+    private void setIp() {
+        NetworkModule networkModule = NetworkModuleFactory.last();
+        if(networkModule!=null) {
+            String ip = networkModule.connectionContext().thisAddress();
+            IpAddress.setText(ip);
+        }
     }
 }
