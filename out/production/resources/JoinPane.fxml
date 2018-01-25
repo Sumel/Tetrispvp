@@ -14,7 +14,7 @@
          </font>
       </Text>
       <Text id="ChoseText" layoutX="138.0" layoutY="236.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter Host Ip Address:" wrappingWidth="745.13671875" />
-      <TextField layoutX="327.0" layoutY="300.0" prefHeight="50.0" prefWidth="370.0" />
+      <TextField fx:id="ipAddress" layoutX="327.0" layoutY="300.0" prefHeight="50.0" prefWidth="370.0" />
       <Button fx:id="AcceptButton" layoutX="247.0" layoutY="415.0" mnemonicParsing="false" onAction="#handleAcceptAction" prefHeight="62.0" prefWidth="161.0" text="Accept" />
       <Button fx:id="CancelButton" layoutX="617.0" layoutY="415.0" mnemonicParsing="false" onAction="#handleCancelAction" prefHeight="62.0" prefWidth="161.0" text="Cancel" />
    </children>

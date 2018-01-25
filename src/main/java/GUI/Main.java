@@ -12,6 +12,7 @@ public class Main extends Application{
 	@Override
 	public void start(Stage primaryStage) {
 		GuiController module = new GuiController(primaryStage);
+
 		module.setKeyPressedHandler(new EventHandler<KeyEvent>() {
 			@Override
 			public void handle(KeyEvent event) {
