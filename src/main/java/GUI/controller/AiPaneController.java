@@ -1,6 +1,6 @@
 package GUI.controller;
 
-import GUI.GameMode.AIMode;
+import controller.Mode;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -16,8 +16,10 @@ public class AiPaneController extends PaneController {
 
     @FXML
     private void handleAcceptAction(ActionEvent actionEvent) {
-        gameModeData.setGameMode(new AIMode(0)); // zamiast "0" podac wybrany poziom trudnosci
-        gameModeData.notifyListeners();
+        //gameModeData.setGameMode(new AIMode(AILevel.getValue()/100)); // zamiast "0" podac wybrany poziom trudnosci
+        guiController.gameController.setGameMode(Mode.AI);
+        guiController.gameController.setAIDifficulty(AILevel.getValue()/100);
+        guiController.gameController.startGame();
         // czekamy odpowiedzi i zmienamy scene na BoardPane
         // super.guiController.changeScene("BoardPane");
         //System.out.println(AILevel.getValue());

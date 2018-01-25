@@ -2,5 +2,6 @@ package GUI.GameMode;
 
 public enum Mode {
     AI,
-    PVP
+    PVP_HOST,
+    PVP_JOIN
 }

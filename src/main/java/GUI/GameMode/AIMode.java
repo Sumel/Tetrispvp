@@ -2,9 +2,9 @@ package GUI.GameMode;
 
 public class AIMode implements GameMode {
     private Mode gameType = Mode.AI;
-    private int level;
+    private double level;
 
-    public AIMode(int level) {
+    public AIMode(double level) {
         this.level = level;
     }
 
@@ -13,7 +13,7 @@ public class AIMode implements GameMode {
         return gameType;
     }
 
-    public int getLevel() {
+    public double getLevel() {
         return level;
     }
 }
